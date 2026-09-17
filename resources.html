@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resources & Assets - Useme Team</title>
+  <script>
+    if (localStorage.getItem('useme_logged_in') !== 'true') window.location.replace('index.html');
+    if (localStorage.getItem('useme_role') !== 'admin') window.location.replace('dashboard.html');
+  </script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/task-modal.css">
+  <link rel="stylesheet" href="css/ranking.css">
+  <link rel="stylesheet" href="css/resources.css">
+  <link rel="stylesheet" href="css/command-palette.css">
+</head>
+<body data-page="resources">
+  <header class="mobile-header">
+    <img src="assets/useme-team.png" alt="Useme Team" class="brand-logo">
+    <button type="button" class="menu-toggle-btn" id="sidebarToggle" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header"><img src="assets/useme-team.png" alt="Useme Team" class="brand-logo"></div>
+      <nav class="sidebar-nav"><ul class="nav-list"></ul></nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="resources-header-row">
+        <div>
+          <h1>Resources & Documentation Library</h1>
+          <p class="resources-subtitle">Repository of technical deliverables, compliance files, schema templates, and project assets.</p>
+        </div>
+      </div>
+
+      <div class="resources-filter-bar" style="display:flex; gap:var(--space-3); align-items:center; flex-wrap:wrap; margin-bottom:var(--space-5);">
+        <div class="search-box-wrapper" style="max-width:280px; flex:1 1 200px;">
+          <input type="text" class="search-input" id="resSearchInput" name="resSearch" placeholder="Filter assets by name, record, or uploader..." autocomplete="off">
+        </div>
+        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+          <select id="resMemberFilter" class="form-select" style="padding:6px 10px; font-size:var(--text-xs); border:1px solid var(--color-border); border-radius:var(--radius-sm); background:var(--color-white); color:var(--color-text);">
+            <option value="all">All Uploaders</option>
+          </select>
+          <select id="resProjectFilter" class="form-select" style="padding:6px 10px; font-size:var(--text-xs); border:1px solid var(--color-border); border-radius:var(--radius-sm); background:var(--color-white); color:var(--color-text);">
+            <option value="all">All Initiatives / Projects</option>
+          </select>
+        </div>
+        <div class="res-type-chips" id="resTypeChips">
+          <button type="button" class="res-chip active" data-type="all">All Assets</button>
+          <button type="button" class="res-chip" data-type="code">Code & SQL</button>
+          <button type="button" class="res-chip" data-type="doc">Documents & PDF</button>
+          <button type="button" class="res-chip" data-type="design">Design & UI</button>
+          <button type="button" class="res-chip" data-type="archive">Archives & Data</button>
+        </div>
+      </div>
+
+      <div class="res-table-container">
+        <table class="res-table">
+          <thead>
+            <tr>
+              <th>Asset / Deliverable</th>
+              <th>Uploaded By</th>
+              <th>Origin Record</th>
+              <th>Initiative</th>
+              <th>Date</th>
+              <th>Action(s)</th>
+            </tr>
+          </thead>
+          <tbody id="resourcesTableBody"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/data-store.js"></script>
+  <script src="js/data-store-writes.js"></script>
+  <script src="js/data-store-team-writes.js"></script>
+  <script src="js/status-badge.js"></script>
+  <script src="js/kpi-engine.js"></script>
+  <script src="js/member-modal.js"></script>
+  <script src="js/password-modal.js"></script>
+  <script src="js/task-asset-field.js"></script>
+  <script src="js/task-detail-modal.js"></script>
+  <script src="js/project-modal.js"></script>
+  <script src="js/command-palette.js"></script>
+  <script src="js/resources.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KRA & KPI Performance - Useme Team</title>
+  <script>
+    if (localStorage.getItem('useme_logged_in') !== 'true') window.location.replace('index.html');
+  </script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/project-modal.css">
+  <link rel="stylesheet" href="css/tasks.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/kra.css">
+  <link rel="stylesheet" href="css/command-palette.css">
+</head>
+<body data-page="kra">
+  <header class="mobile-header">
+    <img src="assets/useme-team.png" alt="Useme Team" class="brand-logo">
+    <button type="button" class="menu-toggle-btn" id="sidebarToggle" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header"><img src="assets/useme-team.png" alt="Useme Team" class="brand-logo"></div>
+      <nav class="sidebar-nav"><ul class="nav-list"></ul></nav>
+    </aside>
+
+    <main class="main-content" id="kraMainContent">
+      <div class="kra-header-row">
+        <div>
+          <h1 id="kraPageTitle">KRA &amp; KPI Performance</h1>
+          <p class="kra-subtitle" id="kraPageSubtitle">Visual performance tracking layer across 5 core strategic pillars &amp; 6-month attainment trajectory.</p>
+        </div>
+        <div class="kra-controls-group" id="kraControlsGroup"></div>
+      </div>
+
+      <!-- Summary / Attainment Cards -->
+      <div class="kra-summary-grid" id="kraSummaryGrid"></div>
+
+      <!-- Performance Trajectory Chart -->
+      <section class="kra-chart-card">
+        <div class="kra-chart-header">
+          <div>
+            <h2 class="section-title" style="margin-bottom:2px; border:none; padding:0;" id="trajectoryTitle">Performance Trajectory (Last 6 Months)</h2>
+            <p class="kra-chart-sub" id="trajectorySub">Historical KRA weighted attainment % from Mar to Aug 2026</p>
+          </div>
+          <div class="kra-legend">
+            <span class="legend-dot" id="trajectoryLegendDot"></span>
+            <span id="trajectoryLegendLabel">Team Average Attainment</span>
+          </div>
+        </div>
+        <div class="kra-svg-container" id="trajectoryChartContainer"></div>
+      </section>
+
+      <!-- Pillar Attainment Breakdown Table -->
+      <section class="kra-table-card">
+        <h2 class="section-title" style="margin-bottom:var(--space-4);">Pillar Attainment Breakdown</h2>
+        <div class="rank-table-container">
+          <table class="tasks-table kra-table">
+            <thead id="kraTableHead"></thead>
+            <tbody id="kraPillarTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/data-store.js"></script>
+  <script src="js/data-store-writes.js"></script>
+  <script src="js/data-store-team-writes.js"></script>
+  <script src="js/status-badge.js"></script>
+  <script src="js/kpi-engine.js"></script>
+  <script src="js/member-modal.js"></script>
+  <script src="js/password-modal.js"></script>
+  <script src="js/task-asset-field.js"></script>
+  <script src="js/task-detail-modal.js"></script>
+  <script src="js/kra-combobox.js"></script>
+  <script src="js/command-palette.js"></script>
+  <script src="js/kra.js"></script>
+</body>
+</html>

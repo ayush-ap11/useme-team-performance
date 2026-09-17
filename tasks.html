@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tasks - Useme Team</title>
+  <script>
+    if (localStorage.getItem('useme_logged_in') !== 'true') window.location.replace('index.html');
+  </script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/task-modal.css">
+  <link rel="stylesheet" href="css/tasks.css">
+  <link rel="stylesheet" href="css/command-palette.css">
+</head>
+<body data-page="tasks">
+  <header class="mobile-header">
+    <img src="assets/useme-team.png" alt="Useme Team" class="brand-logo">
+    <button type="button" class="menu-toggle-btn" id="sidebarToggle" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header"><img src="assets/useme-team.png" alt="Useme Team" class="brand-logo"></div>
+      <nav class="sidebar-nav"><ul class="nav-list"></ul></nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="tasks-header-row">
+        <div>
+          <h1>Tasks Management</h1>
+          <p class="tasks-subtitle">Operational deliverables, assigned workflows, and delivery deadlines.</p>
+        </div>
+        <button type="button" class="btn btn-primary" id="btnNewTask">+ New Task</button>
+      </div>
+
+      <div class="filter-bar">
+        <div class="filter-group">
+          <label class="filter-label" for="statusFilter">Status:</label>
+          <select id="statusFilter" class="form-input" style="padding:4px 8px; width:auto;">
+            <option value="all">All Statuses</option>
+            <option value="notStarted">Not Started</option>
+            <option value="inProgress">In Progress</option>
+            <option value="testing">Testing</option>
+            <option value="awaitingFeedback">Awaiting Feedback</option>
+            <option value="completed">Completed</option>
+            <option value="reworkNeeded">Rework Needed</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+        <div class="filter-group" id="assigneeFilterGroup">
+          <label class="filter-label" for="assigneeFilter">Assignee:</label>
+          <select id="assigneeFilter" class="form-input" style="padding:4px 8px; width:auto;"></select>
+        </div>
+      </div>
+
+      <div class="tasks-container">
+        <table class="tasks-table">
+          <thead>
+            <tr>
+              <th>Task Title & Project</th>
+              <th>Assignees</th>
+              <th>Status</th>
+              <th>Due Date</th>
+              <th>Skill Domain</th>
+              <th id="tasksActionColHeader" style="text-align:right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="tasksTableBody"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/data-store.js"></script>
+  <script src="js/data-store-writes.js"></script>
+  <script src="js/data-store-team-writes.js"></script>
+  <script src="js/status-badge.js"></script>
+  <script src="js/kpi-engine.js"></script>
+  <script src="js/member-modal.js"></script>
+  <script src="js/password-modal.js"></script>
+  <script src="js/task-asset-field.js"></script>
+  <script src="js/task-detail-modal.js"></script>
+  <script src="js/new-task-modal.js"></script>
+  <script src="js/command-palette.js"></script>
+  <script src="js/tasks.js"></script>
+</body>
+</html>

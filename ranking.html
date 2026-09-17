@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ranking Leaderboard - Useme Team</title>
+  <script>
+    if (localStorage.getItem('useme_logged_in') !== 'true') window.location.replace('index.html');
+  </script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/task-modal.css">
+  <link rel="stylesheet" href="css/tasks.css">
+  <link rel="stylesheet" href="css/ranking.css">
+  <link rel="stylesheet" href="css/command-palette.css">
+</head>
+<body data-page="ranking">
+  <header class="mobile-header">
+    <img src="assets/useme-team.png" alt="Useme Team" class="brand-logo">
+    <button type="button" class="menu-toggle-btn" id="sidebarToggle" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header"><img src="assets/useme-team.png" alt="Useme Team" class="brand-logo"></div>
+      <nav class="sidebar-nav"><ul class="nav-list"></ul></nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="ranking-header-row">
+        <div>
+          <h1>Performance Leaderboard</h1>
+          <p class="ranking-subtitle">Evaluated by net composite score (KPI achievements less KRA rework penalties).</p>
+        </div>
+      </div>
+
+      <!-- Member personal summary card (Team Member only) -->
+      <div id="myRankSummary" class="my-rank-card" style="display:none;"></div>
+
+      <!-- Top 3 Podium -->
+      <div class="podium-container" id="podiumContainer"></div>
+
+      <!-- Specialty Category Filter Chips -->
+      <div class="rank-filter-bar" id="rankFilterChips"></div>
+
+      <!-- Leaderboard Table -->
+      <div class="rank-table-container">
+        <table class="tasks-table">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Team Member</th>
+              <th>Domain</th>
+              <th>KPI / Penalty</th>
+              <th>Net Score</th>
+              <th>Trend</th>
+            </tr>
+          </thead>
+          <tbody id="rankTableBody"></tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/data-store.js"></script>
+  <script src="js/data-store-writes.js"></script>
+  <script src="js/data-store-team-writes.js"></script>
+  <script src="js/status-badge.js"></script>
+  <script src="js/kpi-engine.js"></script>
+  <script src="js/member-modal.js"></script>
+  <script src="js/password-modal.js"></script>
+  <script src="js/task-asset-field.js"></script>
+  <script src="js/task-detail-modal.js"></script>
+  <script src="js/command-palette.js"></script>
+  <script src="js/ranking.js"></script>
+</body>
+</html>

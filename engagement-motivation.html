@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engagement &amp; Motivation - Useme Team</title>
+  <script>if (localStorage.getItem('useme_logged_in') !== 'true') window.location.replace('index.html');</script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/tasks.css">
+  <link rel="stylesheet" href="css/kra.css">
+  <link rel="stylesheet" href="css/engagement.css">
+  <link rel="stylesheet" href="css/command-palette.css">
+</head>
+<body data-page="engagement">
+  <header class="mobile-header">
+    <img src="assets/useme-team.png" alt="Useme Team" class="brand-logo">
+    <button type="button" class="menu-toggle-btn" id="sidebarToggle" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header"><img src="assets/useme-team.png" alt="Useme Team" class="brand-logo"></div>
+      <nav class="sidebar-nav"><ul class="nav-list"></ul></nav>
+    </aside>
+
+    <main class="main-content" id="engagementMainContent">
+      <div class="eng-header-row">
+        <div>
+          <h1>Engagement &amp; Motivation</h1>
+          <p class="eng-subtitle">Operational outreach tracking, grassroots campaigns, Zoom presence, and peer enablement.</p>
+        </div>
+        <div style="display:flex; align-items:center; gap:var(--space-3); flex-wrap:wrap;">
+          <button type="button" class="btn btn-secondary" id="btnManageActivityTypes" style="display:none; height:34px; padding:0 12px; font-size:11.5px; font-weight:700; align-items:center; gap:6px;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>Manage Activity Types</span>
+          </button>
+          <div class="eng-tab-buttons">
+            <button type="button" class="tab-btn active tab-eng" id="tabEngagementBtn">Engagement</button>
+            <button type="button" class="tab-btn tab-mot" id="tabMotivationBtn">Motivation</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Engagement Tab Content -->
+      <section class="tab-pane active" id="paneEngagement">
+        <div class="eng-summary-row" id="engSummaryRow"></div>
+        <h2 class="section-title" style="margin-top:var(--space-5);">Outreach Activity Channels</h2>
+        <div class="eng-activity-grid" id="engActivityGrid"></div>
+        <div class="eng-breakdown-card" id="engBreakdownContainer"></div>
+        <div class="eng-table-section">
+          <div class="eng-table-header">
+            <h2 class="section-title" style="border:none; padding:0; margin:0;">Engagement Submissions Log</h2>
+            <div id="engActionContainer"></div>
+          </div>
+          <div class="rank-table-container">
+            <table class="tasks-table">
+              <thead><tr><th>Activity Type</th><th>Member</th><th>Date</th><th>Proof Asset</th><th>Status</th><th style="text-align:right;">Actions</th></tr></thead>
+              <tbody id="engSubmissionsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- Motivation Tab Content -->
+      <section class="tab-pane" id="paneMotivation">
+        <div class="mot-summary-row" id="motSummaryRow"></div>
+        <h2 class="section-title" style="margin-top:var(--space-5);">Growth &amp; Leadership Programs</h2>
+        <div class="mot-cards-grid" id="motCardsGrid"></div>
+        <div class="eng-breakdown-card" id="motBreakdownContainer"></div>
+        <div class="eng-table-section">
+          <div class="eng-table-header">
+            <h2 class="section-title" style="border:none; padding:0; margin:0;">Talks &amp; Micro-Events Log</h2>
+            <div id="motActionContainer"></div>
+          </div>
+          <div class="rank-table-container">
+            <table class="tasks-table">
+              <thead><tr><th>Program Type</th><th>Member</th><th>Date</th><th>Recorded Proof</th><th>Status</th><th style="text-align:right;">Actions</th></tr></thead>
+              <tbody id="motSubmissionsTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Log Activity Modal -->
+  <div class="modal-overlay" id="logActivityModal">
+    <div class="modal-card modal-form-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="logModalTitle">Log Outreach Activity</h3>
+        <button type="button" class="modal-close-btn" id="logModalClose" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="logActivityForm" class="modal-body">
+        <input type="hidden" id="logCategoryType" value="engagement">
+        <div class="modal-form-group"><label class="modal-form-label">Activity Type</label><select class="modal-form-select" id="logActivitySelect"></select></div>
+        <div class="modal-form-group"><label class="modal-form-label">Activity Headline / Description</label><input type="text" class="modal-form-input" id="logActivityTitle" placeholder="e.g. LinkedIn feature spotlight, Tech talk on API..." required></div>
+        <div class="modal-form-group"><label class="modal-form-label">Date Completed</label><input type="date" class="modal-form-input" id="logActivityDate" required></div>
+        <div class="modal-form-group" id="logProofGroup">
+          <label class="modal-form-label" style="display:flex; justify-content:space-between; align-items:center;">
+            <span>Proof of Work</span>
+            <span id="logProofRequiredBadge" class="proof-badge-required">Required</span>
+          </label>
+          <input type="url" class="modal-form-input" id="logProofUrl" placeholder="https://linkedin.com/posts/... or cloud link">
+          <div class="proof-choice-divider"><span>OR UPLOAD A DOCUMENT</span></div>
+          <div class="custom-file-upload">
+            <input type="file" class="hidden-file-input" id="logProofFile">
+            <label for="logProofFile" class="file-upload-btn">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              <span>Choose File</span>
+            </label>
+            <span class="file-name-display" id="logFileName">No file chosen</span>
+          </div>
+          <div id="logProofOptionalHint" style="font-size:11px; color:var(--color-text-muted); margin-top:4px; display:none;">Proof is optional for this activity type.</div>
+        </div>
+        <div class="modal-actions-footer">
+          <button type="button" class="btn btn-secondary" id="logCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="logSubmitBtn">Submit for Verification</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Zoom Attendance Roster Modal -->
+  <div class="modal-overlay" id="zoomRosterModal">
+    <div class="modal-card modal-wide">
+      <div class="modal-header">
+        <h3 class="modal-title">Zoom Call Sessions &amp; Attendance Roster</h3>
+        <button type="button" class="modal-close-btn" id="zoomModalClose" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="zoom-roster-header-bar">
+        <div class="zoom-select-wrap">
+          <label for="zoomSessionSelect" class="zoom-select-lbl">Session:</label>
+          <select class="modal-form-select zoom-session-select" id="zoomSessionSelect"></select>
+        </div>
+        <div class="zoom-admin-actions" id="zoomAdminActions" style="display:none;">
+          <button type="button" class="btn btn-primary btn-sm" id="btnNewZoomSession">+ New Session</button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btnEditZoomSession">Edit</button>
+          <button type="button" class="btn btn-danger btn-sm" id="btnDeleteZoomSession">Delete</button>
+        </div>
+      </div>
+      <div class="modal-session-strip" id="zoomSessionInfo"></div>
+      <div class="modal-body" style="padding:0;"><div class="zoom-roster-list" id="zoomModalBody"></div></div>
+    </div>
+  </div>
+
+  <!-- Manage Activity Types Modal (Admin Only) -->
+  <div class="modal-overlay" id="activityTypesModal">
+    <div class="modal-card modal-wide">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Manage Activity Types</h3>
+          <p style="font-size:11.5px; color:var(--color-text-muted); margin-top:2px;">Define outreach and motivation parameters, point values, and verification requirements.</p>
+        </div>
+        <div style="display:flex; align-items:center; gap:var(--space-2);">
+          <button type="button" class="btn btn-primary btn-sm" id="btnAddActivityType">+ New Type</button>
+          <button type="button" class="modal-close-btn" id="activityTypesModalClose" aria-label="Close modal">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body" style="padding:var(--space-4);">
+        <div id="actTypeAlertBox" style="display:none; margin-bottom:var(--space-3); padding:8px 12px; border-radius:var(--radius-sm); font-size:11.5px; background:rgba(239, 68, 68, 0.1); color:var(--color-red); border:1px solid rgba(239, 68, 68, 0.3);"></div>
+        <div class="rank-table-container">
+          <table class="tasks-table">
+            <thead>
+              <tr>
+                <th>Type Label</th>
+                <th>Category</th>
+                <th>Point Value</th>
+                <th>Requires Proof</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="activityTypesTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Activity Type Add/Edit Form Modal -->
+  <div class="modal-overlay" id="activityTypeFormModal">
+    <div class="modal-card modal-form-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="actTypeFormTitle">New Activity Type</h3>
+        <button type="button" class="modal-close-btn" id="actTypeFormClose" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="activityTypeForm" class="modal-body">
+        <input type="hidden" id="actTypeEditId" value="">
+        <div class="modal-form-group">
+          <label class="modal-form-label">Activity Type Label</label>
+          <input type="text" class="modal-form-input" id="actTypeLabel" placeholder="e.g. YouTube Video, Campus Workshop..." required>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label">Category</label>
+          <select class="modal-form-select" id="actTypeCategory" required>
+            <option value="outreach">Outreach (Engagement)</option>
+            <option value="motivation">Motivation (Talks &amp; Events)</option>
+          </select>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label">Point Value</label>
+          <input type="number" class="modal-form-input" id="actTypePointValue" min="0" step="1" placeholder="e.g. 2, 4, 5" required>
+          <div style="font-size:11px; color:var(--color-text-muted); margin-top:3px;">Points awarded for each approved submission. Live calculation recalculates index automatically.</div>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label" style="display:flex; align-items:center; gap:8px; cursor:pointer; text-transform:none; font-size:12px;">
+            <input type="checkbox" id="actTypeRequiresProof" style="width:16px; height:16px; cursor:pointer;" checked>
+            <span>Requires proof of work (URL or document attachment)</span>
+          </label>
+        </div>
+        <div class="modal-actions-footer">
+          <button type="button" class="btn btn-secondary" id="actTypeCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="actTypeSaveBtn">Save Activity Type</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Zoom Session Create/Edit Modal -->
+  <div class="modal-overlay" id="zoomSessionFormModal">
+    <div class="modal-card modal-form-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="zoomSessionFormTitle">New Zoom Session</h3>
+        <button type="button" class="modal-close-btn" id="zoomSessionFormClose" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="zoomSessionForm" class="modal-body">
+        <input type="hidden" id="zoomSessionEditId" value="">
+        <div class="modal-form-group">
+          <label class="modal-form-label">Session Title</label>
+          <input type="text" class="modal-form-input" id="zoomSessionTitle" placeholder="e.g. Weekly Strategy Sync" required>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label">Date</label>
+          <input type="date" class="modal-form-input" id="zoomSessionDate" required>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label">Time</label>
+          <input type="text" class="modal-form-input" id="zoomSessionTime" placeholder="e.g. 10:00 AM" required>
+        </div>
+        <div class="modal-actions-footer">
+          <button type="button" class="btn btn-secondary" id="zoomSessionCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="zoomSessionSaveBtn">Save Session</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Submission Edit Correction Modal (Admin Only) -->
+  <div class="modal-overlay" id="editSubmissionModal">
+    <div class="modal-card modal-form-card">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Edit Submission (Admin Correction)</h3>
+          <p style="font-size:11px; color:var(--color-text-muted); margin-top:2px;">Correct data-entry errors (title, date, activity type, proof)</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="editSubmissionModalClose" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="editSubmissionForm" class="modal-body">
+        <input type="hidden" id="editSubmissionId" value="">
+        <div class="modal-form-group">
+          <label class="modal-form-label">Activity Type</label>
+          <select class="modal-form-select" id="editSubmissionType" required></select>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label">Title / Headline</label>
+          <input type="text" class="modal-form-input" id="editSubmissionTitle" required>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label">Date Completed</label>
+          <input type="date" class="modal-form-input" id="editSubmissionDate" required>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label">Proof Value (URL or Filename)</label>
+          <input type="text" class="modal-form-input" id="editSubmissionProofValue">
+        </div>
+        <div class="modal-actions-footer">
+          <button type="button" class="btn btn-secondary" id="editSubmissionCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Correction</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/data-store.js"></script>
+  <script src="js/data-store-writes.js"></script>
+  <script src="js/data-store-team-writes.js"></script>
+  <script src="js/kpi-engine.js"></script>
+  <script src="js/status-badge.js"></script>
+  <script src="js/member-modal.js"></script>
+  <script src="js/password-modal.js"></script>
+  <script src="js/task-asset-field.js"></script>
+  <script src="js/task-detail-modal.js"></script>
+  <script src="js/engagement.js"></script>
+  <script src="js/command-palette.js"></script>
+</body>
+</html>

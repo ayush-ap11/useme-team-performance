@@ -1,0 +1,135 @@
+/* Skill Search & Filter Toolbar Styles */
+.search-filter-row, .skills-filter-toolbar {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.search-box-wrapper, .skill-search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 240px;
+  max-width: 440px;
+}
+
+.search-input, .skill-search-input {
+  width: 100%;
+  padding: 8px 32px 8px 14px;
+  font-size: var(--text-sm);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  outline: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.search-input:focus, .skill-search-input:focus {
+  border-color: var(--color-orange);
+  box-shadow: 0 0 0 3px rgba(245, 130, 11, 0.12);
+}
+
+.search-clear-btn, .skill-search-clear {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+.search-clear-btn:hover, .skill-search-clear:hover { color: var(--color-text); }
+
+/* Category Filter Button & Dropdown Menu */
+.filter-dropdown-wrapper, .skill-filter-wrapper { position: relative; }
+
+.filter-btn, .skill-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 14px;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background-color: var(--color-white);
+  color: var(--color-text);
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.filter-btn:hover, .skill-filter-btn:hover { border-color: var(--color-orange); color: var(--color-orange); }
+
+.filter-btn.active, .skill-filter-btn.active {
+  border-color: var(--color-orange);
+  background-color: #FFFDF9;
+  color: var(--color-orange-dark);
+  box-shadow: 0 0 0 2px rgba(245, 130, 11, 0.15);
+}
+
+.dropdown-chevron, .chevron-icon, .filter-icon { width: 14px; height: 14px; stroke: currentColor; flex-shrink: 0; }
+
+.filter-dropdown-menu, .skill-filter-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  width: 250px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 60;
+  padding: var(--space-2) 0;
+}
+
+.filter-menu-header, .filter-dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px 8px;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.filter-reset-link, .filter-clear-link {
+  background: none;
+  border: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-orange);
+  cursor: pointer;
+  padding: 0;
+}
+.filter-reset-link:hover, .filter-clear-link:hover { text-decoration: underline; }
+
+.filter-options-list { padding: 4px 0; max-height: 260px; overflow-y: auto; }
+
+.filter-option-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  font-size: var(--text-sm);
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.filter-option-item:hover { background-color: var(--color-bg); }
+.filter-option-item.selected { background-color: rgba(245, 130, 11, 0.08); color: var(--color-orange); font-weight: 600; }
+.filter-option-count { font-size: 11px; color: var(--color-text-muted); background: var(--color-bg); padding: 1px 6px; border-radius: 9999px; border: 1px solid var(--color-border); }
+
+.no-results-cell { text-align: center; padding: var(--space-6) var(--space-4); color: var(--color-text-muted); font-size: var(--text-sm); }
+.no-results-cell strong { color: var(--color-orange); }

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Insights (AI) - Useme Team</title>
+  <script>
+    if (localStorage.getItem('useme_logged_in') !== 'true') window.location.replace('index.html');
+    if (localStorage.getItem('useme_role') !== 'admin') window.location.replace('dashboard.html');
+  </script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/task-modal.css">
+  <link rel="stylesheet" href="css/project-modal.css">
+  <link rel="stylesheet" href="css/insights.css">
+  <link rel="stylesheet" href="css/command-palette.css">
+</head>
+<body data-page="insights">
+  <header class="mobile-header">
+    <img src="assets/useme-team.png" alt="Useme Team" class="brand-logo">
+    <button type="button" class="menu-toggle-btn" id="sidebarToggle" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header"><img src="assets/useme-team.png" alt="Useme Team" class="brand-logo"></div>
+      <nav class="sidebar-nav"><ul class="nav-list"></ul></nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="insights-header-row">
+        <div>
+          <h1>Automated Performance Insights</h1>
+          <p class="insights-subtitle">Rule-based diagnostic signals identifying workflow bottlenecks, stalled tasks, quality rework clusters, and timeline delivery risks across team operations.</p>
+        </div>
+      </div>
+
+      <div class="insights-meta-bar">
+        <span>System Status: <strong>Live Analysis Active</strong> • Last evaluated: <strong id="lastAnalyzedTime">--:--:--</strong></span>
+        <button type="button" class="btn btn-primary" id="btnReanalyze" style="padding:4px 12px; font-size:var(--text-xs);">Re-analyze</button>
+      </div>
+
+      <div class="insights-grid" id="insightsGrid"></div>
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/data-store.js"></script>
+  <script src="js/data-store-writes.js"></script>
+  <script src="js/data-store-team-writes.js"></script>
+  <script src="js/status-badge.js"></script>
+  <script src="js/kpi-engine.js"></script>
+  <script src="js/member-modal.js"></script>
+  <script src="js/password-modal.js"></script>
+  <script src="js/task-asset-field.js"></script>
+  <script src="js/task-detail-modal.js"></script>
+  <script src="js/project-modal.js"></script>
+  <script src="js/command-palette.js"></script>
+  <script src="js/insights.js"></script>
+</body>
+</html>

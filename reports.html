@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reports & Executive KPI Summary - Useme Team</title>
+  <script>
+    if (localStorage.getItem('useme_logged_in') !== 'true') window.location.replace('index.html');
+    if (localStorage.getItem('useme_role') !== 'admin') window.location.replace('dashboard.html');
+  </script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/task-modal.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/tasks.css">
+  <link rel="stylesheet" href="css/reports.css">
+  <link rel="stylesheet" href="css/command-palette.css">
+</head>
+<body data-page="reports">
+  <header class="mobile-header">
+    <img src="assets/useme-team.png" alt="Useme Team" class="brand-logo">
+    <button type="button" class="menu-toggle-btn" id="sidebarToggle" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header"><img src="assets/useme-team.png" alt="Useme Team" class="brand-logo"></div>
+      <nav class="sidebar-nav"><ul class="nav-list"></ul></nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="reports-header-row">
+        <div>
+          <h1>Executive Performance Reports</h1>
+          <p class="reports-subtitle">Organizational KRA &amp; KPI analytics, delivery velocity trends, and skill coverage gaps.</p>
+        </div>
+        <div class="reports-actions-bar">
+          <div class="reports-range-selector">
+            <button type="button" class="rep-range-btn" data-range="week">This Week</button>
+            <button type="button" class="rep-range-btn active" data-range="month">This Month</button>
+            <button type="button" class="rep-range-btn" data-range="quarter">This Quarter</button>
+            <button type="button" class="rep-range-btn" data-range="custom">Custom</button>
+          </div>
+          <button type="button" class="btn-export" id="btnExportCSV">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Export CSV
+          </button>
+        </div>
+      </div>
+
+      <div class="reports-summary-grid">
+        <div class="summary-card">
+          <div class="summary-card-title">Completed Tasks</div>
+          <div class="summary-card-value" id="repCompleted">--</div>
+          <div class="summary-card-sub" style="color:var(--color-green);">+15% vs previous period</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-title">Avg KPI Score</div>
+          <div class="summary-card-value" id="repScore">--</div>
+          <div class="summary-card-sub" style="color:var(--color-green);">Net of KRA penalties</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-title">Overdue Deliverables</div>
+          <div class="summary-card-value" id="repOverdue" style="color:var(--color-red);">--</div>
+          <div class="summary-card-sub" style="color:var(--color-red);">Requires immediate review</div>
+        </div>
+        <div class="summary-card">
+          <div class="summary-card-title">Quality Rework Rate</div>
+          <div class="summary-card-value" id="repRework" style="color:var(--color-orange);">--</div>
+          <div class="summary-card-sub">Target threshold: &lt; 15%</div>
+        </div>
+      </div>
+
+      <div class="charts-grid">
+        <div class="chart-card">
+          <div class="chart-title">Tasks Completed Velocity</div>
+          <div class="chart-subtitle">Weekly delivered milestones and closed tasks.</div>
+          <div class="css-bar-chart" id="repCompletedChart"></div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-title">Rework Rate Trend (%)</div>
+          <div class="chart-subtitle">Quality review rejections and rework cycles over time.</div>
+          <div class="css-bar-chart" id="repReworkChart"></div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-title">Top Skill Gaps & Operational Vulnerabilities</div>
+        <div class="chart-subtitle">Key technical competencies with single-person dependencies or elevated rework rates.</div>
+        <ul class="gap-list" id="repSkillGaps"></ul>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/data-store.js"></script>
+  <script src="js/data-store-writes.js"></script>
+  <script src="js/data-store-team-writes.js"></script>
+  <script src="js/status-badge.js"></script>
+  <script src="js/kpi-engine.js"></script>
+  <script src="js/member-modal.js"></script>
+  <script src="js/password-modal.js"></script>
+  <script src="js/task-asset-field.js"></script>
+  <script src="js/task-detail-modal.js"></script>
+  <script src="js/reports-data.js"></script>
+  <script src="js/reports-export.js"></script>
+  <script src="js/command-palette.js"></script>
+  <script src="js/reports.js"></script>
+</body>
+</html>

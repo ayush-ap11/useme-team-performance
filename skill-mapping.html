@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skill Mapping - Useme Team</title>
+  <script>
+    if (localStorage.getItem('useme_logged_in') !== 'true') window.location.replace('index.html');
+  </script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/task-modal.css">
+  <link rel="stylesheet" href="css/skill-mapping.css">
+  <link rel="stylesheet" href="css/skill-search.css">
+  <link rel="stylesheet" href="css/command-palette.css">
+</head>
+<body data-page="skills">
+  <header class="mobile-header">
+    <img src="assets/useme-team.png" alt="Useme Team" class="brand-logo">
+    <button type="button" class="menu-toggle-btn" id="sidebarToggle" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header"><img src="assets/useme-team.png" alt="Useme Team" class="brand-logo"></div>
+      <nav class="sidebar-nav"><ul class="nav-list"></ul></nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="skill-mapping-header-row" style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:var(--space-3);">
+        <div>
+          <h1>Skill Mapping Directory</h1>
+          <p class="skill-subtitle">Cross-functional specialist matrix, verified proficiencies, and capacity distribution.</p>
+        </div>
+        <button type="button" class="btn btn-primary" id="btnManageCategories" style="display:none; align-items:center; gap:6px; font-size:var(--text-xs); padding:8px 14px;">
+          ⚙️ Manage Categories
+        </button>
+      </div>
+
+      <div class="search-filter-row">
+        <div class="search-box-wrapper">
+          <input type="text" class="search-input" id="skillSearchInput" placeholder="Search specialists by name, skill, or role..." autocomplete="off">
+          <button type="button" class="search-clear-btn" id="skillSearchClear" aria-label="Clear search">&times;</button>
+        </div>
+        <div class="filter-dropdown-wrapper" id="skillFilterWrapper">
+          <button type="button" class="filter-btn" id="skillFilterBtn" aria-haspopup="true" aria-expanded="false">
+            <span id="skillFilterLabel">Filter by Skill Category</span>
+            <svg class="dropdown-chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"></path></svg>
+          </button>
+          <div class="filter-dropdown-menu" id="skillFilterDropdown">
+            <div class="filter-menu-header">
+              <span>Filter by Skill Category</span>
+              <button type="button" class="filter-reset-link" id="skillFilterClearBtn">Reset</button>
+            </div>
+            <div class="filter-options-list" id="filterOptionsList"></div>
+          </div>
+        </div>
+      </div>
+
+      <section class="member-list-section" id="filteredCategorySection">
+        <div class="list-header-row">
+          <h2 class="list-title" id="filteredCategoryTitle">Specialist Directory</h2>
+          <div class="list-count-badge" id="memberCountBadge"></div>
+        </div>
+        <div class="member-table-wrapper">
+          <table class="member-table">
+            <thead>
+              <tr>
+                <th>Team Member</th>
+                <th>Skill Domain</th>
+                <th>Proficiency</th>
+                <th>Workload</th>
+                <th>Verification</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="memberTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Manage Skill Categories Modal (Admin Only) -->
+  <div class="modal-overlay" id="categoriesModal">
+    <div class="modal-card modal-wide">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Manage Skill Categories</h3>
+          <p style="font-size:11.5px; color:var(--color-text-muted); margin-top:2px;">Define organizational skill competencies and specializations.</p>
+        </div>
+        <div style="display:flex; align-items:center; gap:var(--space-2);">
+          <button type="button" class="btn btn-primary btn-sm" id="btnAddCategory">+ New Category</button>
+          <button type="button" class="modal-close-btn" id="catModalClose" aria-label="Close modal">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body" style="padding:var(--space-4);">
+        <div id="catAlertBox" style="display:none; margin-bottom:var(--space-3); padding:8px 12px; border-radius:var(--radius-sm); font-size:11.5px; background:rgba(239, 68, 68, 0.1); color:var(--color-red); border:1px solid rgba(239, 68, 68, 0.3);"></div>
+        <div class="rank-table-container">
+          <table class="tasks-table">
+            <thead>
+              <tr>
+                <th>Category Name</th>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Active Specialists</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="categoriesTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Category Add/Edit Form Modal -->
+  <div class="modal-overlay" id="categoryFormModal">
+    <div class="modal-card modal-form-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="catFormTitle">New Skill Category</h3>
+        <button type="button" class="modal-close-btn" id="catFormClose" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="categoryForm" class="modal-body">
+        <input type="hidden" id="catEditId" value="">
+        <div class="modal-form-group">
+          <label class="modal-form-label">Category Name *</label>
+          <input type="text" class="modal-form-input" id="catNameInput" placeholder="e.g. Cloud Infrastructure & DevOps" required>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label">Description</label>
+          <textarea class="modal-form-input" id="catDescInput" rows="3" placeholder="Core competencies and skill expectations..."></textarea>
+        </div>
+        <div class="modal-actions-footer">
+          <button type="button" class="btn btn-secondary" id="catCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="catSaveBtn">Save Category</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Member Skill Proficiency Edit / Self-Upgrade Modal -->
+  <div class="modal-overlay" id="editProficiencyModal">
+    <div class="modal-card modal-form-card">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title" id="epModalTitle">Update Skill Proficiency</h3>
+          <p style="font-size:11.5px; color:var(--color-text-muted); margin-top:2px;">Adjust proficiency rating for this skill domain.</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="epCloseBtn" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="editProficiencyForm" class="modal-body">
+        <input type="hidden" id="epMemberId" value="">
+        <input type="hidden" id="epCategoryId" value="">
+        <div style="background:var(--color-bg); padding:10px 12px; border-radius:var(--radius-sm); border:1px solid var(--color-border); margin-bottom:var(--space-3); font-size:12px; line-height:1.5;">
+          <div><strong>Member:</strong> <span id="epMemberName">--</span></div>
+          <div style="margin-top:2px;"><strong>Skill Domain:</strong> <span id="epCategoryName">--</span></div>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label">Proficiency Level *</label>
+          <select id="epLevelSelect" class="modal-form-input" required>
+            <option value="Beginner">Beginner (Level 1 — Foundational execution)</option>
+            <option value="Intermediate">Intermediate (Level 2 — Independent contributor)</option>
+            <option value="Advanced">Advanced (Level 3 — Complex deliverables & guidance)</option>
+            <option value="Expert">Expert (Level 4 — Architectural lead & principal review)</option>
+          </select>
+        </div>
+        <div id="epNotice" style="font-size:11px; color:var(--color-text-muted); margin-bottom:var(--space-3); line-height:1.4;">
+          Self-declared level updates are recorded live and flagged as Self-Declared until reviewed by an admin.
+        </div>
+        <div class="modal-actions-footer">
+          <button type="button" class="btn btn-secondary" id="epCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="epSaveBtn">Save Proficiency</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/data-store.js"></script>
+  <script src="js/data-store-writes.js"></script>
+  <script src="js/data-store-team-writes.js"></script>
+  <script src="js/status-badge.js"></script>
+  <script src="js/kpi-engine.js"></script>
+  <script src="js/member-modal.js"></script>
+  <script src="js/password-modal.js"></script>
+  <script src="js/task-asset-field.js"></script>
+  <script src="js/task-detail-modal.js"></script>
+  <script src="js/skill-mapping.js"></script>
+  <script src="js/command-palette.js"></script>
+  <script src="js/skill-search.js"></script>
+</body>
+</html>

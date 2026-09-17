@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Useme Team</title>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/login.css">
+</head>
+<body class="login-page">
+  <main class="login-card">
+    <header class="login-header">
+      <img src="assets/useme-team.png" alt="Useme Team" class="login-logo">
+      <p class="login-subtitle">Performance Dashboard</p>
+    </header>
+
+    <div class="role-toggle-group" role="group" aria-label="Select User Role">
+      <button type="button" class="role-toggle-btn" id="roleAdmin" aria-pressed="false">Admin</button>
+      <button type="button" class="role-toggle-btn active" id="roleMember" aria-pressed="true">Team Member</button>
+    </div>
+
+    <form id="loginForm" novalidate>
+      <div class="form-group">
+        <label for="username" class="form-label">Username / Email</label>
+        <input type="text" id="username" name="username" class="form-input" placeholder="e.g. aditya.sharma or rahul.sen" required autocomplete="username">
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" id="password" name="password" class="form-input" placeholder="Enter password" required autocomplete="current-password">
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-full" id="loginSubmitBtn">Login</button>
+      
+      <div id="loginError" class="login-error" role="alert" aria-live="polite"></div>
+    </form>
+
+    <!-- Demo Credentials Quick Reference -->
+    <div class="demo-creds-box">
+      <div class="demo-creds-title">Demo Credentials (Click to fill)</div>
+      <ul class="demo-creds-list">
+        <li class="demo-creds-item" data-role="admin" data-user="aditya.sharma" data-pass="Useme@Admin1">
+          <span><strong>Admin:</strong> Aditya Sharma</span>
+          <code>aditya.sharma / Useme@Admin1</code>
+        </li>
+        <li class="demo-creds-item" data-role="member" data-user="rahul.sen" data-pass="Useme@Member1">
+          <span><strong>Member:</strong> Rahul Sen (m5)</span>
+          <code>rahul.sen / Useme@Member1</code>
+        </li>
+        <li class="demo-creds-item" data-role="member" data-user="rohan.verma" data-pass="Useme@2026">
+          <span><strong>Member:</strong> Rohan Verma (m2)</span>
+          <code>rohan.verma / Useme@2026</code>
+        </li>
+      </ul>
+    </div>
+  </main>
+
+  <script src="js/mock-data.js"></script>
+  <script src="js/data-store.js"></script>
+  <script src="js/data-store-writes.js"></script>
+  <script src="js/data-store-team-writes.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

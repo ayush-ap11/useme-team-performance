@@ -1,0 +1,73 @@
+/* Useme Team - Zoho People Horizontal Hierarchy Layout & Straight Connectors */
+.hierarchy-page-header {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: var(--space-4); margin-bottom: var(--space-4); width: 100%;
+}
+.hierarchy-header-info h1 { font-size: var(--text-2xl); line-height: 1.2; margin: 0; }
+.hierarchy-subtitle { color: var(--color-text-muted); font-size: var(--text-sm); margin-top: 4px; }
+
+/* Interactive Toolbar */
+.org-toolbar {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: var(--space-3); background-color: var(--color-white); border: 1px solid var(--color-border);
+  border-radius: var(--radius-md); padding: var(--space-3) var(--space-4); margin-bottom: var(--space-4);
+}
+.org-toolbar-left, .org-toolbar-right { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.org-search-input {
+  padding: 6px 12px; font-size: var(--text-xs); border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); min-width: 230px; outline: none; transition: border-color 0.15s;
+}
+.org-search-input:focus { border-color: var(--color-orange); }
+.org-dept-select {
+  padding: 6px 10px; font-size: var(--text-xs); border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm); background-color: var(--color-white); cursor: pointer;
+}
+.view-switch-group { display: inline-flex; border: 1px solid var(--color-border); border-radius: var(--radius-sm); overflow: hidden; }
+.view-btn {
+  background: var(--color-white); border: none; padding: 6px 12px; font-size: 11px; font-weight: 600;
+  color: var(--color-text-muted); cursor: pointer; transition: all 0.15s ease;
+}
+.view-btn:not(:last-child) { border-right: 1px solid var(--color-border); }
+.view-btn.active { background-color: var(--color-orange); color: var(--color-white); }
+
+/* Tree Canvas & Column Scroll Layout */
+.org-chart-canvas {
+  position: relative; background-color: var(--color-white); border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border); padding: 0; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  width: 100%; box-sizing: border-box; overflow: auto; min-height: 560px;
+  height: calc(100vh - 220px); scroll-behavior: smooth; cursor: grab;
+}
+.org-chart-canvas.is-dragging { cursor: grabbing; user-select: none; }
+.org-chart-canvas::-webkit-scrollbar { width: 6px; height: 6px; }
+.org-chart-canvas::-webkit-scrollbar-track { background: transparent; }
+.org-chart-canvas::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 3px; }
+.org-chart-canvas::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+.zoho-columns-container {
+  display: flex; flex-direction: row; gap: 72px; align-items: flex-start;
+  width: max-content; min-height: 100%; position: relative; box-sizing: border-box;
+  padding: 32px calc(50% - 118px) 80px calc(50% - 118px);
+}
+.zoho-columns-container.root-only {
+  align-items: center; padding-top: 0; padding-bottom: 0;
+}
+.zoho-column {
+  display: flex; flex-direction: column; gap: 14px; position: relative; z-index: 2;
+}
+
+/* Straight SVG Connectors Layer */
+#zohoConnectorsSvg, .zoho-connectors-overlay {
+  position: absolute; top: 0; left: 0; pointer-events: none; z-index: 10; overflow: visible;
+}
+.zoho-connector-line { stroke: var(--color-orange, #F5820B); stroke-width: 2px; fill: none; }
+.zoho-connector-badge-group { pointer-events: auto; cursor: pointer; transition: transform 0.15s ease; }
+.zoho-connector-badge-group:hover circle { fill: #EA580C; }
+
+/* Department Filters & Badges */
+.zoho-card.dimmed { opacity: 0.28; filter: grayscale(0.5); }
+.zoho-card.dept-highlight { box-shadow: 0 0 0 2.5px var(--dept-color, var(--color-orange)); }
+.dept-color-swatch { width: 16px; height: 16px; border-radius: 4px; display: inline-block; vertical-align: middle; border: 1px solid rgba(0,0,0,0.1); margin-right: 6px; }
+.dept-pill-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: var(--radius-sm); border: 1px solid var(--color-border); background: var(--color-bg); }
+.btn-sm { height: 28px !important; padding: 0 10px !important; font-size: 11px !important; font-weight: 700 !important; border-radius: var(--radius-sm) !important; display: inline-flex; align-items: center; justify-content: center; gap: 4px; }
+.btn-danger { background: var(--color-red) !important; color: var(--color-white) !important; border: 1px solid var(--color-red) !important; }
+.btn-danger:hover { background: #B91C1C !important; }
+.actions-cell { display: flex; justify-content: flex-end; align-items: center; gap: 6px; }

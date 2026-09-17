@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submissions Review Queue - Useme Team</title>
+  <script>
+    if (localStorage.getItem('useme_logged_in') !== 'true') window.location.replace('index.html');
+  </script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/task-modal.css">
+  <link rel="stylesheet" href="css/submissions.css">
+  <link rel="stylesheet" href="css/command-palette.css">
+</head>
+<body data-page="submissions">
+  <header class="mobile-header">
+    <img src="assets/useme-team.png" alt="Useme Team" class="brand-logo">
+    <button type="button" class="menu-toggle-btn" id="sidebarToggle" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header"><img src="assets/useme-team.png" alt="Useme Team" class="brand-logo"></div>
+      <nav class="sidebar-nav"><ul class="nav-list"></ul></nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="submissions-page-header">
+        <h1 id="subPageTitle">Submissions Review Queue</h1>
+        <p class="submissions-subtitle" id="subPageSubtitle">Evaluate completed milestones, approve deliverables, and request workflow rework.</p>
+      </header>
+
+      <div class="sub-tabs">
+        <button type="button" class="sub-tab-btn active" data-tab="pending">
+          Pending Reviews <span class="sub-count-badge" id="countPending">0</span>
+        </button>
+        <button type="button" class="sub-tab-btn" data-tab="approved">
+          Approved <span class="sub-count-badge" id="countApproved">0</span>
+        </button>
+        <button type="button" class="sub-tab-btn" data-tab="needsRework">
+          Needs Rework <span class="sub-count-badge" id="countRework">0</span>
+        </button>
+      </div>
+
+      <div class="submissions-grid" id="submissionsGrid"></div>
+    </main>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/data-store.js"></script>
+  <script src="js/data-store-writes.js"></script>
+  <script src="js/data-store-team-writes.js"></script>
+  <script src="js/status-badge.js"></script>
+  <script src="js/kpi-engine.js"></script>
+  <script src="js/member-modal.js"></script>
+  <script src="js/password-modal.js"></script>
+  <script src="js/task-asset-field.js"></script>
+  <script src="js/task-detail-modal.js"></script>
+  <script src="js/command-palette.js"></script>
+  <script src="js/submissions.js"></script>
+</body>
+</html>

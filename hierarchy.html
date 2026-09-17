@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Hierarchy - Useme Team</title>
+  <script>
+    if (localStorage.getItem('useme_logged_in') !== 'true') window.location.replace('index.html');
+    if (localStorage.getItem('useme_role') !== 'admin') window.location.replace('dashboard.html');
+  </script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/task-modal.css">
+  <link rel="stylesheet" href="css/hierarchy.css">
+  <link rel="stylesheet" href="css/hierarchy-card.css">
+  <link rel="stylesheet" href="css/hierarchy-panel.css">
+  <link rel="stylesheet" href="css/hierarchy-popover.css">
+  <link rel="stylesheet" href="css/command-palette.css">
+</head>
+<body data-page="hierarchy">
+  <header class="mobile-header">
+    <img src="assets/useme-team.png" alt="Useme Team" class="brand-logo">
+    <button type="button" class="menu-toggle-btn" id="sidebarToggle" aria-label="Toggle navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header"><img src="assets/useme-team.png" alt="Useme Team" class="brand-logo"></div>
+      <nav class="sidebar-nav"><ul class="nav-list"></ul></nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="hierarchy-page-header">
+        <div class="hierarchy-header-info">
+          <h1>Team Hierarchy</h1>
+          <p class="hierarchy-subtitle">Organizational reporting structure and active task loads across departments.</p>
+        </div>
+        <div style="display:flex; align-items:center; gap:var(--space-2);">
+          <button type="button" class="btn btn-secondary" id="btnManageDepartments" style="display:none; font-size:var(--text-xs); height:34px; padding:0 12px; font-weight:700; align-items:center; gap:6px;">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            <span>Manage Departments</span>
+          </button>
+          <button type="button" class="btn btn-primary" id="btnAddMember">+ Add Member</button>
+        </div>
+      </header>
+
+      <!-- Interactive Toolbar -->
+      <section class="org-toolbar" id="orgToolbar">
+        <div class="org-toolbar-left">
+          <input type="search" id="orgSearchInput" class="org-search-input" placeholder="Search by name, role, or skill..." aria-label="Search organization">
+          <select id="orgDeptSelect" class="org-dept-select" aria-label="Filter by department">
+            <option value="all">All Departments</option>
+          </select>
+        </div>
+        <div class="org-toolbar-right">
+          <div class="view-switch-group" id="orgViewSwitcher">
+            <button type="button" class="view-btn active" data-view="all">Full Org</button>
+            <button type="button" class="view-btn" data-view="me">Reporting to Me</button>
+          </div>
+          <button type="button" class="btn btn-secondary" id="btnExportOrg" style="font-size:var(--text-xs); padding:6px 12px;">Export CSV</button>
+        </div>
+      </section>
+
+      <section class="org-chart-canvas" id="treeWrapper"></section>
+    </main>
+  </div>
+
+  <!-- Slide-in Detail Panel -->
+  <aside class="hierarchy-detail-panel" id="hierarchyDetailPanel" aria-label="Member details panel" aria-hidden="true">
+    <div class="panel-header">
+      <span class="panel-dept-badge" id="panelDeptBadge">Engineering</span>
+      <button type="button" class="modal-close-btn" id="panelCloseBtn" aria-label="Close modal">&times;</button>
+    </div>
+    <div class="panel-profile-hero">
+      <div class="panel-hero-avatar" id="panelAvatar">--</div>
+      <div class="panel-hero-info">
+        <h2 class="panel-name" id="panelName">Member Name</h2>
+        <p class="panel-role" id="panelRole">Role Title</p>
+      </div>
+    </div>
+    <div class="panel-tabs-bar">
+      <button type="button" class="panel-tab-btn active" data-tab="details">Details</button>
+      <button type="button" class="panel-tab-btn" data-tab="history">Job History</button>
+    </div>
+    <div class="panel-scroll-body">
+      <div class="panel-pane active" id="paneDetails">
+        <div class="panel-field-grid">
+          <div class="panel-field-card"><span class="panel-field-label">Band / Level</span><span class="panel-field-value" id="panelBand">--</span></div>
+          <div class="panel-field-card"><span class="panel-field-label">Location</span><span class="panel-field-value" id="panelLocation">--</span></div>
+          <div class="panel-field-card"><span class="panel-field-label">Start Date</span><span class="panel-field-value" id="panelStartDate">--</span></div>
+          <div class="panel-field-card"><span class="panel-field-label">Active Tasks</span><span class="panel-field-value" id="panelTasks">--</span></div>
+        </div>
+        <div class="panel-section-title">Reports To</div>
+        <div id="panelManagerBox"></div>
+        <div class="panel-section-title" style="display:flex; justify-content:space-between; align-items:center;">
+          <span>Direct Reports</span>
+          <span id="panelReportsCount" style="font-weight:normal; text-transform:none;">--</span>
+        </div>
+        <div class="panel-reports-list" id="panelReportsList"></div>
+        <div class="panel-section-title">Quick Actions</div>
+        <div class="panel-actions-row">
+          <a href="#" id="panelEmailLink" class="btn btn-secondary panel-btn">✉ Send Email</a>
+          <a href="tasks.html" class="btn btn-secondary panel-btn">📋 View Tasks</a>
+        </div>
+        <div class="panel-section-title" id="panelAdminSectionTitle" style="display:none; margin-top:var(--space-4);">Admin Management</div>
+        <div id="panelAdminActions" class="panel-actions-row" style="display:none;">
+          <button type="button" id="panelEditMemberBtn" class="btn btn-secondary panel-btn">✏️ Edit Profile</button>
+          <button type="button" id="panelOffboardMemberBtn" class="btn btn-danger panel-btn">🚪 Offboard Member</button>
+        </div>
+      </div>
+      <div class="panel-pane" id="paneHistory">
+        <div class="panel-gap-notice">
+          <strong>Job History Integration Pending:</strong><br>
+          Historical promotion, band progression, and internal role mobility tracking are scheduled for future performance review cycles. Currently, only active assignment records are stored in the data layer.
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Manage Departments Modal (Admin Only) -->
+  <div class="modal-overlay" id="departmentsModal">
+    <div class="modal-card modal-wide">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Manage Organizational Departments</h3>
+          <p style="font-size:11.5px; color:var(--color-text-muted); margin-top:2px;">Define departments, visual color tags, and display order.</p>
+        </div>
+        <div style="display:flex; align-items:center; gap:var(--space-2);">
+          <button type="button" class="btn btn-primary btn-sm" id="btnAddDepartment">+ New Department</button>
+          <button type="button" class="modal-close-btn" id="deptModalClose" aria-label="Close modal">&times;</button>
+        </div>
+      </div>
+      <div class="modal-body" style="padding:var(--space-4);">
+        <div id="deptAlertBox" style="display:none; margin-bottom:var(--space-3); padding:8px 12px; border-radius:var(--radius-sm); font-size:11.5px; background:rgba(239, 68, 68, 0.1); color:var(--color-red); border:1px solid rgba(239, 68, 68, 0.3);"></div>
+        <div class="rank-table-container">
+          <table class="tasks-table">
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Department Name</th>
+                <th>Color Tag</th>
+                <th>Active Members</th>
+                <th style="text-align:right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="departmentsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Department Add/Edit Form Modal -->
+  <div class="modal-overlay" id="departmentFormModal">
+    <div class="modal-card modal-form-card">
+      <div class="modal-header">
+        <h3 class="modal-title" id="deptFormTitle">New Department</h3>
+        <button type="button" class="modal-close-btn" id="deptFormClose" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="departmentForm" class="modal-body">
+        <input type="hidden" id="deptEditId" value="">
+        <div class="modal-form-group">
+          <label class="modal-form-label">Department Name</label>
+          <input type="text" class="modal-form-input" id="deptNameInput" placeholder="e.g. Core Infrastructure" required>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label">Color Hex</label>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input type="color" id="deptColorPicker" value="#2563EB" style="width:40px; height:36px; border:1px solid var(--color-border); border-radius:var(--radius-sm); cursor:pointer; padding:2px; background:none;">
+            <input type="text" class="modal-form-input" id="deptColorInput" placeholder="#2563EB" required style="flex:1;">
+          </div>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-form-label">Display Order</label>
+          <input type="number" class="modal-form-input" id="deptOrderInput" min="1" step="1" placeholder="1" required>
+        </div>
+        <div class="modal-actions-footer">
+          <button type="button" class="btn btn-secondary" id="deptCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="deptSaveBtn">Save Department</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Member Edit Modal (Admin Only) -->
+  <div class="modal-overlay" id="editMemberModal">
+    <div class="modal-card" style="max-width:560px;">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title">Edit Member Profile</h3>
+          <p style="font-size:11.5px; color:var(--color-text-muted); margin-top:2px;">Update role, department assignment, manager reporting line, and band.</p>
+        </div>
+        <button type="button" class="modal-close-btn" id="emCloseBtn" aria-label="Close modal">&times;</button>
+      </div>
+      <div id="emError" style="display:none; color:var(--color-red); font-size:var(--text-xs); margin:0 var(--space-4) var(--space-3); background:#FDF2F2; padding:6px 12px; border-radius:var(--radius-sm); border:1px solid rgba(214,69,69,0.2);"></div>
+      <form id="editMemberForm" class="modal-body" style="padding:var(--space-4);">
+        <input type="hidden" id="emMemberId" value="">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3);" class="form-group">
+          <div><label class="form-label">Full Name</label><input type="text" id="emName" class="form-input" required></div>
+          <div><label class="form-label">Email (Read-only)</label><input type="email" id="emEmail" class="form-input" disabled style="background:var(--color-bg); opacity:0.8;"></div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3);" class="form-group">
+          <div><label class="form-label">Title / Role *</label><input type="text" id="emRole" class="form-input" required></div>
+          <div><label class="form-label">Department *</label><select id="emDept" class="form-input" required></select></div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3);" class="form-group">
+          <div><label class="form-label">Reporting Manager</label><select id="emManager" class="form-input"></select></div>
+          <div><label class="form-label">Band / Level *</label><select id="emBand" class="form-input" required></select></div>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-3);" class="form-group">
+          <div><label class="form-label">Workplace Location *</label><input type="text" id="emLocation" class="form-input" required></div>
+          <div><label class="form-label">Start Date *</label><input type="date" id="emStartDate" class="form-input" required></div>
+        </div>
+        <div class="modal-actions-footer">
+          <button type="button" class="btn btn-secondary" id="emCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Changes</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Member Offboard Modal (Admin Only) -->
+  <div class="modal-overlay" id="offboardMemberModal">
+    <div class="modal-card modal-form-card">
+      <div class="modal-header">
+        <h3 class="modal-title" style="color:var(--color-red);">Offboard Team Member</h3>
+        <button type="button" class="modal-close-btn" id="offboardCloseBtn" aria-label="Close modal">&times;</button>
+      </div>
+      <form id="offboardMemberForm" class="modal-body">
+        <input type="hidden" id="offboardMemberId" value="">
+        <p style="font-size:var(--text-xs); color:var(--color-text); margin-bottom:var(--space-3); line-height:1.5;">
+          You are offboarding <strong id="offboardMemberName">--</strong> (<span id="offboardMemberRole">--</span>).
+        </p>
+
+        <div id="offboardReportsAlert" style="display:none; background:#FFFBEB; border:1px solid #FDE68A; border-radius:var(--radius-sm); padding:10px 12px; margin-bottom:var(--space-3);">
+          <div style="font-size:11.5px; font-weight:700; color:#B45309; margin-bottom:4px;">Direct Reports Detected</div>
+          <div style="font-size:11px; color:#92400E; margin-bottom:8px;" id="offboardReportsDesc">This member manages active direct reports. Please designate a new manager to inherit them:</div>
+          <select class="form-input" id="offboardReassignSelect" style="font-size:11.5px;"></select>
+        </div>
+
+        <div style="background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-sm); padding:10px 12px; font-size:11px; color:var(--color-text-muted); line-height:1.5;">
+          <strong>Historical Data Policy:</strong> Past completed deliverables, review cycle scores, and activity logs will remain preserved with this member's identity. They will be marked inactive and removed from the live hierarchy tree.
+        </div>
+
+        <div class="modal-actions-footer">
+          <button type="button" class="btn btn-secondary" id="offboardCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-danger" id="offboardConfirmBtn">Confirm Offboarding</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/mock-data.js"></script>
+  <script src="js/data-store.js"></script>
+  <script src="js/data-store-writes.js"></script>
+  <script src="js/data-store-team-writes.js"></script>
+  <script src="js/status-badge.js"></script>
+  <script src="js/kpi-engine.js"></script>
+  <script src="js/member-modal.js"></script>
+  <script src="js/password-modal.js"></script>
+  <script src="js/new-member-modal.js"></script>
+  <script src="js/task-asset-field.js"></script>
+  <script src="js/task-detail-modal.js"></script>
+  <script src="js/command-palette.js"></script>
+  <script src="js/hierarchy-seed.js"></script>
+  <script src="js/hierarchy-connectors.js"></script>
+  <script src="js/hierarchy-render.js"></script>
+  <script src="js/hierarchy-panel.js"></script>
+  <script src="js/hierarchy-popover.js"></script>
+  <script src="js/hierarchy.js"></script>
+</body>
+</html>
