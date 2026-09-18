@@ -79,6 +79,7 @@
           }
         }
         (parsed.members || []).forEach(m => {
+          if (m.isUnassigned || m.role === 'Unassigned') return;
           const s = seedMembers.find(sm => sm.id === m.id);
           if (!m.department) { m.department = s?.department || 'Engineering'; upgraded = true; }
           if (!m.band) { m.band = s?.band || 'L4 - Specialist'; upgraded = true; }
@@ -106,6 +107,51 @@
             upgraded = true;
           }
         });
+        if (!parsed.members.some(m => m.isUnassigned || m.role === 'Unassigned')) {
+          parsed.members.push(
+            {
+              id: 'm-unassigned-1',
+              name: 'Kavita Rao',
+              username: 'kavita.rao',
+              passwordHash: sha256('Useme@2026'),
+              email: 'kavita.rao@useme.in',
+              role: 'Unassigned',
+              department: 'Unassigned',
+              reportsTo: null,
+              avatar: 'KR',
+              band: 'Unassigned',
+              location: 'Bangalore, IN',
+              startDate: '2026-09-18',
+              joinedDate: 'Sep 2026',
+              skills: ['React', 'CSS'],
+              skillCategory: 'dev',
+              proficiency: 'Intermediate',
+              isActive: true,
+              isUnassigned: true
+            },
+            {
+              id: 'm-unassigned-2',
+              name: 'Arnav Patel',
+              username: 'arnav.patel',
+              passwordHash: sha256('Useme@2026'),
+              email: 'arnav.patel@useme.in',
+              role: 'Unassigned',
+              department: 'Unassigned',
+              reportsTo: null,
+              avatar: 'AP',
+              band: 'Unassigned',
+              location: 'Mumbai, IN',
+              startDate: '2026-09-18',
+              joinedDate: 'Sep 2026',
+              skills: ['Financial Analysis'],
+              skillCategory: 'finance',
+              proficiency: 'Beginner',
+              isActive: true,
+              isUnassigned: true
+            }
+          );
+          upgraded = true;
+        }
         if (!parsed.cycles || !Array.isArray(parsed.cycles) || parsed.cycles.length === 0) {
           parsed.cycles = clone(seedMembers && window.USEME_DATA?.cycles ? window.USEME_DATA.cycles : [
             { id: 'cycle-mar-2026', label: 'Mar 2026', startDate: '2026-03-01', endDate: '2026-03-31', isCurrent: false },
@@ -193,9 +239,67 @@
         (parsed.members || []).forEach(m => {
           if (m.isActive === undefined) { m.isActive = true; upgraded = true; }
         });
+        if (!parsed.targetGroups || !Array.isArray(parsed.targetGroups) || parsed.targetGroups.length === 0) {
+          parsed.targetGroups = clone(window.USEME_DATA?.targetGroups || [
+            { id: 'tg-field', name: 'Field Outreach Specialists', memberIds: ['m5', 'm6', 'm7'], targetPoints: 45 },
+            { id: 'tg-core', name: 'Core Operations & Strategy', memberIds: ['m2', 'm3', 'm4'], targetPoints: 35 }
+          ]);
+          upgraded = true;
+        }
+        if (!parsed.memberTargetOverrides || typeof parsed.memberTargetOverrides !== 'object') {
+          parsed.memberTargetOverrides = clone(window.USEME_DATA?.memberTargetOverrides || {
+            'm5': { engagement: 50, motivation: 45 }
+          });
+          upgraded = true;
+        }
         (parsed.zoomSessions || []).forEach(z => {
           if (!z.time) { z.time = '10:00 AM'; upgraded = true; }
+          if (!z.scheduledStart) {
+            let hours = 10, mins = 0;
+            const parts = (z.time || '').match(/(\d+):(\d+)\s*(AM|PM)/i);
+            if (parts) {
+              hours = parseInt(parts[1], 10);
+              mins = parseInt(parts[2], 10);
+              if (parts[3].toUpperCase() === 'PM' && hours < 12) hours += 12;
+              if (parts[3].toUpperCase() === 'AM' && hours === 12) hours = 0;
+            }
+            const pad = (n) => String(n).padStart(2, '0');
+            z.scheduledStart = `${z.date}T${pad(hours)}:${pad(mins)}:00.000Z`;
+            z.sessionEnd = `${z.date}T${pad((hours + 1) % 24)}:${pad(mins)}:00.000Z`;
+            upgraded = true;
+          }
+          if (!z.attendanceRecords) {
+            z.attendanceRecords = {};
+            Object.entries(z.attendance || {}).forEach(([mid, status]) => {
+              z.attendanceRecords[mid] = {
+                sessionId: z.id,
+                memberId: mid,
+                capturedAt: z.scheduledStart,
+                status,
+                source: 'self-capture'
+              };
+            });
+            upgraded = true;
+          }
         });
+        if (parsed.zoomSessions && !parsed.zoomSessions.some(z => z.id === 'z-live')) {
+          parsed.zoomSessions.unshift({
+            id: "z-live",
+            title: "Daily Sync & Open Office Hours (Live)",
+            date: "2026-09-18",
+            time: "09:00 PM",
+            scheduledStart: "2026-09-18T21:00:00.000Z",
+            sessionEnd: "2026-09-18T22:30:00.000Z",
+            attendance: { "m1": "present", "m2": "present", "m3": "present", "m4": "present" },
+            attendanceRecords: {
+              "m1": { sessionId: "z-live", memberId: "m1", capturedAt: "2026-09-18T21:02:00.000Z", status: "present", source: "self-capture" },
+              "m2": { sessionId: "z-live", memberId: "m2", capturedAt: "2026-09-18T21:01:30.000Z", status: "present", source: "admin-override" },
+              "m3": { sessionId: "z-live", memberId: "m3", capturedAt: "2026-09-18T21:03:15.000Z", status: "present", source: "self-capture" },
+              "m4": { sessionId: "z-live", memberId: "m4", capturedAt: "2026-09-18T21:08:45.000Z", status: "late", source: "self-capture" }
+            }
+          });
+          upgraded = true;
+        }
         if (upgraded) {
           try { localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed)); } catch (err) {}
         }
@@ -246,8 +350,59 @@
         { id: 'dept-fin', name: 'Finance & Operations', colorHex: '#0D9488', order: 5 },
         { id: 'dept-data', name: 'Data & Analytics', colorHex: '#7C3AED', order: 6 },
         { id: 'dept-supp', name: 'Customer Support', colorHex: '#E11D48', order: 7 }
-      ])
+      ]),
+      targetGroups: clone(seed.targetGroups || [
+        { id: 'tg-field', name: 'Field Outreach Specialists', memberIds: ['m5', 'm6', 'm7'], targetPoints: 45 },
+        { id: 'tg-core', name: 'Core Operations & Strategy', memberIds: ['m2', 'm3', 'm4'], targetPoints: 35 }
+      ]),
+      memberTargetOverrides: clone(seed.memberTargetOverrides || {
+        'm5': { engagement: 50, motivation: 45 }
+      })
     };
+    if (!initial.members.some(m => m.isUnassigned || m.role === 'Unassigned')) {
+      initial.members.push(
+        {
+          id: 'm-unassigned-1',
+          name: 'Kavita Rao',
+          username: 'kavita.rao',
+          passwordHash: sha256('Useme@2026'),
+          email: 'kavita.rao@useme.in',
+          role: 'Unassigned',
+          department: 'Unassigned',
+          reportsTo: null,
+          avatar: 'KR',
+          band: 'Unassigned',
+          location: 'Bangalore, IN',
+          startDate: '2026-09-18',
+          joinedDate: 'Sep 2026',
+          skills: ['React', 'CSS'],
+          skillCategory: 'dev',
+          proficiency: 'Intermediate',
+          isActive: true,
+          isUnassigned: true
+        },
+        {
+          id: 'm-unassigned-2',
+          name: 'Arnav Patel',
+          username: 'arnav.patel',
+          passwordHash: sha256('Useme@2026'),
+          email: 'arnav.patel@useme.in',
+          role: 'Unassigned',
+          department: 'Unassigned',
+          reportsTo: null,
+          avatar: 'AP',
+          band: 'Unassigned',
+          location: 'Mumbai, IN',
+          startDate: '2026-09-18',
+          joinedDate: 'Sep 2026',
+          skills: ['Financial Analysis'],
+          skillCategory: 'finance',
+          proficiency: 'Beginner',
+          isActive: true,
+          isUnassigned: true
+        }
+      );
+    }
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(initial));
     } catch (e) {
@@ -329,6 +484,9 @@
       }
       if (typeof f === 'function') return list.filter(f);
       return filterList(list, f);
+    },
+    getUnassignedMembers: () => {
+      return (_data.members || []).filter(m => m.isActive !== false && (m.isUnassigned === true || m.role === 'Unassigned'));
     },
     getMemberById: (id) => {
       const m = (_data.members || []).find(x => x.id === id);
@@ -435,6 +593,16 @@
     getActivityTypeById: (id) => {
       const t = (_data.activityTypes || []).find(x => x.id === id);
       return t ? { ...t } : null;
+    },
+    getTargetGroups: () => (_data.targetGroups || []).slice(),
+    getTargetGroupById: (id) => (_data.targetGroups || []).find(g => g.id === id) || null,
+    getMemberTargetOverrides: () => clone(_data.memberTargetOverrides || {}),
+    getMemberTargetOverride: (memberId, category) => {
+      const overrides = _data.memberTargetOverrides?.[memberId];
+      if (!overrides) return null;
+      if (typeof overrides === 'number') return overrides;
+      if (category && overrides[category] !== undefined) return overrides[category];
+      return overrides.targetPoints ?? overrides.points ?? null;
     },
     getKraObjectives: () => (_data.kraObjectives || []).slice(),
     getKraHistory: () => (_data.kraHistory || { months: [], org: [], members: {} }),

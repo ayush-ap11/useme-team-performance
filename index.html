@@ -15,42 +15,93 @@
       <p class="login-subtitle">Performance Dashboard</p>
     </header>
 
-    <div class="role-toggle-group" role="group" aria-label="Select User Role">
-      <button type="button" class="role-toggle-btn" id="roleAdmin" aria-pressed="false">Admin</button>
-      <button type="button" class="role-toggle-btn active" id="roleMember" aria-pressed="true">Team Member</button>
+    <div class="auth-tabs" role="tablist" aria-label="Authentication Mode">
+      <button type="button" class="auth-tab active" id="tabLogin" role="tab" aria-selected="true">Sign In</button>
+      <button type="button" class="auth-tab" id="tabSignup" role="tab" aria-selected="false">Sign Up (New Member)</button>
     </div>
 
-    <form id="loginForm" novalidate>
-      <div class="form-group">
-        <label for="username" class="form-label">Username / Email</label>
-        <input type="text" id="username" name="username" class="form-input" placeholder="e.g. aditya.sharma or rahul.sen" required autocomplete="username">
+    <div id="loginSection">
+      <div class="role-toggle-group" role="group" aria-label="Select User Role">
+        <button type="button" class="role-toggle-btn" id="roleAdmin" aria-pressed="false">Admin</button>
+        <button type="button" class="role-toggle-btn active" id="roleMember" aria-pressed="true">Team Member</button>
       </div>
 
-      <div class="form-group">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" id="password" name="password" class="form-input" placeholder="Enter password" required autocomplete="current-password">
-      </div>
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="username" class="form-label">Username / Email</label>
+          <input type="text" id="username" name="username" class="form-input" placeholder="e.g. aditya.sharma or rahul.sen" required autocomplete="username">
+        </div>
 
-      <button type="submit" class="btn btn-primary btn-full" id="loginSubmitBtn">Login</button>
-      
-      <div id="loginError" class="login-error" role="alert" aria-live="polite"></div>
-    </form>
+        <div class="form-group">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" id="password" name="password" class="form-input" placeholder="Enter password" required autocomplete="current-password">
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" id="loginSubmitBtn">Login</button>
+        
+        <div id="loginError" class="login-error" role="alert" aria-live="polite"></div>
+        <div class="auth-switch"><p>New team member? <button type="button" class="auth-switch-link" id="linkToSignup">Register your credentials</button></p></div>
+      </form>
+    </div>
+
+    <div id="signupSection" style="display: none;">
+      <form id="signupForm" novalidate>
+        <div class="form-group">
+          <label for="signupName" class="form-label">Full Name *</label>
+          <input type="text" id="signupName" class="form-input" placeholder="e.g. Pooja Sharma" required>
+        </div>
+
+        <div class="form-group">
+          <label for="signupEmail" class="form-label">Email Address *</label>
+          <input type="email" id="signupEmail" class="form-input" placeholder="e.g. pooja.sharma@useme.in" required>
+        </div>
+
+        <div class="form-group">
+          <label for="signupUsername" class="form-label">Username (Login ID) *</label>
+          <input type="text" id="signupUsername" class="form-input" placeholder="e.g. pooja.sharma" required>
+        </div>
+
+        <div class="form-group">
+          <label for="signupPassword" class="form-label">Password *</label>
+          <input type="password" id="signupPassword" class="form-input" placeholder="Min. 4 characters" required>
+        </div>
+
+        <div class="form-group">
+          <label for="signupConfirmPassword" class="form-label">Confirm Password *</label>
+          <input type="password" id="signupConfirmPassword" class="form-input" placeholder="Re-enter password" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-full" id="signupSubmitBtn">Create Member Account</button>
+
+        <div id="signupAlert" class="login-error" role="alert" aria-live="polite"></div>
+        <div class="auth-switch"><p>Already registered? <button type="button" class="auth-switch-link" id="linkToLogin">Sign in to your account</button></p></div>
+      </form>
+    </div>
 
     <!-- Demo Credentials Quick Reference -->
     <div class="demo-creds-box">
       <div class="demo-creds-title">Demo Credentials (Click to fill)</div>
       <ul class="demo-creds-list">
-        <li class="demo-creds-item" data-role="admin" data-user="aditya.sharma" data-pass="Useme@Admin1">
-          <span><strong>Admin:</strong> Aditya Sharma</span>
-          <code>aditya.sharma / Useme@Admin1</code>
+        <li class="demo-creds-item" data-role="admin" data-user="aditya.sharma" data-pass="Useme@Admin1" title="Click to fill Admin credentials">
+          <div class="demo-creds-info">
+            <span class="demo-role-badge badge-admin">Admin</span>
+            <span class="demo-name">Aditya Sharma</span>
+          </div>
+          <span class="demo-user-tag">aditya.sharma</span>
         </li>
-        <li class="demo-creds-item" data-role="member" data-user="rahul.sen" data-pass="Useme@Member1">
-          <span><strong>Member:</strong> Rahul Sen (m5)</span>
-          <code>rahul.sen / Useme@Member1</code>
+        <li class="demo-creds-item" data-role="member" data-user="rahul.sen" data-pass="Useme@Member1" title="Click to fill Member credentials">
+          <div class="demo-creds-info">
+            <span class="demo-role-badge badge-member">Member</span>
+            <span class="demo-name">Rahul Sen</span>
+          </div>
+          <span class="demo-user-tag">rahul.sen</span>
         </li>
-        <li class="demo-creds-item" data-role="member" data-user="rohan.verma" data-pass="Useme@2026">
-          <span><strong>Member:</strong> Rohan Verma (m2)</span>
-          <code>rohan.verma / Useme@2026</code>
+        <li class="demo-creds-item" data-role="member" data-user="rohan.verma" data-pass="Useme@2026" title="Click to fill Member credentials">
+          <div class="demo-creds-info">
+            <span class="demo-role-badge badge-member">Member</span>
+            <span class="demo-name">Rohan Verma</span>
+          </div>
+          <span class="demo-user-tag">rohan.verma</span>
         </li>
       </ul>
     </div>

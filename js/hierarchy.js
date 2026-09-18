@@ -54,24 +54,16 @@ document.addEventListener('DOMContentLoaded', () => {
   if (treeCanvas) {
     treeCanvas.addEventListener('mousedown', (e) => {
       if (e.target.closest('.zoho-card') || e.target.closest('.zoho-connector-badge-group')) return;
-      isDown = true;
-      startX = e.pageX;
-      startY = e.pageY;
-      startLeft = treeCanvas.scrollLeft;
-      startTop = treeCanvas.scrollTop;
+      isDown = true; startX = e.pageX; startY = e.pageY;
+      startLeft = treeCanvas.scrollLeft; startTop = treeCanvas.scrollTop;
       treeCanvas.classList.add('is-dragging');
     });
-
     window.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
+      if (!isDown) return; e.preventDefault();
       treeCanvas.scrollLeft = startLeft - (e.pageX - startX);
       treeCanvas.scrollTop = startTop - (e.pageY - startY);
     });
-
-    window.addEventListener('mouseup', () => {
-      if (isDown) { isDown = false; treeCanvas.classList.remove('is-dragging'); }
-    });
+    window.addEventListener('mouseup', () => { if (isDown) { isDown = false; treeCanvas.classList.remove('is-dragging'); } });
 
     treeCanvas.addEventListener('scroll', () => {
       const container = document.getElementById('zohoColumns');
@@ -122,12 +114,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const btnAddMember = document.getElementById('btnAddMember');
+  const btnUnassigned = document.getElementById('btnUnassignedNotice');
+  const un = (window.DataStore?.getUnassignedMembers?.() || []);
+  if (btnUnassigned && un.length) {
+    btnUnassigned.style.display = 'inline-flex';
+    const txt = document.getElementById('unassignedCountText');
+    if (txt) txt.textContent = `${un.length} Awaiting Role`;
+    btnUnassigned.onclick = () => window.openNewMemberModal?.(() => window.location.reload());
+  }
+  if (btnAddMember) btnAddMember.onclick = () => window.openNewMemberModal?.(() => window.location.reload());
+
   if (btnExport) {
-    btnExport.addEventListener('click', () => {
+    btnExport.onclick = () => {
       const rows = [['ID', 'Name', 'Role', 'Department', 'Manager ID', 'Total Reports'], ...hierarchyData.map(e => [e.id, `"${e.name}"`, `"${e.role}"`, `"${e.department}"`, e.managerId || '', e.totalReportCount])];
       const blob = new Blob([rows.map(r => r.join(',')).join('\n')], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'useme_team_hierarchy.csv'; a.click();
-    });
+    };
   }
 
   window.addEventListener('resize', () => {

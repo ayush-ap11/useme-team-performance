@@ -41,12 +41,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getRag(pct) {
-    if (pct >= 90) return { cls: 'rag-green', label: 'On Track', color: 'var(--color-green)' };
-    if (pct >= 70) return { cls: 'rag-amber', label: 'At Risk', color: 'var(--color-orange)' };
+    if (window.SCORING_ENGINE?.getRAG) return window.SCORING_ENGINE.getRAG(pct);
+    if (pct >= 85) return { cls: 'rag-green', label: 'On Track', color: 'var(--color-green)' };
+    if (pct >= 60) return { cls: 'rag-amber', label: 'At Risk', color: 'var(--color-orange)' };
     return { cls: 'rag-red', label: 'Behind', color: 'var(--color-red)' };
   }
 
   function getPillarSnapshot(currentCycle, kraObjectives, kraHistory, memberId) {
+    if (window.SCORING_ENGINE) {
+      const kra = window.SCORING_ENGINE.getKRAScore(memberId || 'all', currentCycle);
+      const list = Object.values(kra.pillars || {}).map(p => ({
+        pillar: p.name,
+        title: p.targetDescription || p.name,
+        attainment: p.score,
+        rag: p.rag
+      }));
+      const sorted = [...list].sort((a, b) => b.attainment - a.attainment);
+      const topPillar = sorted[0] || { pillar: 'Growth', title: 'Output Velocity', attainment: 90, rag: getRag(90) };
+      const focusPillar = sorted[sorted.length - 1] || { pillar: 'Quality', title: 'Quality Standards', attainment: 85, rag: getRag(85) };
+      const counts = {
+        onTrack: list.filter(p => p.attainment >= 85).length,
+        atRisk: list.filter(p => p.attainment >= 60 && p.attainment < 85).length,
+        behind: list.filter(p => p.attainment < 60).length
+      };
+      return { topPillar, focusPillar, counts, totalAttain: Math.round(kra.overall), totalRag: kra.rag };
+    }
     let histIdx = 5;
     if (currentCycle && kraHistory?.months?.length) {
       const match = kraHistory.months.findIndex(m => currentCycle.label.toLowerCase().includes(m.toLowerCase()) || m.toLowerCase().includes(currentCycle.label.slice(0, 3).toLowerCase()));
@@ -63,14 +82,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const sorted = [...pillars].sort((a, b) => b.attainment - a.attainment);
     const [topPillar, focusPillar] = [sorted[0] || { pillar: 'Growth', title: 'Output Velocity', attainment: 90, rag: getRag(90) }, sorted[sorted.length - 1] || { pillar: 'Quality', title: 'Quality Standards', attainment: 85, rag: getRag(85) }];
-    const counts = { onTrack: pillars.filter(p => p.attainment >= 90).length, atRisk: pillars.filter(p => p.attainment >= 70 && p.attainment < 90).length, behind: pillars.filter(p => p.attainment < 70).length };
+    const counts = { onTrack: pillars.filter(p => p.attainment >= 85).length, atRisk: pillars.filter(p => p.attainment >= 60 && p.attainment < 85).length, behind: pillars.filter(p => p.attainment < 60).length };
     return { topPillar, focusPillar, counts, totalAttain: Math.round(histTotal), totalRag: getRag(Math.round(histTotal)) };
   }
 
   function renderTopbar(name, roleLabel, avatar, cycles, currentCycle, isAdm) {
+    const activeCycleId = currentCycle?.id;
     const cycleAffordance = isAdm ? `
       <select class="dash-select" id="dashCycleSelect" aria-label="Review Cycle">
-        ${cycles.map(c => `<option value="${c.id}" ${c.isCurrent ? 'selected' : ''}>Cycle: ${escapeHtml(c.label)}${c.isCurrent ? ' (Current)' : ''}</option>`).join('')}
+        ${cycles.map(c => `<option value="${c.id}" ${c.id === activeCycleId ? 'selected' : ''}>Cycle: ${escapeHtml(c.label)}${c.isCurrent ? ' (Current)' : ''}</option>`).join('')}
         <option disabled>──────────</option>
         <option value="__NEW__">+ New Cycle...</option>
         <option value="__MANAGE__">Manage Cycles...</option>
@@ -96,8 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderEngMotCard(memberId) {
-    const eng = window.KPI_ENGINE?.calculateEngagementScore(memberId) || 84;
-    const mot = window.KPI_ENGINE?.calculateMotivationScore(memberId) || 88;
+    const eng = window.SCORING_ENGINE ? window.SCORING_ENGINE.getEngagementScore(memberId) : (window.KPI_ENGINE?.calculateEngagementScore(memberId) || 84);
+    const mot = window.SCORING_ENGINE ? window.SCORING_ENGINE.getMotivationScore(memberId) : (window.KPI_ENGINE?.calculateMotivationScore(memberId) || 88);
     return `<div class="stat-card" style="cursor:pointer;" onclick="window.location.href='engagement-motivation.html'">
       <div class="stat-header">
         <div class="stat-icon-badge stat-icon-purple"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
@@ -372,6 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('manageCyclesModal').classList.add('active');
   }
 
+  let selectedCycleId = null;
   function renderDashboard() {
     const isAdm = role === 'admin';
     const targetMid = isAdm ? null : currentUserId;
@@ -380,16 +401,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const kraObjectives = window.DataStore ? window.DataStore.getKraObjectives() : [];
     const kraHistory = window.DataStore ? window.DataStore.getKraHistory() : { months: ['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'], org: [82, 84, 85, 87, 89, 90.2], members: {} };
     const cycles = window.DataStore ? window.DataStore.getCycles() : [];
-    const currentCycle = (window.DataStore && window.DataStore.getCurrentCycle()) || cycles.find(c => c.isCurrent) || cycles[cycles.length - 1];
+    const activeCycle = (selectedCycleId ? cycles.find(c => c.id === selectedCycleId) : null) || (window.DataStore && window.DataStore.getCurrentCycle()) || cycles.find(c => c.isCurrent) || cycles[cycles.length - 1];
+    if (activeCycle) selectedCycleId = activeCycle.id;
 
-    const snap = getPillarSnapshot(currentCycle, kraObjectives, kraHistory, targetMid);
+    const snap = getPillarSnapshot(activeCycle, kraObjectives, kraHistory, targetMid);
     const totalMembers = members.length;
     const activeTasks = tasks.filter(t => !['completed', 'cancelled'].includes(t.status)).length;
     const pendingSubs = tasks.filter(t => t.submittedForReview).length;
     const me = window.getMemberOrFallback ? window.getMemberOrFallback(currentUserId, { name: 'Member', role: 'Specialist', avatar: 'ME' }) : (members.find(m => m.id === currentUserId) || { name: 'Member', role: 'Specialist', avatar: 'ME' });
 
     mainContent.innerHTML = `
-      ${renderTopbar(isAdm ? 'Admin' : me.name, isAdm ? 'Administrator' : me.role, isAdm ? 'AD' : me.avatar, cycles, currentCycle, isAdm)}
+      ${renderTopbar(isAdm ? 'Admin' : me.name, isAdm ? 'Administrator' : me.role, isAdm ? 'AD' : me.avatar, cycles, activeCycle, isAdm)}
       <div class="stats-grid">
         ${renderDonutCard('Overall KRA Attainment', snap)}
         ${renderEngMotCard(targetMid)}
@@ -449,20 +471,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const val = e.target.value;
         const u = window.currentUser || window.DataStore?.getCurrentUser();
         if (val === '__NEW__') {
-          cSel.value = currentCycle?.id || '';
+          cSel.value = selectedCycleId || '';
           openNewCycleModal();
         } else if (val === '__MANAGE__') {
-          cSel.value = currentCycle?.id || '';
+          cSel.value = selectedCycleId || '';
           openManageCyclesModal();
         } else if (val) {
-          try {
-            if (window.DataStore?.setCurrentCycle) {
-              window.DataStore.setCurrentCycle(val, u);
-              renderDashboard();
-            }
-          } catch (err) {
-            console.error('Failed to set current cycle:', err);
-          }
+          selectedCycleId = val;
+          renderDashboard();
         }
       };
     }

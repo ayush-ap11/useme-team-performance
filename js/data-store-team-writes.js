@@ -66,6 +66,91 @@
     return _clone(m);
   };
 
+  DS.registerMember = (data) => {
+    const name = (data.name || '').trim();
+    if (!name) throw new Error('Full name is required');
+    const email = (data.email || '').toLowerCase().trim();
+    if (!email || !email.includes('@')) throw new Error('A valid email address is required');
+    if (_data.members.some(m => (m.email || '').toLowerCase() === email)) {
+      throw new Error('A member with this email address already exists');
+    }
+    const username = (data.username || name.toLowerCase().replace(/[^a-z0-9]+/g, '.')).toLowerCase().trim();
+    if (!username || username.length < 3) throw new Error('Username must be at least 3 characters');
+    if (_data.members.some(m => (m.username || '').toLowerCase() === username)) {
+      throw new Error('This username is already taken');
+    }
+    const rawPass = (data.password || '').trim();
+    if (!rawPass || rawPass.length < 4) throw new Error('Password must be at least 4 characters');
+
+    const initials = name.split(' ').filter(Boolean).map(n => n[0]).join('').toUpperCase().slice(0, 2) || 'TM';
+    const m = {
+      id: data.id || ('m' + (_data.members.length + 1)),
+      name, username,
+      passwordHash: DS.hashPassword(rawPass),
+      email,
+      phone: data.phone || '',
+      role: 'Unassigned',
+      department: 'Unassigned',
+      reportsTo: null,
+      avatar: initials,
+      band: 'Unassigned',
+      location: data.location || 'Bangalore, IN',
+      startDate: new Date().toISOString().slice(0, 10),
+      joinedDate: new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+      skills: [],
+      skillCategory: null,
+      proficiency: 'Beginner',
+      verified: false,
+      rank: '#' + (_data.members.length + 1),
+      kpiScore: 70,
+      kriPenalty: 0,
+      compositeScore: 70,
+      isActive: true,
+      isUnassigned: true
+    };
+    _data.members.push(m);
+    _persist();
+    DS.logActivity(m.id, `registered credentials as a new team member`, 'member', m.id);
+    return _clone(m);
+  };
+
+  DS.assignMemberToHierarchy = (id, details, u) => {
+    reqAdmin('assignMemberToHierarchy', u);
+    const m = _data.members.find(x => x.id === id);
+    if (!m) throw new Error(`Member not found: ${id}`);
+    m.role = details.role || 'Member';
+    m.department = details.department || 'Engineering';
+    m.reportsTo = details.reportsTo || null;
+    m.band = details.band || 'L4 - Specialist';
+    m.location = details.location || 'Bangalore, IN';
+    m.startDate = details.startDate || new Date().toISOString().slice(0, 10);
+    m.skillCategory = details.skillCategory || 'dev';
+    if (details.avatar) m.avatar = details.avatar;
+    m.isUnassigned = false;
+
+    _data.skillProficiencies = _data.skillProficiencies || [];
+    const existingSp = _data.skillProficiencies.find(sp => sp.memberId === m.id && sp.categoryId === m.skillCategory);
+    if (!existingSp) {
+      _data.skillProficiencies.push({
+        id: `sp-${m.id}-${m.skillCategory}`,
+        memberId: m.id,
+        categoryId: m.skillCategory,
+        level: details.proficiency || 'Beginner',
+        lastUpdated: new Date().toISOString(),
+        updatedBy: u?.id || 'admin'
+      });
+    }
+    _persist();
+    const mgr = _data.members.find(x => x.id === m.reportsTo);
+    const mgrName = mgr ? mgr.name : (m.reportsTo || 'None');
+    DS.logActivity(u?.id, `assigned ${m.name} as ${m.role} reporting to ${mgrName}`, 'member', m.id);
+    return _clone(m);
+  };
+
+  DS.getUnassignedMembers = () => {
+    return (_data.members || []).filter(m => m.isActive !== false && (m.isUnassigned === true || m.role === 'Unassigned'));
+  };
+
   DS.updateMemberRole = (id, role, u) => {
     reqAdmin('updateMemberRole', u);
     const m = _data.members.find(x => x.id === id);
@@ -93,12 +178,115 @@
     reqAdmin('setZoomAttendance', u);
     const sess = sid ? _data.zoomSessions.find(z => z.id === sid) : _data.zoomSessions[0];
     if (!sess) throw new Error(`Zoom session not found: ${sid}`);
-    sess.attendance = sess.attendance || {}; sess.attendance[mid] = st;
+    sess.attendance = sess.attendance || {};
+    sess.attendance[mid] = st;
+    sess.attendanceRecords = sess.attendanceRecords || {};
+    sess.attendanceRecords[mid] = {
+      sessionId: sess.id,
+      memberId: mid,
+      capturedAt: new Date().toISOString(),
+      status: st,
+      source: 'admin-override'
+    };
     _persist();
     const targetMember = _data.members.find(m => m.id === mid);
     const mName = targetMember ? targetMember.name : mid;
     DS.logActivity(u?.id, `marked ${mName} as ${st} in "${sess.title}"`, 'attendance', sess.id);
     return _clone(sess);
+  };
+
+  DS.recordZoomSelfCapture = (sid, mid, captureTime, u) => {
+    if (!u) throw new Error('Unauthorized: login session required');
+    const sess = _data.zoomSessions.find(z => z.id === sid);
+    if (!sess) throw new Error(`Zoom session not found: ${sid}`);
+    const existingRec = sess.attendanceRecords?.[mid];
+    if (existingRec && existingRec.source === 'admin-override') {
+      return _clone(sess);
+    }
+    const start = new Date(sess.scheduledStart || (sess.date + 'T10:00:00.000Z')).getTime();
+    const capTime = captureTime ? new Date(captureTime).getTime() : Date.now();
+    const diffMin = (capTime - start) / 60000;
+    let status = 'absent';
+    if (diffMin <= 5) status = 'present';
+    else if (diffMin <= 15) status = 'late';
+    else status = 'absent';
+
+    sess.attendance = sess.attendance || {};
+    sess.attendance[mid] = status;
+    sess.attendanceRecords = sess.attendanceRecords || {};
+    sess.attendanceRecords[mid] = {
+      sessionId: sess.id,
+      memberId: mid,
+      capturedAt: new Date(capTime).toISOString(),
+      status,
+      source: 'self-capture'
+    };
+    _persist();
+    const targetMember = _data.members.find(m => m.id === mid);
+    const mName = targetMember ? targetMember.name : mid;
+    DS.logActivity(mid, `joined "${sess.title}" (${status}, self-capture)`, 'attendance', sess.id);
+    return _clone(sess);
+  };
+
+  DS.saveTargetGroup = (group, u) => {
+    reqAdmin('saveTargetGroup', u);
+    if (!group || !group.name || isNaN(Number(group.targetPoints))) {
+      throw new Error('Group name and numeric target points are required');
+    }
+    _data.targetGroups = _data.targetGroups || [];
+    let saved;
+    if (group.id) {
+      const idx = _data.targetGroups.findIndex(g => g.id === group.id);
+      if (idx !== -1) {
+        _data.targetGroups[idx] = {
+          ..._data.targetGroups[idx],
+          name: group.name,
+          memberIds: Array.isArray(group.memberIds) ? group.memberIds : [],
+          targetPoints: Number(group.targetPoints)
+        };
+        saved = _data.targetGroups[idx];
+      }
+    }
+    if (!saved) {
+      saved = {
+        id: group.id || `tg-${Date.now()}`,
+        name: group.name,
+        memberIds: Array.isArray(group.memberIds) ? group.memberIds : [],
+        targetPoints: Number(group.targetPoints)
+      };
+      _data.targetGroups.push(saved);
+    }
+    _persist();
+    DS.logActivity(u?.id, `saved target group "${saved.name}" (${saved.targetPoints} pts)`, 'cycle', saved.id);
+    return _clone(saved);
+  };
+
+  DS.deleteTargetGroup = (id, u) => {
+    reqAdmin('deleteTargetGroup', u);
+    _data.targetGroups = _data.targetGroups || [];
+    const idx = _data.targetGroups.findIndex(g => g.id === id);
+    if (idx === -1) throw new Error('Target group not found');
+    const removed = _data.targetGroups.splice(idx, 1)[0];
+    _persist();
+    DS.logActivity(u?.id, `deleted target group "${removed.name}"`, 'cycle', id);
+    return true;
+  };
+
+  DS.setMemberTargetOverride = (memberId, category, points, u) => {
+    reqAdmin('setMemberTargetOverride', u);
+    _data.memberTargetOverrides = _data.memberTargetOverrides || {};
+    _data.memberTargetOverrides[memberId] = _data.memberTargetOverrides[memberId] || {};
+    if (points === null || points === undefined || points === '') {
+      delete _data.memberTargetOverrides[memberId][category];
+      if (Object.keys(_data.memberTargetOverrides[memberId]).length === 0) {
+        delete _data.memberTargetOverrides[memberId];
+      }
+    } else {
+      _data.memberTargetOverrides[memberId][category] = Number(points);
+    }
+    _persist();
+    DS.logActivity(u?.id, `updated target override for member ${memberId} (${category}: ${points} pts)`, 'cycle', memberId);
+    return _clone(_data.memberTargetOverrides);
   };
 
   // Skill Proficiency CRUD (Self-declaration by member, override by admin)

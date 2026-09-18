@@ -60,8 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
           ${getStatusBadge(task.status)}
         </div>
         <div class="sub-meta-box">
-          <span>Quality Self-Score: <strong>${task.qualityScore !== null ? task.qualityScore + '/10' : '8.5/10'}</strong></span>
-          <span style="color:var(--color-text-muted);">Due: ${task.dueDate}</span>
+          <span style="display:inline-flex; align-items:center; gap:5px; color:var(--color-text-muted); font-size:11.5px;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span>Due: <strong>${task.dueDate}</strong></span>
+          </span>
         </div>
         ${proofChipsHtml}
         <div class="sub-actions">

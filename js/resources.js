@@ -323,7 +323,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <td style="font-size:11px; color:var(--color-text-muted);">${item.timestamp || 'Aug 24, 2026'}</td>
         <td>
           <div style="display:inline-flex; align-items:center;">
-            <a href="${item.data || item.url || '#'}" target="_blank" download="${item.name}" class="btn btn-primary btn-xs" style="text-decoration:none;">View / Get</a>
+            <a href="${item.data || item.url || '#'}" target="_blank" download="${item.name}" class="btn btn-primary btn-xs" style="text-decoration:none;">View</a>
             ${deleteBtnHtml}
           </div>
         </td>

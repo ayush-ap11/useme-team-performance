@@ -209,19 +209,24 @@
     });
 
     const userTag = document.getElementById('modalUsernameTag');
-    if (userTag) userTag.textContent = activeMember.username ? `Login: @${activeMember.username}` : `ID: ${activeMember.id}`;
+    if (userTag) {
+      userTag.innerHTML = `
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-primary); flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+        <span>${activeMember.username ? `@${activeMember.username}` : `ID: ${activeMember.id}`}</span>
+      `;
+    }
 
     const pwdActionBtn = document.getElementById('btnMemberPasswordAction');
     if (pwdActionBtn) {
       if (isSelf) {
-        pwdActionBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Change Password';
-        pwdActionBtn.style.display = 'inline-block';
+        pwdActionBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg><span>Change Password</span>';
+        pwdActionBtn.style.display = 'inline-flex';
         pwdActionBtn.onclick = () => {
           if (window.openPasswordModal) window.openPasswordModal({ memberId: activeMember.id, isReset: false });
         };
       } else if (isAdmin) {
-        pwdActionBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><circle cx="7.5" cy="15.5" r="5.5"></circle><path d="m21 2-9.6 9.6"></path><path d="m15.5 7.5 3 3"></path></svg>Reset Password';
-        pwdActionBtn.style.display = 'inline-block';
+        pwdActionBtn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"></circle><path d="m21 2-9.6 9.6"></path><path d="m15.5 7.5 3 3"></path></svg><span>Reset Password</span>';
+        pwdActionBtn.style.display = 'inline-flex';
         pwdActionBtn.onclick = () => {
           if (window.openPasswordModal) window.openPasswordModal({ memberId: activeMember.id, isReset: true });
         };

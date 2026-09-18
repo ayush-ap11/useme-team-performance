@@ -26,8 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getRag(pct) {
-    if (pct >= 90) return { cls: 'rag-green', label: 'On Track', color: 'var(--color-green)' };
-    if (pct >= 70) return { cls: 'rag-amber', label: 'At Risk', color: 'var(--color-orange)' };
+    if (window.SCORING_ENGINE?.getRAG) return window.SCORING_ENGINE.getRAG(pct);
+    if (pct >= 85) return { cls: 'rag-green', label: 'On Track', color: 'var(--color-green)' };
+    if (pct >= 60) return { cls: 'rag-amber', label: 'At Risk', color: 'var(--color-orange)' };
     return { cls: 'rag-red', label: 'Behind', color: 'var(--color-red)' };
   }
 
@@ -42,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const match = scores.find(s => s.pillarId === pillar.id || s.pillarId.toLowerCase() === pillar.name.toLowerCase() || s.pillarId === ('pillar-' + pillar.name.toLowerCase()));
     if (match) return { score: match.score, notes: match.notes || '' };
 
-    // Fallback to legacy seed if present
     const legacyObj = kraObjectives.find(o => o.pillar.toLowerCase() === pillar.name.toLowerCase() || o.id === pillar.id);
     if (legacyObj && legacyObj.memberActuals && legacyObj.memberActuals[mId] !== undefined) {
       return { score: Number(legacyObj.memberActuals[mId]), notes: '' };
@@ -54,6 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const pillars = window.DataStore ? window.DataStore.getKraPillars() : [];
     const activeCycle = getActiveCycle();
 
+    if (window.SCORING_ENGINE) {
+      const kra = window.SCORING_ENGINE.getKRAScore(activeMemberId, activeCycle);
+      return pillars.map(p => {
+        const key = p.name.toLowerCase();
+        const pillarScore = kra.pillars[key] || kra.pillars[p.id?.replace('pillar-', '')] || { score: 85, attainment: 85, rag: getRag(85) };
+        return {
+          ...p,
+          score: pillarScore.score,
+          attainment: pillarScore.attainment || pillarScore.score,
+          rag: pillarScore.rag || getRag(pillarScore.score),
+          notes: activeMemberId === 'all' ? 'Team aggregate across all members' : (getMemberPillarScore(activeMemberId, activeCycle.id, p).notes || '')
+        };
+      });
+    }
+
     return pillars.map(p => {
       if (activeMemberId !== 'all') {
         const { score, notes } = getMemberPillarScore(activeMemberId, activeCycle.id, p);
@@ -61,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const rag = getRag(attainment);
         return { ...p, score, attainment, rag, notes };
       } else {
-        // Team average
         const allScores = members.map(m => getMemberPillarScore(m.id, activeCycle.id, p).score);
         const avg = allScores.length ? Math.round((allScores.reduce((a, b) => a + b, 0) / allScores.length) * 10) / 10 : 85;
         const rag = getRag(avg);

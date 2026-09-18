@@ -44,7 +44,7 @@
       return due < now;
     }).length;
 
-    const totalScore = members.reduce((sum, m) => sum + (typeof m.compositeScore === 'number' ? m.compositeScore : 80), 0);
+    const totalScore = members.reduce((sum, m) => sum + (window.SCORING_ENGINE ? window.SCORING_ENGINE.getOverallScore(m.id) : (typeof m.compositeScore === 'number' ? m.compositeScore : 80)), 0);
     const avgScore = members.length > 0 ? (totalScore / members.length).toFixed(1) : '85.0';
     const reworkRate = tasksInPeriod.length > 0 ? ((rework / tasksInPeriod.length) * 100).toFixed(1) : '0.0';
     const unverifiedCount = members.filter(m => !m.verified).length;

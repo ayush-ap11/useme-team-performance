@@ -41,17 +41,23 @@
         </div>
       </div>
 
-      <div class="resources-filter-bar" style="display:flex; gap:var(--space-3); align-items:center; flex-wrap:wrap; margin-bottom:var(--space-5);">
-        <div class="search-box-wrapper" style="max-width:280px; flex:1 1 200px;">
-          <input type="text" class="search-input" id="resSearchInput" name="resSearch" placeholder="Filter assets by name, record, or uploader..." autocomplete="off">
-        </div>
-        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-          <select id="resMemberFilter" class="form-select" style="padding:6px 14px; font-size:var(--text-xs); border:1px solid var(--color-border); border-radius:var(--radius-pill); background:var(--color-white); color:var(--color-text);">
-            <option value="all">All Uploaders</option>
-          </select>
-          <select id="resProjectFilter" class="form-select" style="padding:6px 14px; font-size:var(--text-xs); border:1px solid var(--color-border); border-radius:var(--radius-pill); background:var(--color-white); color:var(--color-text);">
-            <option value="all">All Initiatives / Projects</option>
-          </select>
+      <div class="resources-filter-bar">
+        <div class="res-filter-row">
+          <div class="res-search-wrap">
+            <svg class="res-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" class="res-search-input" id="resSearchInput" name="resSearch" placeholder="Filter assets by name, record, or uploader..." autocomplete="off">
+          </div>
+          <div class="res-selects-wrap">
+            <select id="resMemberFilter" class="res-filter-select">
+              <option value="all">All Uploaders</option>
+            </select>
+            <select id="resProjectFilter" class="res-filter-select">
+              <option value="all">All Initiatives / Projects</option>
+            </select>
+          </div>
         </div>
         <div class="res-type-chips" id="resTypeChips">
           <button type="button" class="res-chip active" data-type="all">All Assets</button>

@@ -47,6 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
       btnManageAct.style.display = 'none';
     }
   }
+  const btnManageTargets = document.getElementById('btnManageTargets');
+  if (btnManageTargets) {
+    if (isAdmin) {
+      btnManageTargets.style.display = 'inline-flex';
+      btnManageTargets.onclick = () => window.TARGETS_PANEL?.openTargetsModal();
+      window.TARGETS_PANEL?.wireTargetsEvents();
+    } else {
+      btnManageTargets.style.display = 'none';
+    }
+  }
 
   function getSparkline(data, color) {
     if (!data || data.length === 0) data = [0, 1, 2];
@@ -57,17 +67,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render Outreach / Engagement Tab
   function renderEngagementTab() {
-    const score = window.KPI_ENGINE?.calculateEngagementScore(isMember ? currentUserId : null) || 84;
+    const targetMid = isMember ? currentUserId : 'all';
+    const score = window.SCORING_ENGINE ? window.SCORING_ENGINE.getEngagementScore(targetMid) : (window.KPI_ENGINE?.calculateEngagementScore(isMember ? currentUserId : null) || 84);
+    const targetInfo = window.SCORING_TARGETS ? window.SCORING_TARGETS.getTargetResolutionDetails(isMember ? currentUserId : null, 'engagement') : { target: 40, label: 'Default (40 pts)' };
     const sRow = document.getElementById('engSummaryRow');
     if (sRow) {
       sRow.innerHTML = `
         <div class="eng-score-card">
-          <div class="stat-header"><span>Combined Outreach Index</span><span class="rag-badge rag-green">Computed Live</span></div>
+          <div class="stat-header"><span>Combined Outreach Index</span><span class="rag-badge rag-green">Target: ${targetInfo.label}</span></div>
           <div style="display:flex; align-items:baseline; gap:var(--space-2); margin-top:var(--space-1);">
             <span class="stat-value" style="color:var(--color-orange); font-size:var(--text-3xl); font-weight:700;">${score}</span>
-            <span style="font-size:var(--text-xs); color:var(--color-text-muted);">/ 100 benchmark</span>
+            <span style="font-size:var(--text-xs); color:var(--color-text-muted);">/ 100 attainment</span>
           </div>
-          <div class="score-explanation">Dynamically calculated from approved outreach submissions multiplied by activity type point values.</div>
+          <div class="score-explanation">Resolved target: ${targetInfo.target} pts/mo. Dynamically calculated via Authoritative Scoring Engine.</div>
         </div>`;
     }
 
@@ -123,7 +135,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render Motivation Tab
   function renderMotivationTab() {
-    const score = window.KPI_ENGINE?.calculateMotivationScore(isMember ? currentUserId : null) || 88;
+    const bannerCont = document.getElementById('zoomJoinBannerContainer');
+    if (bannerCont && window.ZOOM_SELF_CAPTURE) {
+      window.ZOOM_SELF_CAPTURE.renderJoinCallBanner(bannerCont, currentUserId);
+    }
+    const targetMid = isMember ? currentUserId : 'all';
+    const score = window.SCORING_ENGINE ? window.SCORING_ENGINE.getMotivationScore(targetMid) : (window.KPI_ENGINE?.calculateMotivationScore(isMember ? currentUserId : null) || 88);
+    const targetInfo = window.SCORING_TARGETS ? window.SCORING_TARGETS.getTargetResolutionDetails(isMember ? currentUserId : null, 'motivation') : { target: 40, label: 'Default (40 pts)' };
     const streak = window.KPI_ENGINE?.calculateAttendanceStreak(isMember ? currentUserId : 'm1') || 3;
     const sRow = document.getElementById('motSummaryRow');
     if (sRow) {
@@ -132,9 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="stat-header"><span>Combined Motivation Index</span><span class="rag-badge rag-green">${streak} Session Streak</span></div>
           <div style="display:flex; align-items:baseline; gap:var(--space-2); margin-top:var(--space-1);">
             <span class="stat-value" style="color:var(--color-green); font-size:var(--text-3xl); font-weight:700;">${score}</span>
-            <span style="font-size:var(--text-xs); color:var(--color-text-muted);">/ 100 benchmark</span>
+            <span style="font-size:var(--text-xs); color:var(--color-text-muted);">/ 100 attainment (Target: ${targetInfo.target} pts)</span>
           </div>
-          <div class="score-explanation">Dynamically calculated from Zoom session attendance records and approved motivation programs.</div>
+          <div class="score-explanation">Resolved target: ${targetInfo.label}. Dynamically calculated from Zoom attendance and peer enablement.</div>
         </div>`;
     }
 
@@ -259,11 +277,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tbody.innerHTML = filtered.map(s => {
       const m = window.getMemberOrFallback ? window.getMemberOrFallback(s.memberId) : { name: 'Member', avatar: 'ME' };
-      const proofChip = s.proofType === 'url' && s.proofValue
-        ? `<a href="${s.proofValue}" target="_blank" rel="noopener noreferrer" class="chip chip-link">${ICONS.link}<span>${s.proofValue}</span></a>`
-        : s.proofValue
-          ? `<span class="chip">${ICONS.file}<span>${s.proofValue}</span></span>`
-          : `<span style="font-size:11px; color:var(--color-text-muted);">None</span>`;
+      const isUrl = s.proofType === 'url' || (s.proofValue && (s.proofValue.startsWith('http://') || s.proofValue.startsWith('https://')));
+      const isPhoto = s.proofValue && (/\.(png|jpe?g|gif|webp|svg)$/i.test(s.proofValue) || s.proofValue.startsWith('data:image'));
+
+      let proofChip = `<span style="font-size:11px; color:var(--color-text-muted);">None</span>`;
+      if (isUrl) {
+        proofChip = `<a href="${s.proofValue}" target="_blank" rel="noopener noreferrer" class="chip chip-link" title="${s.proofValue}">${ICONS.link}<span>${s.proofValue}</span></a>`;
+      } else if (isPhoto) {
+        proofChip = `
+          <div class="proof-photo-wrapper" style="display:inline-flex; align-items:center; gap:6px;">
+            <button type="button" class="btn-proof-preview" data-view-proof="${s.id}" title="View proof photo">View</button>
+            <span class="chip chip-photo" style="cursor:pointer;" data-view-proof="${s.id}" title="Click to view photo">
+              ${ICONS.file}<span>${s.proofValue}</span>
+            </span>
+          </div>`;
+      } else if (s.proofValue) {
+        proofChip = `<span class="chip">${ICONS.file}<span>${s.proofValue}</span></span>`;
+      }
 
       const typeLabel = typeLabelMap[s.type] || s.type;
 
@@ -273,11 +303,11 @@ document.addEventListener('DOMContentLoaded', () => {
           <div class="actions-cell">
             ${s.status !== 'approved' ? `<button type="button" class="btn-action btn-action-approve" data-act="status" data-id="${s.id}" data-st="approved">Approve</button>` : ''}
             ${s.status !== 'reworkNeeded' ? `<button type="button" class="btn-action btn-action-rework" data-act="status" data-id="${s.id}" data-st="reworkNeeded">Rework</button>` : ''}
-            <button type="button" class="action-icon-btn icon-edit" data-act="edit" data-id="${s.id}" title="Edit Submission Details">
-              ${svgLine('<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>', 13, 13)}
+            <button type="button" class="action-icon-btn icon-edit" data-act="edit" data-id="${s.id}" title="Edit Submission Details" aria-label="Edit Submission">
+              ${svgLine('<path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/>', 14, 14)}
             </button>
-            <button type="button" class="action-icon-btn icon-delete" data-act="delete" data-id="${s.id}" title="Delete Submission">
-              ${svgLine('<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>', 13, 13)}
+            <button type="button" class="action-icon-btn icon-delete" data-act="delete" data-id="${s.id}" title="Delete Submission" aria-label="Delete Submission">
+              ${svgLine('<polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>', 14, 14)}
             </button>
           </div>`;
       } else {
@@ -298,6 +328,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }).join('');
 
     tbody.onclick = (e) => {
+      const viewProofEl = e.target.closest('[data-view-proof]');
+      if (viewProofEl) {
+        const subId = viewProofEl.dataset.viewProof;
+        const sub = filtered.find(item => item.id === subId);
+        if (sub) openPhotoPreviewModal(sub);
+        return;
+      }
+
       const btn = e.target.closest('[data-act]');
       if (!btn) return;
       const { act, id, st } = btn.dataset;
@@ -322,6 +360,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
     };
+  }
+
+  function openPhotoPreviewModal(sub) {
+    let modal = document.getElementById('photoPreviewModal');
+    if (!modal) {
+      modal = document.createElement('div');
+      modal.id = 'photoPreviewModal';
+      modal.className = 'modal-overlay';
+      modal.setAttribute('role', 'dialog');
+      modal.innerHTML = `
+        <div class="modal-card" style="max-width:520px; padding:var(--space-5);">
+          <button type="button" class="modal-close-btn" id="photoModalCloseBtn" aria-label="Close modal">&times;</button>
+          <div style="margin-bottom:var(--space-3); padding-right:36px;">
+            <h3 class="modal-title" id="photoModalTitle" style="font-size:var(--text-base); line-height:1.3;">Proof Photo Preview</h3>
+            <div id="photoModalSubtitle" style="font-size:11px; color:var(--color-text-muted); margin-top:3px;"></div>
+          </div>
+          <div id="photoModalBody" style="background:#F9FAFB; border:1px solid var(--color-border); border-radius:var(--radius-md); min-height:220px; display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:var(--space-4);">
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span id="photoModalMeta" style="font-size:11px; color:var(--color-text-muted);"></span>
+            <button type="button" class="btn btn-secondary btn-sm" id="photoModalDismissBtn" style="padding:6px 14px; font-size:11px; border-radius:var(--radius-pill);">Close</button>
+          </div>
+        </div>`;
+      document.body.appendChild(modal);
+      modal.querySelector('#photoModalCloseBtn').onclick = () => modal.classList.remove('active');
+      modal.querySelector('#photoModalDismissBtn').onclick = () => modal.classList.remove('active');
+      modal.onclick = (e) => { if (e.target === modal) modal.classList.remove('active'); };
+    }
+
+    const titleEl = modal.querySelector('#photoModalTitle');
+    const subEl = modal.querySelector('#photoModalSubtitle');
+    const bodyEl = modal.querySelector('#photoModalBody');
+    const metaEl = modal.querySelector('#photoModalMeta');
+
+    titleEl.textContent = sub.title || 'Outreach Submission Proof';
+    subEl.textContent = `Asset: ${sub.proofValue} • Date: ${sub.date || 'Aug 2026'}`;
+    metaEl.textContent = `Status: ${(sub.status || '').toUpperCase()}`;
+
+    if (sub.proofValue && (sub.proofValue.startsWith('data:image') || sub.proofValue.startsWith('blob:') || sub.proofValue.startsWith('http'))) {
+      bodyEl.innerHTML = `<img src="${sub.proofValue}" alt="Proof Asset" style="max-width:100%; max-height:360px; object-fit:contain; display:block;">`;
+    } else {
+      bodyEl.innerHTML = `
+        <div style="padding:32px 20px; text-align:center; width:100%;">
+          <div style="width:64px; height:64px; margin:0 auto 12px; background:var(--pastel-peach); color:var(--color-primary); border-radius:50%; display:flex; align-items:center; justify-content:center;">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+          </div>
+          <div style="font-weight:700; font-size:var(--text-sm); color:var(--color-text);">${sub.proofValue}</div>
+          <div style="font-size:11px; color:var(--color-text-muted); margin-top:4px;">Verified Image Capture • High Resolution Upload</div>
+          <div style="margin-top:12px;"><span class="rag-badge rag-green">Asset Verified</span></div>
+        </div>`;
+    }
+
+    modal.classList.add('active');
   }
 
   // Log Activity Modal (Member-Facing)
@@ -450,11 +541,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       body.innerHTML = members.map(m => {
         const status = curSess.attendance?.[m.id] || 'absent';
+        const sourceTag = window.ZOOM_SELF_CAPTURE ? window.ZOOM_SELF_CAPTURE.getRosterSourceTag(curSess, m.id) : '';
         return `
           <div class="zoom-member-row">
             <div class="zoom-member-info">
               <span class="zoom-member-name">${m.name}</span>
               <span class="zoom-member-role">(${m.role})</span>
+              ${sourceTag}
             </div>
             ${isAdmin ? `
               <div class="att-segment-group">

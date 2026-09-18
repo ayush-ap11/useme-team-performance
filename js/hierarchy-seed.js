@@ -85,6 +85,35 @@
       }
     });
 
+    try {
+      const ds = typeof window !== 'undefined' ? window.DataStore : null;
+      const dsMembers = (ds && ds._data && ds._data.members) ? ds._data.members : [];
+      dsMembers.forEach(dm => {
+        if (!dm.isUnassigned && dm.role !== 'Unassigned' && dm.reportsTo && !emps.some(e => e.id === dm.id)) {
+          const mgr = emps.find(e => e.id === dm.reportsTo) || emps[0];
+          emps.push({
+            id: dm.id,
+            name: dm.name,
+            role: dm.role,
+            avatar: dm.avatar || dm.name.split(' ').map(n => n[0]).join('').slice(0, 2),
+            managerId: mgr ? mgr.id : null,
+            reportsTo: mgr ? mgr.id : null,
+            department: dm.department || (mgr ? mgr.department : 'Engineering'),
+            band: dm.band || 'L4 - Specialist',
+            depth: (mgr ? mgr.depth : 1) + 1,
+            location: dm.location || 'Bangalore, IN',
+            startDate: dm.startDate || '2026-09-18',
+            joinedDate: dm.joinedDate || 'Sep 2026',
+            activeTasks: dm.activeTasks || 0,
+            email: dm.email,
+            rank: emps.length + 1,
+            proficiency: dm.proficiency || 'Beginner',
+            directReportIds: []
+          });
+        }
+      });
+    } catch (e) { /* ignore */ }
+
     const map = new Map(emps.map(e => [e.id, e]));
     emps.forEach(e => {
       if (e.managerId && map.has(e.managerId)) map.get(e.managerId).directReportIds.push(e.id);

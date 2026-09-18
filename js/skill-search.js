@@ -116,13 +116,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function toggleDropdown() {
     if (!filterDropdown) return;
-    const isShown = filterDropdown.style.display === 'block';
-    filterDropdown.style.display = isShown ? 'none' : 'block';
-    if (filterBtn) filterBtn.setAttribute('aria-expanded', !isShown);
+    const isShown = filterDropdown.style.display === 'block' || filterDropdown.classList.contains('active');
+    if (isShown) {
+      filterDropdown.style.display = 'none';
+      filterDropdown.classList.remove('active');
+      if (filterBtn) filterBtn.setAttribute('aria-expanded', 'false');
+    } else {
+      filterDropdown.style.display = 'block';
+      filterDropdown.classList.add('active');
+      if (filterBtn) filterBtn.setAttribute('aria-expanded', 'true');
+    }
   }
 
   function closeDropdown() {
-    if (filterDropdown) filterDropdown.style.display = 'none';
+    if (filterDropdown) {
+      filterDropdown.style.display = 'none';
+      filterDropdown.classList.remove('active');
+    }
     if (filterBtn) filterBtn.setAttribute('aria-expanded', 'false');
   }
 
@@ -299,7 +309,10 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeAllModals();
+    if (e.key === 'Escape') {
+      closeAllModals();
+      closeDropdown();
+    }
   });
 
   window.addEventListener('useme:member-updated', () => {
@@ -308,6 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   initFilterDropdown();
+  closeDropdown();
   const urlParams = new URLSearchParams(window.location.search);
   const paramCat = urlParams.get('cat'), paramSkill = urlParams.get('skill');
   if (paramCat) setCategoryFilter(paramCat);

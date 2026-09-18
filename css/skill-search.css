@@ -89,6 +89,7 @@
 .dropdown-chevron, .chevron-icon, .filter-icon { width: 14px; height: 14px; stroke: currentColor; flex-shrink: 0; }
 
 .filter-dropdown-menu, .skill-filter-dropdown {
+  display: none;
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
@@ -99,6 +100,10 @@
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
   z-index: 60;
   padding: var(--space-2) 0;
+}
+
+.filter-dropdown-menu.active, .filter-dropdown-menu.show, .skill-filter-dropdown.active {
+  display: block;
 }
 
 .filter-menu-header, .filter-dropdown-header {
