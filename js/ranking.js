@@ -98,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (tableBody) {
       tableBody.innerHTML = '';
       const kraHistory = window.DataStore ? window.DataStore.getKraHistory() : null;
+      const fragment = document.createDocumentFragment();
 
       sorted.forEach((m, idx) => {
         const isMe = role === 'member' && m.id === currentUserId;
@@ -141,8 +142,9 @@ document.addEventListener('DOMContentLoaded', () => {
           <td><span class="${trendCls}">${trendLabel}</span></td>
         `;
         tr.onclick = () => window.openMemberModal && window.openMemberModal(m.id);
-        tableBody.appendChild(tr);
+        fragment.appendChild(tr);
       });
+      tableBody.appendChild(fragment);
     }
   }
   renderRanking();

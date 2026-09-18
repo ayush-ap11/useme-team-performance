@@ -23,25 +23,31 @@
 }
 
 .sidebar-header {
-  height: 80px;
-  padding: 0 var(--space-4);
+  min-height: 92px;
+  padding: 12px 16px 8px 12px;
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: none;
 }
 
 .brand-logo {
-  height: 90px;
-  max-width: 208px;
+  height: 88px;
+  max-width: 170px;
   width: auto;
   object-fit: contain;
   display: block;
+  margin-left: -16px;
+}
+
+.mobile-header .brand-logo {
+  height: 38px;
+  margin-left: 0;
 }
 
 .sidebar-nav {
   flex: 1;
   overflow-y: auto;
-  padding: var(--space-4) 0;
+  padding: 8px 0;
 }
 
 .nav-list {

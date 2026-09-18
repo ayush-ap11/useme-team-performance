@@ -1,4 +1,4 @@
-/* Useme Team - Zoho People Org Chart Card Styling */
+/* Useme Team - Zoho People Org Chart Card Styling (Peko Theme) */
 .zoho-card-wrapper {
   display: flex;
   align-items: center;
@@ -15,28 +15,27 @@
   min-height: 58px;
   box-sizing: border-box;
   border: 1px solid var(--color-border);
-  border-left: 3.5px solid var(--dept-color, var(--color-orange));
-  border-radius: 6px;
-  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
   cursor: pointer;
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-card);
   position: relative;
   z-index: 2;
 }
 
 .zoho-card:hover {
-  border-color: var(--color-orange);
-  background-color: #FFFAF5;
+  border-color: var(--color-primary);
+  background-color: #FFFDFC;
   transform: translateY(-1px);
-  box-shadow: 0 3px 10px rgba(245, 130, 11, 0.08);
+  box-shadow: 0 4px 14px rgba(232, 81, 77, 0.08);
 }
 
 .zoho-card.on-path,
 .zoho-card.selected {
-  border-color: var(--color-orange);
-  background-color: #FFF7ED;
-  box-shadow: 0 2px 8px rgba(245, 130, 11, 0.14);
+  border-color: var(--color-primary);
+  background-color: var(--pastel-peach);
+  box-shadow: 0 4px 16px rgba(232, 81, 77, 0.12);
   width: max-content;
   min-width: 236px;
   max-width: 300px;
@@ -57,15 +56,15 @@
 }
 
 @keyframes zohoCardPulse {
-  0%, 100% { box-shadow: 0 0 0 2px rgba(245, 130, 11, 0.4); }
-  50% { box-shadow: 0 0 0 6px rgba(245, 130, 11, 0.7); }
+  0%, 100% { box-shadow: 0 0 0 2px rgba(232, 81, 77, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(232, 81, 77, 0.7); }
 }
 
 .zoho-avatar {
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background-color: var(--dept-color, var(--color-orange));
+  background-color: var(--color-primary);
   color: var(--color-white);
   font-size: 11.5px;
   font-weight: 700;
@@ -101,6 +100,7 @@
   margin-top: 1px;
 }
 
+/* Count Badges (Direct / Indirect Reports): Coral circular badge with bold white text */
 .zoho-badge {
   margin-left: 8px;
   width: 26px;
@@ -108,9 +108,9 @@
   min-width: 26px;
   padding: 0;
   border-radius: 50%;
-  background-color: var(--color-white);
-  border: 1.5px solid var(--color-border);
-  color: var(--color-text-muted);
+  background-color: var(--color-primary);
+  border: none;
+  color: #ffffff;
   font-size: 11px;
   font-weight: 700;
   display: flex;
@@ -119,13 +119,13 @@
   cursor: pointer;
   transition: all 0.15s ease;
   box-sizing: border-box;
+  box-shadow: 0 1px 3px rgba(232, 81, 77, 0.3);
   z-index: 3;
 }
 
 .zoho-badge:hover {
-  border-color: var(--color-orange);
-  color: var(--color-orange);
-  background-color: #FFF7ED;
+  background-color: var(--color-primary-dark);
+  transform: scale(1.08);
 }
 
 .zoho-card-wrapper.expanded .zoho-badge {

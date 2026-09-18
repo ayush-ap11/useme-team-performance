@@ -1,4 +1,4 @@
-/* Events Page CSS */
+/* Events Page CSS - Peko Fintech Theme */
 .events-header-row {
   display: flex;
   justify-content: space-between;
@@ -20,20 +20,19 @@
 .event-card {
   background-color: var(--color-white);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   padding: var(--space-5);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-card);
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .event-card:hover {
   transform: translateY(-2px);
-  border-color: var(--color-orange);
-  box-shadow: 0 6px 16px rgba(245, 130, 11, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
 }
 
 .event-card-top {
@@ -43,34 +42,52 @@
   gap: var(--space-3);
 }
 
+/* Calendar-Icon Motif - Circular Soft Pastel Lavender Badge with Coral Icon */
 .event-icon-wrapper {
-  width: 36px;
-  height: 36px;
-  border-radius: var(--radius-sm);
-  background-color: rgba(30, 132, 73, 0.1);
-  color: var(--color-green);
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: 50%;
+  background-color: var(--pastel-lavender);
+  color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
 }
 
-.event-icon-wrapper svg { width: 20px; height: 20px; stroke: currentColor; }
+.event-icon-wrapper svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--color-primary);
+}
 
 .event-card-title { font-size: var(--text-base); font-weight: 700; color: var(--color-text); margin-bottom: 2px; }
 .event-card-desc { font-size: var(--text-xs); color: var(--color-text-muted); line-height: 1.4; }
 
+/* Venue Box - Soft Pastel Card with Coral Icon Accent */
 .event-venue-row {
-  background-color: var(--color-bg);
+  background-color: var(--pastel-lavender);
   padding: var(--space-2) var(--space-3);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(124, 58, 237, 0.14);
   font-size: var(--text-xs);
   display: flex;
   align-items: center;
   gap: var(--space-2);
   color: var(--color-text);
-  font-weight: 500;
+  font-weight: 600;
+}
+
+.event-venue-row svg {
+  color: var(--color-primary);
+  stroke: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.event-card-actions .btn-action-edit,
+.event-card-actions .btn-action-delete {
+  border-radius: var(--radius-pill);
 }
 
 .event-card-footer {
@@ -79,6 +96,14 @@
   justify-content: space-between;
   align-items: center;
   padding-top: var(--space-3);
-  border-top: 1px solid rgba(240, 228, 216, 0.6);
+  border-top: 1px solid var(--color-border);
   font-size: var(--text-xs);
+}
+
+.event-card-footer .modal-skill-chip {
+  background-color: var(--pastel-peach);
+  color: var(--color-primary);
+  border: 1px solid rgba(232, 81, 77, 0.2);
+  border-radius: var(--radius-pill);
+  font-weight: 600;
 }

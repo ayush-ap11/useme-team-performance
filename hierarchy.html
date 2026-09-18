@@ -105,13 +105,25 @@
         <div class="panel-reports-list" id="panelReportsList"></div>
         <div class="panel-section-title">Quick Actions</div>
         <div class="panel-actions-row">
-          <a href="#" id="panelEmailLink" class="btn btn-secondary panel-btn">✉ Send Email</a>
-          <a href="tasks.html" class="btn btn-secondary panel-btn">📋 View Tasks</a>
+          <a href="#" id="panelEmailLink" class="btn btn-secondary panel-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <span>Send Email</span>
+          </a>
+          <a href="tasks.html" class="btn btn-secondary panel-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
+            <span>View Tasks</span>
+          </a>
         </div>
         <div class="panel-section-title" id="panelAdminSectionTitle" style="display:none; margin-top:var(--space-4);">Admin Management</div>
         <div id="panelAdminActions" class="panel-actions-row" style="display:none;">
-          <button type="button" id="panelEditMemberBtn" class="btn btn-secondary panel-btn">✏️ Edit Profile</button>
-          <button type="button" id="panelOffboardMemberBtn" class="btn btn-danger panel-btn">🚪 Offboard Member</button>
+          <button type="button" id="panelEditMemberBtn" class="btn btn-secondary panel-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+            <span>Edit Profile</span>
+          </button>
+          <button type="button" id="panelOffboardMemberBtn" class="btn btn-danger panel-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+            <span>Offboard Member</span>
+          </button>
         </div>
       </div>
       <div class="panel-pane" id="paneHistory">

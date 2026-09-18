@@ -1,15 +1,31 @@
 :root {
-  /* Color System */
+  /* Color System - Coral-Red Primary & Clean Neutrals */
   --color-white: #FFFFFF;
-  --color-bg: #FFF9F4;
-  --color-orange: #F5820B;
-  --color-orange-dark: #D96B00;
+  --color-bg: #FAF9F6;
+  --color-primary: #E8514D;
+  --color-primary-dark: #D43E3A;
+  --color-primary-light: #FFECEB;
+  --color-primary-subtle: rgba(232, 81, 77, 0.12);
+  --color-orange: #E8514D;
+  --color-orange-dark: #D43E3A;
   --color-green: #1E8449;
   --color-green-soft: #E8F5EC;
   --color-red: #D64545;
   --color-text: #1F2937;
   --color-text-muted: #6B7280;
-  --color-border: #F0E4D8;
+  --color-border: #EFECE6;
+
+  /* Pastel Card Background Tints */
+  --pastel-peach: #FFF0E8;
+  --pastel-lavender: #F2EEFF;
+  --pastel-mint: #EAF7EF;
+  --badge-peach: #FFE1D1;
+  --badge-lavender: #E3D7FC;
+  --badge-mint: #D2F2E1;
+
+  /* Soft Low-Opacity Box Shadow for Main Content Cards */
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.03);
 
   /* Spacing Scale (4px base) */
   --space-1: 4px;
@@ -21,10 +37,12 @@
   --space-7: 28px;
   --space-8: 32px;
 
-  /* Border Radius Scale */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  /* Border Radius Scale (Large, consistently rounded) */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
 
   /* Font Size Scale */
   --text-xs: 0.75rem;

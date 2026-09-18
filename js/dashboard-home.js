@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ${cycles.map(c => `<option value="${c.id}" ${c.isCurrent ? 'selected' : ''}>Cycle: ${escapeHtml(c.label)}${c.isCurrent ? ' (Current)' : ''}</option>`).join('')}
         <option disabled>──────────</option>
         <option value="__NEW__">+ New Cycle...</option>
-        <option value="__MANAGE__">⚙ Manage Cycles...</option>
+        <option value="__MANAGE__">Manage Cycles...</option>
       </select>
     ` : `
       <div class="dash-cycle-readonly" title="Current Review Cycle">
@@ -98,26 +98,32 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderEngMotCard(memberId) {
     const eng = window.KPI_ENGINE?.calculateEngagementScore(memberId) || 84;
     const mot = window.KPI_ENGINE?.calculateMotivationScore(memberId) || 88;
-    return `<div class="stat-card" style="border-top: 3px solid var(--color-orange); cursor:pointer;" onclick="window.location.href='engagement-motivation.html'">
-      <div class="stat-header"><span>Engagement &amp; Motivation</span><span class="rag-badge rag-green">Active</span></div>
+    return `<div class="stat-card" style="cursor:pointer;" onclick="window.location.href='engagement-motivation.html'">
+      <div class="stat-header">
+        <div class="stat-icon-badge stat-icon-purple"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+        <span class="rag-badge rag-green">Active</span>
+      </div>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2px;">
-        <div><div style="font-size:18px; font-weight:700; color:var(--color-orange);">${eng} <span style="font-size:10px; color:var(--color-text-muted);">pts</span></div><div style="font-size:10.5px; color:var(--color-text-muted);">Outreach Index</div></div>
-        <div style="text-align:right;"><div style="font-size:18px; font-weight:700; color:var(--color-green);">${mot} <span style="font-size:10px; color:var(--color-text-muted);">pts</span></div><div style="font-size:10.5px; color:var(--color-text-muted);">Motivation Index</div></div>
+        <div><div class="stat-value" style="color:var(--color-primary);">${eng} <span style="font-size:11px; font-weight:500; color:var(--color-text-muted);">pts</span></div><div class="stat-label">Outreach Index</div></div>
+        <div style="text-align:right;"><div class="stat-value" style="color:#7C3AED;">${mot} <span style="font-size:11px; font-weight:500; color:var(--color-text-muted);">pts</span></div><div class="stat-label">Motivation Index</div></div>
       </div>
     </div>`;
   }
 
   function renderDonutCard(title, { totalAttain, totalRag }) {
     const circ = 2 * Math.PI * 26, offset = circ * (1 - Math.min(totalAttain, 100) / 100);
-    return `<div class="stat-card" style="border-top: 3px solid ${totalRag.color};">
-      <div class="stat-header"><span>${title}</span><span class="rag-badge ${totalRag.cls}">${totalRag.label}</span></div>
+    return `<div class="stat-card">
+      <div class="stat-header">
+        <div class="stat-icon-badge stat-icon-coral"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg></div>
+        <span class="rag-badge ${totalRag.cls}">${totalRag.label}</span>
+      </div>
       <div style="display:flex; align-items:center; gap:var(--space-3); margin-top:2px;">
         <svg width="56" height="56" viewBox="0 0 64 64" style="flex-shrink:0;">
-          <circle cx="32" cy="32" r="26" fill="none" stroke="var(--color-border)" stroke-width="6" />
-          <circle cx="32" cy="32" r="26" fill="none" stroke="${totalRag.color}" stroke-width="6" stroke-dasharray="${circ}" stroke-dashoffset="${offset}" stroke-linecap="round" transform="rotate(-90 32 32)" />
+          <circle cx="32" cy="32" r="26" fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="6" />
+          <circle cx="32" cy="32" r="26" fill="none" stroke="var(--color-primary)" stroke-width="6" stroke-dasharray="${circ}" stroke-dashoffset="${offset}" stroke-linecap="round" transform="rotate(-90 32 32)" />
           <text x="32" y="36" text-anchor="middle" font-size="12" font-weight="700" fill="var(--color-text)">${totalAttain}%</text>
         </svg>
-        <div><div class="stat-value" style="font-size:var(--text-xl); color:${totalRag.color}; line-height:1.2;">${totalAttain}%</div><div style="font-size:11px; color:var(--color-text-muted);">Weighted 5 pillars</div></div>
+        <div><div class="stat-value">${totalAttain}%</div><div class="stat-label">Weighted 5 pillars</div></div>
       </div>
     </div>`;
   }
@@ -388,12 +394,14 @@ document.addEventListener('DOMContentLoaded', () => {
         ${renderDonutCard('Overall KRA Attainment', snap)}
         ${renderEngMotCard(targetMid)}
         <div class="stat-card">
-          <div class="stat-header"><span>${isAdm ? 'Total Members' : 'Active Tasks'}</span></div>
+          <div class="stat-icon-badge stat-icon-mint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
           <div class="stat-value">${isAdm ? totalMembers : tasks.filter(t => t.assignedTo.includes(currentUserId) && !['completed', 'cancelled'].includes(t.status)).length}</div>
+          <div class="stat-label">${isAdm ? 'Total Members' : 'Active Tasks'}</div>
         </div>
-        <div class="stat-card accent-orange">
-          <div class="stat-header"><span>Pending Reviews</span></div>
-          <div class="stat-value" style="color:var(--color-orange);">${pendingSubs}</div>
+        <div class="stat-card">
+          <div class="stat-icon-badge stat-icon-peach"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></div>
+          <div class="stat-value">${pendingSubs}</div>
+          <div class="stat-label">Pending Reviews</div>
         </div>
       </div>
       <div class="dash-pillar-snapshot">

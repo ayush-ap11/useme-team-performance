@@ -96,8 +96,16 @@
       return Math.min(100, Math.round(pts * 10));
     }
     let total = 0;
-    members.forEach(m => { total += calculateMotivationScore(m.id); });
-    return Math.round(total / (members.length || 1));
+    const count = members.length || 1;
+    members.forEach(m => {
+      let pts = 0;
+      sessions.forEach(s => { const att = s.attendance?.[m.id] || 'absent'; if (att === 'present') pts += 3; else if (att === 'late') pts += 1; });
+      talks.filter(t => t.memberId === m.id && t.status === 'approved').forEach(t => {
+        pts += (typePoints[t.type] !== undefined ? typePoints[t.type] : (ACTIVITY_POINTS[t.type] || 4));
+      });
+      total += Math.min(100, Math.round(pts * 10));
+    });
+    return Math.round(total / count);
   }
 
   function calculateAttendanceStreak(memberId) {
@@ -134,5 +142,10 @@
     calculateTaskScore, recalculateMemberScores, recalculateAllMembers, onTaskStatusChanged,
     calculateEngagementScore, calculateMotivationScore, calculateAttendanceStreak
   };
-  recalculateAllMembers();
+
+  // Only run full recalculation on startup if scores are uninitialized
+  const _sampleMem = (window.DataStore?.getMembers() || [])[0];
+  if (_sampleMem && typeof _sampleMem.compositeScore !== 'number') {
+    recalculateAllMembers();
+  }
 })();

@@ -1,0 +1,2312 @@
+{
+  "skillCategories": [
+    {
+      "id": "dev",
+      "name": "Software Development",
+      "description": "Web, backend, frontend, APIs, and distributed systems architecture"
+    },
+    {
+      "id": "data",
+      "name": "Data Analysis",
+      "description": "Data modeling, BI reporting, telemetry, and analytics pipelines"
+    },
+    {
+      "id": "finance",
+      "name": "CA / Finance",
+      "description": "Financial auditing, accounting, GST compliance, and forecasting"
+    },
+    {
+      "id": "design",
+      "name": "Printing & Design",
+      "description": "Packaging, visual identity, UI/UX prototyping, and print assets"
+    },
+    {
+      "id": "marketing",
+      "name": "Marketing",
+      "description": "Growth hacking, performance advertising, and campaign optimization"
+    },
+    {
+      "id": "support",
+      "name": "Tech Support",
+      "description": "Customer troubleshooting, hardware diagnostics, and ticket resolution"
+    }
+  ],
+  "skillProficiencies": [
+    {
+      "id": "sp-m1-finance",
+      "memberId": "m1",
+      "categoryId": "finance",
+      "level": "Expert",
+      "lastUpdated": "2026-08-15T10:00:00.000Z",
+      "updatedBy": "m1"
+    },
+    {
+      "id": "sp-m2-dev",
+      "memberId": "m2",
+      "categoryId": "dev",
+      "level": "Expert",
+      "lastUpdated": "2026-08-15T10:00:00.000Z",
+      "updatedBy": "m1"
+    },
+    {
+      "id": "sp-m3-marketing",
+      "memberId": "m3",
+      "categoryId": "marketing",
+      "level": "Expert",
+      "lastUpdated": "2026-08-15T10:00:00.000Z",
+      "updatedBy": "m1"
+    },
+    {
+      "id": "sp-m4-finance",
+      "memberId": "m4",
+      "categoryId": "finance",
+      "level": "Expert",
+      "lastUpdated": "2026-08-15T10:00:00.000Z",
+      "updatedBy": "m1"
+    },
+    {
+      "id": "sp-m5-dev",
+      "memberId": "m5",
+      "categoryId": "dev",
+      "level": "Expert",
+      "lastUpdated": "2026-08-15T10:00:00.000Z",
+      "updatedBy": "m1"
+    },
+    {
+      "id": "sp-m6-dev",
+      "memberId": "m6",
+      "categoryId": "dev",
+      "level": "Beginner",
+      "lastUpdated": "2026-08-15T10:00:00.000Z",
+      "updatedBy": "m6"
+    },
+    {
+      "id": "sp-m7-data",
+      "memberId": "m7",
+      "categoryId": "data",
+      "level": "Intermediate",
+      "lastUpdated": "2026-08-15T10:00:00.000Z",
+      "updatedBy": "m1"
+    },
+    {
+      "id": "sp-m8-data",
+      "memberId": "m8",
+      "categoryId": "data",
+      "level": "Beginner",
+      "lastUpdated": "2026-08-15T10:00:00.000Z",
+      "updatedBy": "m8"
+    },
+    {
+      "id": "sp-m9-design",
+      "memberId": "m9",
+      "categoryId": "design",
+      "level": "Expert",
+      "lastUpdated": "2026-08-15T10:00:00.000Z",
+      "updatedBy": "m1"
+    },
+    {
+      "id": "sp-m10-design",
+      "memberId": "m10",
+      "categoryId": "design",
+      "level": "Intermediate",
+      "lastUpdated": "2026-08-15T10:00:00.000Z",
+      "updatedBy": "m10"
+    },
+    {
+      "id": "sp-m11-marketing",
+      "memberId": "m11",
+      "categoryId": "marketing",
+      "level": "Intermediate",
+      "lastUpdated": "2026-08-15T10:00:00.000Z",
+      "updatedBy": "m1"
+    },
+    {
+      "id": "sp-m12-support",
+      "memberId": "m12",
+      "categoryId": "support",
+      "level": "Expert",
+      "lastUpdated": "2026-08-15T10:00:00.000Z",
+      "updatedBy": "m1"
+    }
+  ],
+  "departments": [
+    {
+      "id": "dept-exec",
+      "name": "Executive",
+      "colorHex": "#4F46E5",
+      "order": 1
+    },
+    {
+      "id": "dept-eng",
+      "name": "Engineering",
+      "colorHex": "#2563EB",
+      "order": 2
+    },
+    {
+      "id": "dept-prod",
+      "name": "Product & Design",
+      "colorHex": "#D97706",
+      "order": 3
+    },
+    {
+      "id": "dept-growth",
+      "name": "Growth & Marketing",
+      "colorHex": "#059669",
+      "order": 4
+    },
+    {
+      "id": "dept-fin",
+      "name": "Finance & Operations",
+      "colorHex": "#0D9488",
+      "order": 5
+    },
+    {
+      "id": "dept-data",
+      "name": "Data & Analytics",
+      "colorHex": "#7C3AED",
+      "order": 6
+    },
+    {
+      "id": "dept-supp",
+      "name": "Customer Support",
+      "colorHex": "#E11D48",
+      "order": 7
+    }
+  ],
+  "members": [
+    {
+      "id": "m1",
+      "name": "Aditya Sharma",
+      "username": "aditya.sharma",
+      "passwordHash": "10ea7bafc95f4947ebd22bacb811d004c32b3cf895c9b809d9b6a68d0e992455",
+      "email": "aditya@useme.in",
+      "role": "Director / Operations Head",
+      "department": "Executive",
+      "band": "L7 - Director",
+      "location": "Bangalore, IN",
+      "startDate": "2023-01-15",
+      "reportsTo": null,
+      "avatar": "AS",
+      "activeTasks": 3,
+      "joinedDate": "Jan 2023",
+      "skills": [
+        "Operations",
+        "Strategy"
+      ],
+      "skillCategory": "finance",
+      "proficiency": "Expert",
+      "verified": true,
+      "rank": "#1",
+      "kpiScore": 96,
+      "kriPenalty": 2,
+      "compositeScore": 94,
+      "isActive": true
+    },
+    {
+      "id": "m2",
+      "name": "Rohan Verma",
+      "username": "rohan.verma",
+      "passwordHash": "051344c20f1b118b100587dc29ab0fd3d505bc3dcdbdfddda30f2e631ed03aa7",
+      "email": "rohan@useme.in",
+      "role": "Lead Architect & Tech Lead",
+      "department": "Engineering",
+      "band": "L6 - Principal Lead",
+      "location": "Bangalore, IN",
+      "startDate": "2023-03-01",
+      "reportsTo": "m1",
+      "avatar": "RV",
+      "activeTasks": 5,
+      "joinedDate": "Mar 2023",
+      "skills": [
+        "System Design",
+        "Cloud"
+      ],
+      "skillCategory": "dev",
+      "proficiency": "Expert",
+      "verified": true,
+      "rank": "#2",
+      "kpiScore": 94,
+      "kriPenalty": 4,
+      "compositeScore": 90,
+      "isActive": true
+    },
+    {
+      "id": "m3",
+      "name": "Priya Iyer",
+      "username": "priya.iyer",
+      "passwordHash": "4c61e332caae39b2843e2f0d3a957937df80a72bde88cf1183c440832b3c0d77",
+      "email": "priya@useme.in",
+      "role": "Head of Growth & Marketing",
+      "department": "Growth & Marketing",
+      "band": "L6 - Head of Growth",
+      "location": "Mumbai, IN",
+      "startDate": "2023-02-15",
+      "reportsTo": "m1",
+      "avatar": "PI",
+      "activeTasks": 4,
+      "joinedDate": "Feb 2023",
+      "skills": [
+        "Growth",
+        "Analytics"
+      ],
+      "skillCategory": "marketing",
+      "proficiency": "Expert",
+      "verified": true,
+      "rank": "#4",
+      "kpiScore": 89,
+      "kriPenalty": 5,
+      "compositeScore": 84,
+      "isActive": true
+    },
+    {
+      "id": "m4",
+      "name": "Sneha Patel",
+      "username": "sneha.patel",
+      "passwordHash": "051344c20f1b118b100587dc29ab0fd3d505bc3dcdbdfddda30f2e631ed03aa7",
+      "email": "sneha@useme.in",
+      "role": "Finance & Compliance Manager",
+      "department": "Finance & Operations",
+      "band": "L5 - Manager",
+      "location": "Bangalore, IN",
+      "startDate": "2023-04-10",
+      "reportsTo": "m1",
+      "avatar": "SP",
+      "activeTasks": 2,
+      "joinedDate": "Apr 2023",
+      "skills": [
+        "Taxation",
+        "GST"
+      ],
+      "skillCategory": "finance",
+      "proficiency": "Expert",
+      "verified": true,
+      "rank": "#6",
+      "kpiScore": 84,
+      "kriPenalty": 8,
+      "compositeScore": 76,
+      "isActive": true
+    },
+    {
+      "id": "m5",
+      "name": "Rahul Sen",
+      "username": "rahul.sen",
+      "passwordHash": "5b2f85db447f09e23440a3b4a9105ea0c04157fa44789baa4dbd4d750ab307f2",
+      "email": "rahul@useme.in",
+      "role": "Senior Fullstack Engineer",
+      "department": "Engineering",
+      "band": "L5 - Senior Staff",
+      "location": "Bangalore, IN",
+      "startDate": "2023-06-01",
+      "reportsTo": "m2",
+      "avatar": "RS",
+      "activeTasks": 5,
+      "joinedDate": "Jun 2023",
+      "skills": [
+        "TypeScript (Expert)",
+        "Node.js & APIs (Advanced)",
+        "PostgreSQL (Intermediate)"
+      ],
+      "skillCategory": "dev",
+      "proficiency": "Expert",
+      "verified": true,
+      "rank": "#3",
+      "kpiScore": 92,
+      "kriPenalty": 3,
+      "compositeScore": 89,
+      "isActive": true
+    },
+    {
+      "id": "m6",
+      "name": "Ananya Roy",
+      "username": "ananya.roy",
+      "passwordHash": "051344c20f1b118b100587dc29ab0fd3d505bc3dcdbdfddda30f2e631ed03aa7",
+      "email": "ananya@useme.in",
+      "role": "Junior Frontend Developer",
+      "department": "Engineering",
+      "band": "L3 - Junior Specialist",
+      "location": "Remote (Kolkata)",
+      "startDate": "2023-10-15",
+      "reportsTo": "m5",
+      "avatar": "AR",
+      "activeTasks": 3,
+      "joinedDate": "Oct 2023",
+      "skills": [
+        "HTML/CSS",
+        "JS"
+      ],
+      "skillCategory": "dev",
+      "proficiency": "Beginner",
+      "verified": false,
+      "rank": "#10",
+      "kpiScore": 74,
+      "kriPenalty": 12,
+      "compositeScore": 62,
+      "isActive": true
+    },
+    {
+      "id": "m7",
+      "name": "Vikram Mehta",
+      "username": "vikram.mehta",
+      "passwordHash": "cc62dd9df284cd3de126641f776171dad3b33e9cff1b99db8dd2cc7c268a5844",
+      "email": "vikram@useme.in",
+      "role": "Data & BI Analyst",
+      "department": "Data & Analytics",
+      "band": "L4 - Mid Specialist",
+      "location": "Bangalore, IN",
+      "startDate": "2023-08-01",
+      "reportsTo": "m2",
+      "avatar": "VM",
+      "activeTasks": 3,
+      "joinedDate": "Aug 2023",
+      "skills": [
+        "SQL",
+        "Python"
+      ],
+      "skillCategory": "data",
+      "proficiency": "Intermediate",
+      "verified": true,
+      "rank": "#7",
+      "kpiScore": 82,
+      "kriPenalty": 6,
+      "compositeScore": 76,
+      "isActive": true
+    },
+    {
+      "id": "m8",
+      "name": "Kavita Joshi",
+      "username": "kavita.joshi",
+      "passwordHash": "051344c20f1b118b100587dc29ab0fd3d505bc3dcdbdfddda30f2e631ed03aa7",
+      "email": "kavita@useme.in",
+      "role": "Junior Data Associate",
+      "department": "Data & Analytics",
+      "band": "L3 - Junior Associate",
+      "location": "Remote (Pune)",
+      "startDate": "2023-11-20",
+      "reportsTo": "m7",
+      "avatar": "KJ",
+      "activeTasks": 2,
+      "joinedDate": "Nov 2023",
+      "skills": [
+        "Data Cleaning",
+        "SQL"
+      ],
+      "skillCategory": "data",
+      "proficiency": "Beginner",
+      "verified": false,
+      "rank": "#12",
+      "kpiScore": 68,
+      "kriPenalty": 16,
+      "compositeScore": 52,
+      "isActive": true
+    },
+    {
+      "id": "m9",
+      "name": "Karan Malhotra",
+      "username": "karan.malhotra",
+      "passwordHash": "051344c20f1b118b100587dc29ab0fd3d505bc3dcdbdfddda30f2e631ed03aa7",
+      "email": "karan@useme.in",
+      "role": "Lead UI/UX & Print Designer",
+      "department": "Product & Design",
+      "band": "L5 - Design Lead",
+      "location": "Mumbai, IN",
+      "startDate": "2023-05-12",
+      "reportsTo": "m3",
+      "avatar": "KM",
+      "activeTasks": 3,
+      "joinedDate": "May 2023",
+      "skills": [
+        "Figma",
+        "Print"
+      ],
+      "skillCategory": "design",
+      "proficiency": "Expert",
+      "verified": true,
+      "rank": "#5",
+      "kpiScore": 86,
+      "kriPenalty": 14,
+      "compositeScore": 72,
+      "isActive": true
+    },
+    {
+      "id": "m10",
+      "name": "Neha Kapoor",
+      "username": "neha.kapoor",
+      "passwordHash": "051344c20f1b118b100587dc29ab0fd3d505bc3dcdbdfddda30f2e631ed03aa7",
+      "email": "neha@useme.in",
+      "role": "Visual Designer",
+      "department": "Product & Design",
+      "band": "L4 - Visual Specialist",
+      "location": "Bangalore, IN",
+      "startDate": "2023-09-01",
+      "reportsTo": "m9",
+      "avatar": "NK",
+      "activeTasks": 2,
+      "joinedDate": "Sep 2023",
+      "skills": [
+        "Illustrations",
+        "Print"
+      ],
+      "skillCategory": "design",
+      "proficiency": "Intermediate",
+      "verified": false,
+      "rank": "#9",
+      "kpiScore": 76,
+      "kriPenalty": 11,
+      "compositeScore": 65,
+      "isActive": true
+    },
+    {
+      "id": "m11",
+      "name": "Amitabh Sen",
+      "username": "amitabh.sen",
+      "passwordHash": "051344c20f1b118b100587dc29ab0fd3d505bc3dcdbdfddda30f2e631ed03aa7",
+      "email": "amitabh@useme.in",
+      "role": "Digital Marketing Specialist",
+      "department": "Growth & Marketing",
+      "band": "L4 - Digital Specialist",
+      "location": "Bangalore, IN",
+      "startDate": "2023-07-15",
+      "reportsTo": "m3",
+      "avatar": "AS",
+      "activeTasks": 3,
+      "joinedDate": "Jul 2023",
+      "skills": [
+        "Ads",
+        "Strategy"
+      ],
+      "skillCategory": "marketing",
+      "proficiency": "Intermediate",
+      "verified": true,
+      "rank": "#8",
+      "kpiScore": 80,
+      "kriPenalty": 7,
+      "compositeScore": 73,
+      "isActive": true
+    },
+    {
+      "id": "m12",
+      "name": "Tanya Das",
+      "username": "tanya.das",
+      "passwordHash": "051344c20f1b118b100587dc29ab0fd3d505bc3dcdbdfddda30f2e631ed03aa7",
+      "email": "tanya@useme.in",
+      "role": "Technical Support Lead",
+      "department": "Customer Support",
+      "band": "L5 - Support Lead",
+      "location": "Bangalore, IN",
+      "startDate": "2023-05-20",
+      "reportsTo": "m2",
+      "avatar": "TD",
+      "activeTasks": 4,
+      "joinedDate": "May 2023",
+      "skills": [
+        "Troubleshooting"
+      ],
+      "skillCategory": "support",
+      "proficiency": "Expert",
+      "verified": true,
+      "rank": "#11",
+      "kpiScore": 72,
+      "kriPenalty": 9,
+      "compositeScore": 63,
+      "isActive": true
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t1",
+      "title": "PostgreSQL Query Plan Optimization & PgBouncer Tuning",
+      "description": "Analyze slow query logs (>150ms), reconfigure connection pool sizing, and add composite B-Tree indexes on event telemetry partitions.",
+      "assignedTo": [
+        "m5",
+        "m7"
+      ],
+      "linkedSkill": "dev",
+      "linkedProject": "V2 Analytics & Platform Core",
+      "projectId": "p1",
+      "eventId": null,
+      "status": "inProgress",
+      "dueDate": "2026-09-02",
+      "resources": [
+        "PgBouncer Guide",
+        "Index Blueprint"
+      ],
+      "assets": [
+        "benchmarks_v2.sql"
+      ],
+      "qualityScore": 8.8,
+      "submittedForReview": false,
+      "statusHistory": [
+        {
+          "status": "notStarted",
+          "timestamp": "2026-08-18 10:00"
+        },
+        {
+          "status": "inProgress",
+          "timestamp": "2026-08-20 14:30"
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "title": "Responsive Mobile Navigation Drawer & Focus Trap",
+      "description": "Implement CSS touch gesture dismiss drawer with WCAG 2.1 AA focus trapping for screen readers and keyboard users.",
+      "assignedTo": [
+        "m5",
+        "m6"
+      ],
+      "linkedSkill": "dev",
+      "linkedProject": "Design System & UI Refresh",
+      "projectId": "p2",
+      "eventId": null,
+      "status": "testing",
+      "dueDate": "2026-08-28",
+      "resources": [
+        "A11y Spec",
+        "Drawer Figma"
+      ],
+      "assets": [
+        "drawer_spec.png"
+      ],
+      "qualityScore": 9,
+      "submittedForReview": true,
+      "statusHistory": [
+        {
+          "status": "notStarted",
+          "timestamp": "2026-08-18 09:00"
+        },
+        {
+          "status": "inProgress",
+          "timestamp": "2026-08-21 11:00"
+        },
+        {
+          "status": "testing",
+          "timestamp": "2026-08-25 16:45"
+        }
+      ]
+    },
+    {
+      "id": "t3",
+      "title": "Monthly GST & Tax Reconciliation",
+      "description": "Complete Q3 tax audit and sign-off.",
+      "assignedTo": [
+        "m4"
+      ],
+      "linkedSkill": "finance",
+      "linkedProject": "Q3 Financial Compliance & Tax",
+      "projectId": "p3",
+      "eventId": null,
+      "status": "awaitingFeedback",
+      "dueDate": "2026-08-30",
+      "resources": [
+        "Tally"
+      ],
+      "assets": [
+        "gst.xlsx"
+      ],
+      "qualityScore": 8,
+      "submittedForReview": true,
+      "statusHistory": [
+        {
+          "status": "notStarted",
+          "timestamp": "2026-08-15 10:00"
+        },
+        {
+          "status": "inProgress",
+          "timestamp": "2026-08-19 12:00"
+        },
+        {
+          "status": "awaitingFeedback",
+          "timestamp": "2026-08-24 11:15"
+        }
+      ]
+    },
+    {
+      "id": "t4",
+      "title": "Marketing Sprint Ad Creatives",
+      "description": "Design social banners for promo.",
+      "assignedTo": [
+        "m9",
+        "m10"
+      ],
+      "linkedSkill": "design",
+      "linkedProject": null,
+      "projectId": null,
+      "eventId": "e2",
+      "status": "reworkNeeded",
+      "dueDate": "2026-09-05",
+      "resources": [
+        "Guidelines"
+      ],
+      "assets": [
+        "banner.fig"
+      ],
+      "qualityScore": 6.5,
+      "submittedForReview": false,
+      "statusHistory": [
+        {
+          "status": "notStarted",
+          "timestamp": "2026-08-12 10:00"
+        },
+        {
+          "status": "inProgress",
+          "timestamp": "2026-08-15 15:00"
+        },
+        {
+          "status": "reworkNeeded",
+          "timestamp": "2026-08-22 18:20"
+        }
+      ]
+    },
+    {
+      "id": "t5",
+      "title": "Customer Sentiment Analysis",
+      "description": "Extract NPS records and model sentiments.",
+      "assignedTo": [
+        "m7",
+        "m8"
+      ],
+      "linkedSkill": "data",
+      "linkedProject": "V2 Analytics & Platform Core",
+      "projectId": "p1",
+      "eventId": null,
+      "status": "inProgress",
+      "dueDate": "2026-09-08",
+      "resources": [
+        "NPS Export"
+      ],
+      "assets": [
+        "model.py"
+      ],
+      "qualityScore": null,
+      "submittedForReview": false,
+      "statusHistory": [
+        {
+          "status": "notStarted",
+          "timestamp": "2026-08-15 09:30"
+        },
+        {
+          "status": "inProgress",
+          "timestamp": "2026-08-17 10:00"
+        }
+      ]
+    },
+    {
+      "id": "t6",
+      "title": "Knowledge Base Article Migration",
+      "description": "Migrate legacy support guides.",
+      "assignedTo": [
+        "m12"
+      ],
+      "linkedSkill": "support",
+      "linkedProject": "Help Desk 2.0 Customer Portal",
+      "projectId": "p4",
+      "eventId": null,
+      "status": "completed",
+      "dueDate": "2026-08-24",
+      "resources": [
+        "Zendesk"
+      ],
+      "assets": [
+        "articles.zip"
+      ],
+      "qualityScore": 9.8,
+      "submittedForReview": false,
+      "statusHistory": [
+        {
+          "status": "notStarted",
+          "timestamp": "2026-08-10 10:00"
+        },
+        {
+          "status": "completed",
+          "timestamp": "2026-08-24 15:00"
+        }
+      ]
+    },
+    {
+      "id": "t7",
+      "title": "Summit Keynote Live Stream AV & WebRTC Ingest Relay",
+      "description": "Configure redundant RTMP-to-WebRTC low-latency streaming pipeline and dual audio mixers for the annual leadership summit keynote broadcast.",
+      "assignedTo": [
+        "m5",
+        "m12"
+      ],
+      "linkedSkill": "support",
+      "linkedProject": null,
+      "projectId": null,
+      "eventId": "e1",
+      "status": "completed",
+      "dueDate": "2026-08-16",
+      "resources": [
+        "AV Checklist",
+        "OBS Setup"
+      ],
+      "assets": [
+        "webrtc_topology.pdf"
+      ],
+      "qualityScore": 9.5,
+      "submittedForReview": false,
+      "statusHistory": [
+        {
+          "status": "notStarted",
+          "timestamp": "2026-08-08 09:30"
+        },
+        {
+          "status": "inProgress",
+          "timestamp": "2026-08-11 11:00"
+        },
+        {
+          "status": "completed",
+          "timestamp": "2026-08-15 17:30"
+        }
+      ]
+    },
+    {
+      "id": "t8",
+      "title": "CSS Custom Property Token Modernization & WCAG Contrast Audit",
+      "description": "Refactor hardcoded color and spacing values across navigation and modal components to standardized HSL design tokens, validating 4.5:1 contrast ratios.",
+      "assignedTo": [
+        "m5"
+      ],
+      "linkedSkill": "dev",
+      "linkedProject": "Design System & UI Refresh",
+      "projectId": "p2",
+      "eventId": null,
+      "status": "completed",
+      "dueDate": "2026-08-22",
+      "resources": [
+        "Design Tokens"
+      ],
+      "assets": [
+        "variables.css"
+      ],
+      "qualityScore": 9.8,
+      "submittedForReview": false,
+      "statusHistory": [
+        {
+          "status": "notStarted",
+          "timestamp": "2026-08-17 10:00"
+        },
+        {
+          "status": "inProgress",
+          "timestamp": "2026-08-19 14:00"
+        },
+        {
+          "status": "completed",
+          "timestamp": "2026-08-23 11:15"
+        }
+      ]
+    },
+    {
+      "id": "t9",
+      "title": "Brand Identity Typography Review",
+      "description": "Audit print font licenses and typography guidelines.",
+      "assignedTo": [
+        "m9"
+      ],
+      "linkedSkill": "design",
+      "linkedProject": null,
+      "projectId": null,
+      "eventId": "e2",
+      "status": "reworkNeeded",
+      "dueDate": "2026-09-08",
+      "resources": [
+        "Fonts Folder"
+      ],
+      "assets": [
+        "audit.pdf"
+      ],
+      "qualityScore": 5.5,
+      "submittedForReview": false,
+      "statusHistory": [
+        {
+          "status": "notStarted",
+          "timestamp": "2026-08-14 10:00"
+        },
+        {
+          "status": "inProgress",
+          "timestamp": "2026-08-18 11:00"
+        },
+        {
+          "status": "reworkNeeded",
+          "timestamp": "2026-08-23 15:00"
+        }
+      ]
+    },
+    {
+      "id": "t10",
+      "title": "Packaging Box Die-line Formatting",
+      "description": "Review bleeds and CMYK cuts for physical product boxes.",
+      "assignedTo": [
+        "m9",
+        "m10"
+      ],
+      "linkedSkill": "design",
+      "linkedProject": null,
+      "projectId": null,
+      "eventId": "e2",
+      "status": "testing",
+      "dueDate": "2026-09-10",
+      "resources": [
+        "Dieline AI"
+      ],
+      "assets": [
+        "box.pdf"
+      ],
+      "qualityScore": null,
+      "submittedForReview": false,
+      "statusHistory": [
+        {
+          "status": "notStarted",
+          "timestamp": "2026-08-12 09:00"
+        },
+        {
+          "status": "inProgress",
+          "timestamp": "2026-08-15 14:00"
+        },
+        {
+          "status": "testing",
+          "timestamp": "2026-08-17 11:00"
+        }
+      ]
+    },
+    {
+      "id": "t11",
+      "title": "Redis API Rate Limiter & OWASP Security Audit",
+      "description": "Implement token-bucket sliding-window rate limiting on public auth endpoints and patch security headers.",
+      "assignedTo": [
+        "m5"
+      ],
+      "linkedSkill": "dev",
+      "linkedProject": "V2 Analytics & Platform Core",
+      "projectId": "p1",
+      "eventId": null,
+      "status": "reworkNeeded",
+      "dueDate": "2026-08-19",
+      "resources": [
+        "OWASP Guide",
+        "Redis Docs"
+      ],
+      "assets": [
+        "security_audit_report.pdf"
+      ],
+      "qualityScore": 6,
+      "submittedForReview": false,
+      "statusHistory": [
+        {
+          "status": "notStarted",
+          "timestamp": "2026-08-11 10:00"
+        },
+        {
+          "status": "inProgress",
+          "timestamp": "2026-08-14 11:00"
+        },
+        {
+          "status": "reworkNeeded",
+          "timestamp": "2026-08-20 16:30"
+        }
+      ]
+    },
+    {
+      "id": "t12",
+      "title": "Event-Driven WebSocket PubSub Notification Hub",
+      "description": "Design low-latency Redis PubSub worker and draft RFC for pushing real-time KPI milestone notifications to active sessions.",
+      "assignedTo": [
+        "m5"
+      ],
+      "linkedSkill": "dev",
+      "linkedProject": "V2 Analytics & Platform Core",
+      "projectId": "p1",
+      "eventId": null,
+      "status": "inProgress",
+      "dueDate": "2026-09-06",
+      "resources": [
+        "WebSocket RFC"
+      ],
+      "assets": [
+        "socket_arch.ts"
+      ],
+      "qualityScore": null,
+      "submittedForReview": false,
+      "statusHistory": [
+        {
+          "status": "notStarted",
+          "timestamp": "2026-08-24 09:00"
+        },
+        {
+          "status": "inProgress",
+          "timestamp": "2026-08-25 14:00"
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "p1",
+      "name": "V2 Analytics & Platform Core",
+      "description": "High-throughput KPI calculation engine, connection pool tuning, and telemetry indexing.",
+      "status": "active",
+      "startDate": "2026-07-01",
+      "targetDate": "2026-10-15",
+      "memberIds": [
+        "m1",
+        "m2",
+        "m5",
+        "m7",
+        "m8"
+      ],
+      "linkedTaskIds": [
+        "t1",
+        "t5",
+        "t11",
+        "t12"
+      ]
+    },
+    {
+      "id": "p2",
+      "name": "Design System & UI Refresh",
+      "description": "Accessible components, token architecture, WCAG focus trapping, and mobile drawer navigation.",
+      "status": "active",
+      "startDate": "2026-08-01",
+      "targetDate": "2026-09-10",
+      "memberIds": [
+        "m2",
+        "m5",
+        "m6",
+        "m9"
+      ],
+      "linkedTaskIds": [
+        "t2",
+        "t8"
+      ]
+    },
+    {
+      "id": "p3",
+      "name": "Q3 Financial Compliance & Tax",
+      "description": "Statutory GST audits, reconciliation, and ledger closing.",
+      "status": "onHold",
+      "startDate": "2026-07-15",
+      "targetDate": "2026-08-31",
+      "memberIds": [
+        "m1",
+        "m4"
+      ],
+      "linkedTaskIds": [
+        "t3"
+      ]
+    },
+    {
+      "id": "p4",
+      "name": "Help Desk 2.0 Customer Portal",
+      "description": "Unified customer self-service center with markdown docs.",
+      "status": "completed",
+      "startDate": "2026-06-01",
+      "targetDate": "2026-08-24",
+      "memberIds": [
+        "m2",
+        "m12"
+      ],
+      "linkedTaskIds": [
+        "t6"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "id": "e1",
+      "name": "Useme Annual Leadership Summit 2026",
+      "description": "Company-wide strategy alignment, technical relays, and annual award ceremony.",
+      "venue": "Grand Horizon Convention Hall A",
+      "eventDate": "2026-09-15",
+      "status": "upcoming",
+      "members": [
+        {
+          "memberId": "m1",
+          "roleAtEvent": "Executive Host"
+        },
+        {
+          "memberId": "m3",
+          "roleAtEvent": "Lead Organizer"
+        },
+        {
+          "memberId": "m5",
+          "roleAtEvent": "Tech Coordinator (AV & Broadcast Relay)"
+        },
+        {
+          "memberId": "m9",
+          "roleAtEvent": "Stage & Branding Designer"
+        }
+      ],
+      "linkedTaskIds": [
+        "t7"
+      ]
+    },
+    {
+      "id": "e2",
+      "name": "Q3 Product Growth Showcase",
+      "description": "Demo day for cross-department milestone achievements and live architecture showcase.",
+      "venue": "Innovation Hub Auditorium",
+      "eventDate": "2026-09-02",
+      "status": "upcoming",
+      "members": [
+        {
+          "memberId": "m3",
+          "roleAtEvent": "Host & Speaker"
+        },
+        {
+          "memberId": "m5",
+          "roleAtEvent": "Live Demo Presenter (V2 Real-time Engine)"
+        },
+        {
+          "memberId": "m10",
+          "roleAtEvent": "Collateral Coordinator"
+        }
+      ],
+      "linkedTaskIds": [
+        "t4",
+        "t9",
+        "t10"
+      ]
+    },
+    {
+      "id": "e3",
+      "name": "Regional Tech Expo & Booth Demo",
+      "description": "External tech showcase and talent hiring booth.",
+      "venue": "Grand Horizon Convention Hall A",
+      "eventDate": "2026-09-15",
+      "status": "upcoming",
+      "members": [
+        {
+          "memberId": "m2",
+          "roleAtEvent": "Booth In-Charge"
+        },
+        {
+          "memberId": "m11",
+          "roleAtEvent": "Outreach Specialist"
+        }
+      ],
+      "linkedTaskIds": []
+    },
+    {
+      "id": "e4",
+      "name": "Internal Hackathon: AI Productivity",
+      "description": "48-hour sprint building automated performance audit tools.",
+      "venue": "HQ 4th Floor Tech Lab",
+      "eventDate": "2026-08-10",
+      "status": "completed",
+      "members": [
+        {
+          "memberId": "m2",
+          "roleAtEvent": "Judge"
+        },
+        {
+          "memberId": "m5",
+          "roleAtEvent": "Participant (AST Linting Bot Team)"
+        },
+        {
+          "memberId": "m6",
+          "roleAtEvent": "Participant"
+        }
+      ],
+      "linkedTaskIds": []
+    }
+  ],
+  "kraObjectives": [
+    {
+      "id": "kra-1",
+      "pillar": "Growth",
+      "ownerId": "m3",
+      "title": "Platform Deliverables & Milestone Output Velocity",
+      "weight": 25,
+      "target": 90,
+      "orgActual": 92,
+      "memberActuals": {
+        "m1": 96,
+        "m2": 94,
+        "m3": 92,
+        "m4": 86,
+        "m5": 94.2,
+        "m6": 76,
+        "m7": 84,
+        "m8": 70,
+        "m9": 88,
+        "m10": 78,
+        "m11": 82,
+        "m12": 74
+      }
+    },
+    {
+      "id": "kra-2",
+      "pillar": "Quality",
+      "ownerId": "m2",
+      "title": "Quality Assurance & First-Try Approval Standards",
+      "weight": 25,
+      "target": 90,
+      "orgActual": 88,
+      "memberActuals": {
+        "m1": 96,
+        "m2": 92,
+        "m3": 88,
+        "m4": 84,
+        "m5": 96,
+        "m6": 72,
+        "m7": 82,
+        "m8": 68,
+        "m9": 82,
+        "m10": 74,
+        "m11": 80,
+        "m12": 70
+      }
+    },
+    {
+      "id": "kra-3",
+      "pillar": "Timeliness",
+      "ownerId": "m1",
+      "title": "On-Time Delivery & Schedule Adherence",
+      "weight": 20,
+      "target": 95,
+      "orgActual": 91,
+      "memberActuals": {
+        "m1": 98,
+        "m2": 95,
+        "m3": 90,
+        "m4": 88,
+        "m5": 88.5,
+        "m6": 75,
+        "m7": 85,
+        "m8": 65,
+        "m9": 85,
+        "m10": 78,
+        "m11": 80,
+        "m12": 75
+      }
+    },
+    {
+      "id": "kra-4",
+      "pillar": "Skill",
+      "ownerId": "m5",
+      "title": "Competency Mastery & Skill Proficiency Growth",
+      "weight": 15,
+      "target": 85,
+      "orgActual": 86,
+      "memberActuals": {
+        "m1": 92,
+        "m2": 95,
+        "m3": 88,
+        "m4": 82,
+        "m5": 92.4,
+        "m6": 70,
+        "m7": 80,
+        "m8": 65,
+        "m9": 90,
+        "m10": 75,
+        "m11": 78,
+        "m12": 72
+      }
+    },
+    {
+      "id": "kra-5",
+      "pillar": "Compliance",
+      "ownerId": "m4",
+      "title": "Process Adherence & Statutory Standard Execution",
+      "weight": 15,
+      "target": 95,
+      "orgActual": 94,
+      "memberActuals": {
+        "m1": 98,
+        "m2": 96,
+        "m3": 92,
+        "m4": 95,
+        "m5": 94.8,
+        "m6": 80,
+        "m7": 86,
+        "m8": 72,
+        "m9": 84,
+        "m10": 80,
+        "m11": 85,
+        "m12": 78
+      }
+    }
+  ],
+  "kraHistory": {
+    "months": [
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug"
+    ],
+    "org": [
+      82,
+      84.1,
+      85.5,
+      87.2,
+      89,
+      90.2
+    ],
+    "members": {
+      "m1": [
+        88,
+        90.2,
+        92,
+        94.1,
+        95.3,
+        96.2
+      ],
+      "m2": [
+        86.2,
+        88,
+        89.4,
+        91.2,
+        93,
+        94.4
+      ],
+      "m3": [
+        80.5,
+        82,
+        84.3,
+        86.1,
+        88,
+        89.2
+      ],
+      "m4": [
+        76,
+        78.2,
+        80,
+        82.1,
+        83.5,
+        85
+      ],
+      "m5": [
+        84.2,
+        86.9,
+        86.4,
+        89.1,
+        91,
+        93.1
+      ],
+      "m6": [
+        65,
+        68.1,
+        70,
+        71.3,
+        73,
+        74.8
+      ],
+      "m7": [
+        74.2,
+        76,
+        78.1,
+        80,
+        81.4,
+        82.6
+      ],
+      "m8": [
+        60,
+        62.1,
+        64,
+        65.2,
+        66.3,
+        67.5
+      ],
+      "m9": [
+        78,
+        80.1,
+        81.5,
+        83.2,
+        85,
+        86.4
+      ],
+      "m10": [
+        68,
+        70.2,
+        72,
+        73.4,
+        75.1,
+        76.5
+      ],
+      "m11": [
+        72,
+        74.3,
+        76,
+        77.5,
+        79,
+        80.3
+      ],
+      "m12": [
+        66,
+        68,
+        69.2,
+        70.1,
+        71.4,
+        72.8
+      ]
+    }
+  },
+  "engagementSubmissions": [
+    {
+      "id": "eng-1",
+      "memberId": "m3",
+      "type": "social",
+      "title": "LinkedIn Platform Feature Spotlight Post",
+      "date": "2026-08-24",
+      "proofType": "url",
+      "proofValue": "https://linkedin.com/posts/useme-features",
+      "status": "approved"
+    },
+    {
+      "id": "eng-2",
+      "memberId": "m5",
+      "type": "onGround",
+      "title": "Bangalore Tech Summit Booth & Live Demo Relay",
+      "date": "2026-08-23",
+      "proofType": "file",
+      "proofValue": "tech_summit_booth_pass.pdf",
+      "status": "approved"
+    },
+    {
+      "id": "eng-3",
+      "memberId": "m11",
+      "type": "whatsapp",
+      "title": "Q3 Developer Community Growth Discussion",
+      "date": "2026-08-22",
+      "proofType": "file",
+      "proofValue": "wa_chat_screenshot.png",
+      "status": "approved"
+    },
+    {
+      "id": "eng-4",
+      "memberId": "m9",
+      "type": "offlineAds",
+      "title": "Metro Station Billboard Print Placement Inspection",
+      "date": "2026-08-21",
+      "proofType": "file",
+      "proofValue": "billboard_proof.jpg",
+      "status": "pending"
+    },
+    {
+      "id": "eng-5",
+      "memberId": "m11",
+      "type": "socialAds",
+      "title": "Instagram Paid Conversion Sprint Campaign",
+      "date": "2026-08-20",
+      "proofType": "url",
+      "proofValue": "https://adsmanager.facebook.com/reports/aug20",
+      "status": "approved"
+    },
+    {
+      "id": "eng-6",
+      "memberId": "m6",
+      "type": "social",
+      "title": "X/Twitter Dev Changelog Thread",
+      "date": "2026-08-19",
+      "proofType": "url",
+      "proofValue": "https://x.com/usemeteam/status/19823",
+      "status": "reworkNeeded"
+    },
+    {
+      "id": "eng-7",
+      "memberId": "m5",
+      "type": "social",
+      "title": "Engineering Blog: Scaling High-Concurrency KPI Aggregations",
+      "date": "2026-08-21",
+      "proofType": "url",
+      "proofValue": "https://medium.com/useme-eng/scaling-kpi-aggregations",
+      "status": "approved"
+    },
+    {
+      "id": "eng-8",
+      "memberId": "m5",
+      "type": "whatsapp",
+      "title": "Internal Frontend Guild Weekly Code Review & Async Mentorship",
+      "date": "2026-08-19",
+      "proofType": "file",
+      "proofValue": "guild_chat_recap.png",
+      "status": "approved"
+    },
+    {
+      "id": "eng-9",
+      "memberId": "m5",
+      "type": "socialAds",
+      "title": "Q3 Campus Dev Hiring Campaign & Technical Challenge Ad",
+      "date": "2026-08-17",
+      "proofType": "url",
+      "proofValue": "https://adsmanager.facebook.com/reports/useme-hire-q3",
+      "status": "pending"
+    }
+  ],
+  "zoomSessions": [
+    {
+      "id": "z1",
+      "title": "Weekly Strategy & Operations Alignment",
+      "date": "2026-08-25",
+      "time": "10:00 AM",
+      "attendance": {
+        "m1": "present",
+        "m2": "present",
+        "m3": "present",
+        "m4": "present",
+        "m5": "present",
+        "m6": "late",
+        "m7": "present",
+        "m8": "absent",
+        "m9": "present",
+        "m10": "present",
+        "m11": "present",
+        "m12": "present"
+      }
+    },
+    {
+      "id": "z2",
+      "title": "Mid-Sprint Architectural Sync",
+      "date": "2026-08-18",
+      "time": "02:30 PM",
+      "attendance": {
+        "m1": "present",
+        "m2": "present",
+        "m3": "present",
+        "m4": "present",
+        "m5": "late",
+        "m6": "present",
+        "m7": "present",
+        "m8": "absent",
+        "m9": "present",
+        "m10": "late",
+        "m11": "present",
+        "m12": "present"
+      }
+    },
+    {
+      "id": "z3",
+      "title": "Monthly All-Hands & KRA Kickoff",
+      "date": "2026-08-11",
+      "time": "11:00 AM",
+      "attendance": {
+        "m1": "present",
+        "m2": "present",
+        "m3": "present",
+        "m4": "present",
+        "m5": "present",
+        "m6": "present",
+        "m7": "present",
+        "m8": "absent",
+        "m9": "present",
+        "m10": "present",
+        "m11": "present",
+        "m12": "present"
+      }
+    }
+  ],
+  "activityTypes": [
+    {
+      "id": "social",
+      "label": "Social Media",
+      "category": "outreach",
+      "pointValue": 2,
+      "requiresProof": true
+    },
+    {
+      "id": "onGround",
+      "label": "On-Ground Visit",
+      "category": "outreach",
+      "pointValue": 5,
+      "requiresProof": true
+    },
+    {
+      "id": "whatsapp",
+      "label": "WhatsApp Group",
+      "category": "outreach",
+      "pointValue": 2,
+      "requiresProof": false
+    },
+    {
+      "id": "offlineAds",
+      "label": "Offline / Print Ad",
+      "category": "outreach",
+      "pointValue": 4,
+      "requiresProof": true
+    },
+    {
+      "id": "socialAds",
+      "label": "Social Media Ads",
+      "category": "outreach",
+      "pointValue": 3,
+      "requiresProof": true
+    },
+    {
+      "id": "groupTalk",
+      "label": "Group Talk",
+      "category": "motivation",
+      "pointValue": 4,
+      "requiresProof": true
+    },
+    {
+      "id": "microEvent",
+      "label": "Micro Event",
+      "category": "motivation",
+      "pointValue": 5,
+      "requiresProof": true
+    }
+  ],
+  "motivationSubmissions": [
+    {
+      "id": "mot-1",
+      "memberId": "m3",
+      "type": "groupTalk",
+      "title": "Design Thinking & Agile Collaboration Talk",
+      "date": "2026-08-22",
+      "proofType": "url",
+      "proofValue": "https://youtu.be/group-talk-01",
+      "status": "approved"
+    },
+    {
+      "id": "mot-2",
+      "memberId": "m5",
+      "type": "microEvent",
+      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules",
+      "date": "2026-08-20",
+      "proofType": "file",
+      "proofValue": "typescript_ast_workshop.mp4",
+      "status": "approved"
+    },
+    {
+      "id": "mot-3",
+      "memberId": "m9",
+      "type": "groupTalk",
+      "title": "UI Typography & Brand Consistency Workshop",
+      "date": "2026-08-16",
+      "proofType": "url",
+      "proofValue": "https://vimeo.com/78291039",
+      "status": "approved"
+    },
+    {
+      "id": "mot-4",
+      "memberId": "m7",
+      "type": "microEvent",
+      "title": "Data Analytics Basics for Support Team",
+      "date": "2026-08-14",
+      "proofType": "url",
+      "proofValue": "https://meet.google.com/rec/abc",
+      "status": "pending"
+    },
+    {
+      "id": "mot-5",
+      "memberId": "m5",
+      "type": "groupTalk",
+      "title": "Tech Architecture Deep Dive: Zero-Downtime PostgreSQL Schema Migrations",
+      "date": "2026-08-14",
+      "proofType": "url",
+      "proofValue": "https://youtu.be/useme-zero-downtime-talk",
+      "status": "approved"
+    }
+  ],
+  "cycles": [
+    {
+      "id": "cycle-mar-2026",
+      "label": "Mar 2026",
+      "startDate": "2026-03-01",
+      "endDate": "2026-03-31",
+      "isCurrent": false
+    },
+    {
+      "id": "cycle-apr-2026",
+      "label": "Apr 2026",
+      "startDate": "2026-04-01",
+      "endDate": "2026-04-30",
+      "isCurrent": false
+    },
+    {
+      "id": "cycle-may-2026",
+      "label": "May 2026",
+      "startDate": "2026-05-01",
+      "endDate": "2026-05-31",
+      "isCurrent": false
+    },
+    {
+      "id": "cycle-jun-2026",
+      "label": "Jun 2026",
+      "startDate": "2026-06-01",
+      "endDate": "2026-06-30",
+      "isCurrent": false
+    },
+    {
+      "id": "cycle-jul-2026",
+      "label": "Jul 2026",
+      "startDate": "2026-07-01",
+      "endDate": "2026-07-31",
+      "isCurrent": false
+    },
+    {
+      "id": "cycle-aug-2026",
+      "label": "Aug 2026",
+      "startDate": "2026-08-01",
+      "endDate": "2026-08-31",
+      "isCurrent": true
+    }
+  ],
+  "activityLog": [
+    {
+      "id": "act-1",
+      "actorMemberId": "m5",
+      "actionText": "logged \"Tech Meetup On-Ground Booth\"",
+      "timestamp": "2026-08-25T14:20:00.000Z",
+      "relatedEntityType": "engagement",
+      "relatedEntityId": "eng-2"
+    },
+    {
+      "id": "act-2",
+      "actorMemberId": "m3",
+      "actionText": "approved \"LinkedIn Platform Spotlight\"",
+      "timestamp": "2026-08-25T13:45:00.000Z",
+      "relatedEntityType": "task",
+      "relatedEntityId": "t6"
+    },
+    {
+      "id": "act-3",
+      "actorMemberId": "m12",
+      "actionText": "marked Present in \"Weekly Strategy Zoom Sync\"",
+      "timestamp": "2026-08-25T12:30:00.000Z",
+      "relatedEntityType": "attendance",
+      "relatedEntityId": "z1"
+    }
+  ],
+  "kraPillars": [
+    {
+      "id": "pillar-growth",
+      "name": "Growth",
+      "weight": 25,
+      "targetDescription": "Platform Deliverables & Milestone Output Velocity",
+      "order": 1
+    },
+    {
+      "id": "pillar-quality",
+      "name": "Quality",
+      "weight": 25,
+      "targetDescription": "Quality Assurance & First-Try Approval Standards",
+      "order": 2
+    },
+    {
+      "id": "pillar-timeliness",
+      "name": "Timeliness",
+      "weight": 20,
+      "targetDescription": "On-Time Delivery & Schedule Adherence",
+      "order": 3
+    },
+    {
+      "id": "pillar-skill",
+      "name": "Skill",
+      "weight": 15,
+      "targetDescription": "Competency Mastery & Skill Proficiency Growth",
+      "order": 4
+    },
+    {
+      "id": "pillar-compliance",
+      "name": "Compliance",
+      "weight": 15,
+      "targetDescription": "Process Adherence & Statutory Standard Execution",
+      "order": 5
+    }
+  ],
+  "kraScores": [
+    {
+      "id": "score-m1-growth",
+      "memberId": "m1",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-growth",
+      "score": 96,
+      "notes": "Consistent strategic output velocity",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m1-quality",
+      "memberId": "m1",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-quality",
+      "score": 96,
+      "notes": "Zero rework on architecture reviews",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m1-timeliness",
+      "memberId": "m1",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-timeliness",
+      "score": 98,
+      "notes": "All quarterly OKRs on schedule",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m1-skill",
+      "memberId": "m1",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-skill",
+      "score": 92,
+      "notes": "Cross-functional operations training",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m1-compliance",
+      "memberId": "m1",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-compliance",
+      "score": 98,
+      "notes": "Full compliance with governance",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m2-growth",
+      "memberId": "m2",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-growth",
+      "score": 94,
+      "notes": "V2 architecture milestones met",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m2-quality",
+      "memberId": "m2",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-quality",
+      "score": 92,
+      "notes": "First-try approval on pull requests",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m2-timeliness",
+      "memberId": "m2",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-timeliness",
+      "score": 95,
+      "notes": "Release schedule maintained",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m2-skill",
+      "memberId": "m2",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-skill",
+      "score": 95,
+      "notes": "Cloud systems mastery",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m2-compliance",
+      "memberId": "m2",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-compliance",
+      "score": 96,
+      "notes": "Security audit cleared",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m3-growth",
+      "memberId": "m3",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-growth",
+      "score": 92,
+      "notes": "Marketing campaign sprint targets hit",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m3-quality",
+      "memberId": "m3",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-quality",
+      "score": 88,
+      "notes": "Creative collateral brand audit complete",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m3-timeliness",
+      "memberId": "m3",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-timeliness",
+      "score": 90,
+      "notes": "Campaign launches on track",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m3-skill",
+      "memberId": "m3",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-skill",
+      "score": 88,
+      "notes": "Growth analytics proficiency",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m3-compliance",
+      "memberId": "m3",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-compliance",
+      "score": 92,
+      "notes": "Budget allocations audited",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m4-growth",
+      "memberId": "m4",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-growth",
+      "score": 86,
+      "notes": "Tax filings and reconciliation",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m4-quality",
+      "memberId": "m4",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-quality",
+      "score": 84,
+      "notes": "Statutory adherence verified",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m4-timeliness",
+      "memberId": "m4",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-timeliness",
+      "score": 88,
+      "notes": "Monthly GST closed before deadline",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m4-skill",
+      "memberId": "m4",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-skill",
+      "score": 82,
+      "notes": "Advanced taxation guidelines updated",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m4-compliance",
+      "memberId": "m4",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-compliance",
+      "score": 95,
+      "notes": "100% regulatory filing compliance",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m5-growth",
+      "memberId": "m5",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-growth",
+      "score": 94.2,
+      "notes": "Delivered PostgreSQL & telemetry optimizations",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m5-quality",
+      "memberId": "m5",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-quality",
+      "score": 96,
+      "notes": "Comprehensive test coverage and zero regression",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m5-timeliness",
+      "memberId": "m5",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-timeliness",
+      "score": 88.5,
+      "notes": "Minor sprint delay on redis limiter patch",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m5-skill",
+      "memberId": "m5",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-skill",
+      "score": 92.4,
+      "notes": "TypeScript AST & custom linter mastery",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m5-compliance",
+      "memberId": "m5",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-compliance",
+      "score": 94.8,
+      "notes": "Documentation and PR review standard followed",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m6-growth",
+      "memberId": "m6",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-growth",
+      "score": 76,
+      "notes": "Frontend ticket throughput improving",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m6-quality",
+      "memberId": "m6",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-quality",
+      "score": 72,
+      "notes": "Some styling rework needed on drawer component",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m6-timeliness",
+      "memberId": "m6",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-timeliness",
+      "score": 75,
+      "notes": "Sprint milestones partially delayed",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m6-skill",
+      "memberId": "m6",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-skill",
+      "score": 70,
+      "notes": "HTML/CSS/JS learning curriculum in progress",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m6-compliance",
+      "memberId": "m6",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-compliance",
+      "score": 80,
+      "notes": "Good team attendance and communication",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m7-growth",
+      "memberId": "m7",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-growth",
+      "score": 84,
+      "notes": "NPS modeling and analytics query throughput",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m7-quality",
+      "memberId": "m7",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-quality",
+      "score": 82,
+      "notes": "Dashboard accuracy validated",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m7-timeliness",
+      "memberId": "m7",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-timeliness",
+      "score": 85,
+      "notes": "Reports delivered on time",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m7-skill",
+      "memberId": "m7",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-skill",
+      "score": 80,
+      "notes": "Python modeling competency verified",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m7-compliance",
+      "memberId": "m7",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-compliance",
+      "score": 86,
+      "notes": "Data privacy handling guidelines followed",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m8-growth",
+      "memberId": "m8",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-growth",
+      "score": 70,
+      "notes": "Junior data associate ticket delivery",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m8-quality",
+      "memberId": "m8",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-quality",
+      "score": 68,
+      "notes": "Data cleansing requires senior review",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m8-timeliness",
+      "memberId": "m8",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-timeliness",
+      "score": 65,
+      "notes": "Missed scheduled weekly report deadline",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m8-skill",
+      "memberId": "m8",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-skill",
+      "score": 65,
+      "notes": "SQL training ongoing",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m8-compliance",
+      "memberId": "m8",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-compliance",
+      "score": 72,
+      "notes": "Regular team check-ins maintained",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m9-growth",
+      "memberId": "m9",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-growth",
+      "score": 88,
+      "notes": "UI/UX & Print designs delivered",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m9-quality",
+      "memberId": "m9",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-quality",
+      "score": 82,
+      "notes": "Brand typography review completed",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m9-timeliness",
+      "memberId": "m9",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-timeliness",
+      "score": 85,
+      "notes": "Packaging dieline delivery on track",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m9-skill",
+      "memberId": "m9",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-skill",
+      "score": 90,
+      "notes": "Figma and Print expertise evident",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m9-compliance",
+      "memberId": "m9",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-compliance",
+      "score": 84,
+      "notes": "Design token alignment achieved",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m10-growth",
+      "memberId": "m10",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-growth",
+      "score": 78,
+      "notes": "Illustrations and social creative output",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m10-quality",
+      "memberId": "m10",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-quality",
+      "score": 74,
+      "notes": "Minor revisions needed on promo banners",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m10-timeliness",
+      "memberId": "m10",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-timeliness",
+      "score": 78,
+      "notes": "Ad creatives delivered for review",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m10-skill",
+      "memberId": "m10",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-skill",
+      "score": 75,
+      "notes": "Visual design skill growth",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m10-compliance",
+      "memberId": "m10",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-compliance",
+      "score": 80,
+      "notes": "Brand standards respected",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m11-growth",
+      "memberId": "m11",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-growth",
+      "score": 82,
+      "notes": "Digital ads conversion sprint execution",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m11-quality",
+      "memberId": "m11",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-quality",
+      "score": 80,
+      "notes": "Ad targeting precision validated",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m11-timeliness",
+      "memberId": "m11",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-timeliness",
+      "score": 80,
+      "notes": "Campaign milestones met",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m11-skill",
+      "memberId": "m11",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-skill",
+      "score": 78,
+      "notes": "Paid channel strategy development",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m11-compliance",
+      "memberId": "m11",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-compliance",
+      "score": 85,
+      "notes": "Ad budget reconciliation verified",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m12-growth",
+      "memberId": "m12",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-growth",
+      "score": 74,
+      "notes": "Knowledge base migration completed",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m12-quality",
+      "memberId": "m12",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-quality",
+      "score": 70,
+      "notes": "SLA resolution time in target range",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m12-timeliness",
+      "memberId": "m12",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-timeliness",
+      "score": 75,
+      "notes": "Support ticket resolution on schedule",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m12-skill",
+      "memberId": "m12",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-skill",
+      "score": 72,
+      "notes": "Technical troubleshooting lead competency",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    },
+    {
+      "id": "score-m12-compliance",
+      "memberId": "m12",
+      "cycleId": "cycle-aug-2026",
+      "pillarId": "pillar-compliance",
+      "score": 78,
+      "notes": "Customer escalations protocol adhered",
+      "enteredBy": "m1",
+      "enteredAt": "2026-08-20T10:00:00.000Z"
+    }
+  ]
+}

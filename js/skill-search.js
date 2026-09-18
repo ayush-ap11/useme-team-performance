@@ -107,9 +107,11 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
+    const fragment = document.createDocumentFragment();
     results.forEach(m => {
-      if (window.renderMemberRow) tableBody.appendChild(window.renderMemberRow(m));
+      if (window.renderMemberRow) fragment.appendChild(window.renderMemberRow(m, categories));
     });
+    tableBody.appendChild(fragment);
   }
 
   function toggleDropdown() {

@@ -4,7 +4,7 @@
  */
 (function(global) {
   const CONFIG = {
-    COLOR: '#F5820B',
+    COLOR: '#E8514D',
     WIDTH: 2,
     BADGE_RADIUS: 14
   };

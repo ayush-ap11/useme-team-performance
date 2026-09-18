@@ -21,7 +21,7 @@
             <h3 class="modal-name" id="modalName">Member Name</h3>
             <div style="display:flex; align-items:center; gap:6px; flex-wrap:wrap; margin-top:2px;">
               <p class="modal-role" id="modalRole" style="margin:0;">Role Title</p>
-              <button type="button" id="btnEditRole" class="modal-action-pill" style="display:none;">✏️ Edit</button>
+              <button type="button" id="btnEditRole" class="modal-action-pill" style="display:none;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:3px;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>Edit</button>
             </div>
             <div id="roleEditForm" class="modal-inline-form" style="display:none;">
               <input type="text" id="roleEditInput" class="form-input" style="padding:4px 8px; font-size:12px; height:28px; flex:1;">
@@ -34,7 +34,7 @@
         <div class="modal-grid">
           <div><div class="modal-stat-label">Joined</div><div class="modal-stat-val" id="modalJoined">--</div></div>
           <div><div class="modal-stat-label">Active Tasks</div><div class="modal-stat-val" id="modalTasks">--</div></div>
-          <div><div class="modal-stat-label">Current Rank</div><div class="modal-stat-val" id="modalRank" style="color:var(--color-orange);">--</div></div>
+          <div><div class="modal-stat-label">Current Rank</div><div class="modal-stat-val" id="modalRank" style="color:var(--color-primary);">--</div></div>
           <div>
             <div style="display:flex; justify-content:space-between; align-items:center;">
               <div class="modal-stat-label">Proficiency</div>
@@ -214,13 +214,13 @@
     const pwdActionBtn = document.getElementById('btnMemberPasswordAction');
     if (pwdActionBtn) {
       if (isSelf) {
-        pwdActionBtn.textContent = '🔒 Change Password';
+        pwdActionBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>Change Password';
         pwdActionBtn.style.display = 'inline-block';
         pwdActionBtn.onclick = () => {
           if (window.openPasswordModal) window.openPasswordModal({ memberId: activeMember.id, isReset: false });
         };
       } else if (isAdmin) {
-        pwdActionBtn.textContent = '🔑 Reset Password';
+        pwdActionBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle; margin-right:4px;"><circle cx="7.5" cy="15.5" r="5.5"></circle><path d="m21 2-9.6 9.6"></path><path d="m15.5 7.5 3 3"></path></svg>Reset Password';
         pwdActionBtn.style.display = 'inline-block';
         pwdActionBtn.onclick = () => {
           if (window.openPasswordModal) window.openPasswordModal({ memberId: activeMember.id, isReset: true });

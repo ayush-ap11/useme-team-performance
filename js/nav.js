@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
       dashboard: 'dashboard.html', hierarchy: 'hierarchy.html', skills: 'skill-mapping.html',
       tasks: 'tasks.html', submissions: 'submissions.html', projects: 'projects.html',
       events: 'events.html', ranking: 'ranking.html', kra: 'kra.html', insights: 'insights.html',
-      resources: 'resources.html', reports: 'reports.html', engagement: 'engagement-motivation.html'
+      resources: 'resources.html', reports: 'reports.html', engagement: 'engagement-motivation.html',
+      profile: 'profile.html'
     };
     return urls[page] || '#';
   };
@@ -102,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     sidebar.appendChild(footer);
 
     document.getElementById('navProfileBtn')?.addEventListener('click', () => {
-      if (window.openMemberModal) window.openMemberModal(userId);
+      window.location.href = 'profile.html';
     });
 
     document.getElementById('logoutBtn').addEventListener('click', () => {

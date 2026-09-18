@@ -52,10 +52,15 @@
     rank: '#--'
   });
 
+  const _memberCache = new Map();
   function getMemberOrFallback(id, fallback) {
     if (!id) return fallback ? { ...MEMBER_NOT_FOUND, ...fallback } : MEMBER_NOT_FOUND;
+    if (_memberCache.has(id)) return _memberCache.get(id);
     const m = window.DataStore ? window.DataStore.getMemberById(id) : null;
-    if (m) return m;
+    if (m) {
+      _memberCache.set(id, m);
+      return m;
+    }
     return fallback ? { ...MEMBER_NOT_FOUND, ...fallback } : MEMBER_NOT_FOUND;
   }
 

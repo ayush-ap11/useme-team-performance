@@ -1,4 +1,4 @@
-/* Skill Search & Filter Toolbar Styles */
+/* Skill Search & Filter Toolbar Styles (Peko Theme) */
 .search-filter-row, .skills-filter-toolbar {
   display: flex;
   gap: var(--space-3);
@@ -16,27 +16,36 @@
   max-width: 440px;
 }
 
+.search-left-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--color-text-muted);
+  pointer-events: none;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
 .search-input, .skill-search-input {
   width: 100%;
-  padding: 8px 32px 8px 14px;
+  padding: 9px 34px 9px 38px;
   font-size: var(--text-sm);
   background-color: var(--color-white);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-pill);
   color: var(--color-text);
   outline: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  box-shadow: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .search-input:focus, .skill-search-input:focus {
-  border-color: var(--color-orange);
-  box-shadow: 0 0 0 3px rgba(245, 130, 11, 0.12);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-subtle);
 }
 
 .search-clear-btn, .skill-search-clear {
   position: absolute;
-  right: 10px;
+  right: 12px;
   background: none;
   border: none;
   font-size: 18px;
@@ -44,6 +53,7 @@
   cursor: pointer;
   padding: 0;
   line-height: 1;
+  z-index: 2;
 }
 .search-clear-btn:hover, .skill-search-clear:hover { color: var(--color-text); }
 
@@ -54,26 +64,26 @@
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
-  padding: 8px 14px;
+  padding: 9px 16px;
   font-size: var(--text-sm);
   font-weight: 600;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
   background-color: var(--color-white);
   color: var(--color-text);
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  box-shadow: none;
   transition: all 0.15s ease;
   white-space: nowrap;
 }
 
-.filter-btn:hover, .skill-filter-btn:hover { border-color: var(--color-orange); color: var(--color-orange); }
+.filter-btn:hover, .skill-filter-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
 
 .filter-btn.active, .skill-filter-btn.active {
-  border-color: var(--color-orange);
-  background-color: #FFFDF9;
-  color: var(--color-orange-dark);
-  box-shadow: 0 0 0 2px rgba(245, 130, 11, 0.15);
+  border-color: var(--color-primary);
+  background-color: var(--pastel-peach);
+  color: var(--color-primary);
+  box-shadow: 0 0 0 2px var(--color-primary-subtle);
 }
 
 .dropdown-chevron, .chevron-icon, .filter-icon { width: 14px; height: 14px; stroke: currentColor; flex-shrink: 0; }
@@ -82,11 +92,11 @@
   position: absolute;
   top: calc(100% + 6px);
   right: 0;
-  width: 250px;
+  width: 260px;
   background-color: var(--color-white);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
   z-index: 60;
   padding: var(--space-2) 0;
 }
@@ -95,7 +105,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 12px 8px;
+  padding: 8px 14px;
   border-bottom: 1px solid var(--color-border);
   font-size: 11px;
   font-weight: 700;
@@ -108,7 +118,7 @@
   border: none;
   font-size: 11px;
   font-weight: 600;
-  color: var(--color-orange);
+  color: var(--color-primary);
   cursor: pointer;
   padding: 0;
 }
@@ -120,16 +130,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px;
+  padding: 8px 14px;
   font-size: var(--text-sm);
   color: var(--color-text);
   cursor: pointer;
   transition: background-color 0.15s ease;
 }
 
-.filter-option-item:hover { background-color: var(--color-bg); }
-.filter-option-item.selected { background-color: rgba(245, 130, 11, 0.08); color: var(--color-orange); font-weight: 600; }
-.filter-option-count { font-size: 11px; color: var(--color-text-muted); background: var(--color-bg); padding: 1px 6px; border-radius: 9999px; border: 1px solid var(--color-border); }
+.filter-option-item:hover { background-color: #FAF9F7; }
+.filter-option-item.selected { background-color: var(--pastel-peach); color: var(--color-primary); font-weight: 600; }
+.filter-option-count { font-size: 11px; color: var(--color-text-muted); background: var(--color-bg); padding: 2px 8px; border-radius: var(--radius-pill); border: 1px solid var(--color-border); }
 
 .no-results-cell { text-align: center; padding: var(--space-6) var(--space-4); color: var(--color-text-muted); font-size: var(--text-sm); }
-.no-results-cell strong { color: var(--color-orange); }
+.no-results-cell strong { color: var(--color-primary); }

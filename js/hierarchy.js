@@ -111,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (deptSelect) {
     const depts = [...new Set(hierarchyData.map(e => e.department))];
-    deptSelect.innerHTML = `<option value="all">All Departments (${hierarchyData.length})</option>` +
+    deptSelect.innerHTML = `<option value="all">All Departments</option>` +
       depts.map(d => `<option value="${d}">${d}</option>`).join('');
     deptSelect.addEventListener('change', (e) => {
       activeDept = e.target.value;

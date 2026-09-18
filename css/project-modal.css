@@ -1,39 +1,42 @@
-/* Project & Event Modals CSS */
-.progress-container {
-  margin: var(--space-3) 0;
-}
+/* Project & Event Modals CSS - Peko Theme */
+.progress-container { margin: var(--space-3) 0; }
 
 .progress-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: var(--text-xs);
-  font-weight: 600;
-  margin-bottom: 4px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  margin-bottom: 6px;
+}
+.progress-info span:last-child {
+  font-weight: 700;
+  color: var(--color-text);
 }
 
 .progress-bar-bg {
   width: 100%;
   height: 8px;
-  background-color: var(--color-border);
-  border-radius: 9999px;
+  background-color: #E5E7EB;
+  border-radius: var(--radius-pill);
   overflow: hidden;
 }
 
 .progress-bar-fill {
   height: 100%;
-  background-color: var(--color-green);
-  border-radius: 9999px;
+  background-color: var(--color-primary);
+  border-radius: var(--radius-pill);
   transition: width 0.3s ease;
 }
 
-/* Conflict Alert Banner */
+/* Conflict Alert Banner - Danger Red per finalized palette */
 .conflict-alert {
   background-color: #FEF2F2;
   border: 1px solid rgba(214, 69, 69, 0.3);
   color: var(--color-red);
-  padding: var(--space-3);
-  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
   font-size: var(--text-xs);
   font-weight: 600;
   display: flex;
@@ -50,17 +53,23 @@
   align-items: center;
   margin-bottom: var(--space-2);
   background: var(--color-bg);
-  padding: var(--space-2);
-  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
 }
 
+/* Crew Role-Tag Chips - Rounded Pills with Soft Pastel cycling */
 .role-tag {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   font-size: 11px;
   font-weight: 600;
-  background-color: var(--color-bg);
-  color: var(--color-orange-dark);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
-  padding: 1px 6px;
-  border-radius: var(--radius-sm);
+  background-color: var(--pastel-peach);
+  color: var(--color-primary);
 }
+.role-tag:nth-child(3n+1) { background-color: var(--pastel-peach); color: var(--color-primary); border-color: rgba(232, 81, 77, 0.2); }
+.role-tag:nth-child(3n+2) { background-color: var(--pastel-lavender); color: #6D28D9; border-color: rgba(124, 58, 237, 0.18); }
+.role-tag:nth-child(3n+3) { background-color: var(--pastel-mint); color: var(--color-green); border-color: rgba(30, 132, 73, 0.2); }

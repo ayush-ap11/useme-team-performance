@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (assignGrp) assignGrp.style.display = 'none';
   }
 
+  let displayLimit = 50;
+
+  if (statusFilter) statusFilter.onchange = () => { displayLimit = 50; renderTasks(); };
+  if (assigneeFilter) assigneeFilter.onchange = () => { displayLimit = 50; renderTasks(); };
 
   function renderTasks() {
     let list = window.DataStore ? window.DataStore.getTasks() : [];
@@ -52,10 +56,15 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    list.forEach(task => {
+    const allMembers = window.DataStore ? window.DataStore.getMembers() : [];
+    const memberMap = new Map(allMembers.map(m => [m.id, m]));
+    const fragment = document.createDocumentFragment();
+    const visibleList = list.slice(0, displayLimit);
+
+    visibleList.forEach(task => {
       const tr = document.createElement('tr');
       tr.className = 'task-row';
-      const assignees = (window.DataStore ? window.DataStore.getMembers() : []).filter(m => task.assignedTo.includes(m.id));
+      const assignees = (task.assignedTo || []).map(id => memberMap.get(id)).filter(Boolean);
       const avatarStack = `<div class="avatar-stack">${assignees.map(a => `<span class="avatar-stack-item" title="${a.name}">${a.avatar}</span>`).join('')}</div>`;
 
       tr.innerHTML = `
@@ -110,12 +119,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       };
 
-      tableBody.appendChild(tr);
+      fragment.appendChild(tr);
     });
-  }
 
-  if (statusFilter) statusFilter.onchange = renderTasks;
-  if (assigneeFilter) assigneeFilter.onchange = renderTasks;
+    if (list.length > displayLimit) {
+      const colSpan = role === 'admin' ? 6 : 5;
+      const loadMoreTr = document.createElement('tr');
+      loadMoreTr.innerHTML = `
+        <td colspan="${colSpan}" style="text-align:center; padding:16px;">
+          <button type="button" class="btn" id="btnLoadMoreTasks" style="padding:8px 20px; font-size:var(--text-xs); font-weight:600; background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-pill); cursor:pointer;">
+            Load More Tasks (Showing ${visibleList.length} of ${list.length})
+          </button>
+        </td>
+      `;
+      const lmBtn = loadMoreTr.querySelector('#btnLoadMoreTasks');
+      if (lmBtn) {
+        lmBtn.onclick = () => {
+          displayLimit += 50;
+          renderTasks();
+        };
+      }
+      fragment.appendChild(loadMoreTr);
+    }
+
+    tableBody.appendChild(fragment);
+  }
 
   renderTasks();
 

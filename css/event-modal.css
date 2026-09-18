@@ -1,14 +1,17 @@
-/* Event Specific Modal Styles */
+/* Event Specific Modal Styles - Peko Theme */
 .event-role-badge {
   font-size: 11px;
   font-weight: 600;
-  color: var(--color-orange-dark);
-  background-color: rgba(245, 130, 11, 0.08);
-  border: 1px solid rgba(245, 130, 11, 0.2);
-  padding: 1px 6px;
-  border-radius: var(--radius-sm);
-  margin-left: 4px;
+  color: var(--color-primary);
+  background-color: var(--pastel-peach);
+  border: 1px solid rgba(232, 81, 77, 0.22);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  margin-left: 6px;
 }
+.event-role-badge:nth-child(3n+1) { background-color: var(--pastel-peach); color: var(--color-primary); border-color: rgba(232, 81, 77, 0.22); }
+.event-role-badge:nth-child(3n+2) { background-color: var(--pastel-lavender); color: #6D28D9; border-color: rgba(124, 58, 237, 0.18); }
+.event-role-badge:nth-child(3n+3) { background-color: var(--pastel-mint); color: var(--color-green); border-color: rgba(30, 132, 73, 0.22); }
 
 .event-member-chip {
   display: inline-flex;
@@ -16,16 +19,22 @@
   gap: 6px;
   font-size: var(--text-xs);
   background: var(--color-bg);
-  padding: 3px 8px;
-  border-radius: var(--radius-sm);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
   border: 1px solid var(--color-border);
+  transition: all 0.15s ease;
+}
+.event-member-chip:hover {
+  background-color: var(--color-white);
+  border-color: #D1D5DB;
+  transform: translateY(-1px);
 }
 
 .event-member-chip .avatar-mini {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--color-orange);
+  background: var(--color-primary);
   color: var(--color-white);
   display: inline-flex;
   align-items: center;
@@ -34,10 +43,22 @@
   font-weight: 700;
 }
 
+/* Modal Venue Box */
+#evVenueBox {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text);
+  margin-top: 2px;
+}
+
 .venue-badge {
   display: inline-flex;
   align-items: center;
   gap: 4px;
   font-size: var(--text-xs);
-  color: var(--color-text-muted);
+  color: var(--color-primary);
+  background-color: var(--pastel-lavender);
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
 }

@@ -67,9 +67,17 @@
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved) {
-        const parsed = JSON.parse(saved);
+        let parsed = JSON.parse(saved);
         const seedMembers = (window.USEME_DATA && window.USEME_DATA.members) || [];
+        const seedTasks = (window.USEME_DATA && window.USEME_DATA.tasks) || [];
         let upgraded = false;
+
+        if (!parsed.isSeeded || !parsed.members || parsed.members.length < seedMembers.length || (parsed.tasks && parsed.tasks.length < 100)) {
+          if (seedMembers.length >= 50) {
+            parsed = clone(window.USEME_DATA);
+            upgraded = true;
+          }
+        }
         (parsed.members || []).forEach(m => {
           const s = seedMembers.find(sm => sm.id === m.id);
           if (!m.department) { m.department = s?.department || 'Engineering'; upgraded = true; }
@@ -266,9 +274,10 @@
   const reqAdmin = (act, u) => { if (u?.role !== 'admin') deny(act, u, 'Admin only'); };
 
   function filterList(list, f) {
-    if (!f) return clone(list || []);
-    if (typeof f === 'function') return clone((list || []).filter(f));
-    return clone((list || []).filter(item => Object.entries(f).every(([k, v]) => {
+    if (!list) return [];
+    if (!f) return list.slice();
+    if (typeof f === 'function') return list.filter(f);
+    return list.filter(item => Object.entries(f).every(([k, v]) => {
       if (v === undefined || v === null || v === 'all') return true;
       if (k === 'memberId' || k === 'assignedTo') {
         if (Array.isArray(item.assignedTo)) return item.assignedTo.includes(v);
@@ -278,7 +287,7 @@
       }
       if (Array.isArray(item[k])) return item[k].includes(v);
       return item[k] === v;
-    })));
+    }));
   }
 
   window.DataStore = {
@@ -318,21 +327,27 @@
       if (!f || f.includeInactive !== true) {
         list = list.filter(m => m.isActive !== false);
       }
-      if (typeof f === 'function') return clone(list.filter(f));
+      if (typeof f === 'function') return list.filter(f);
       return filterList(list, f);
     },
-    getMemberById: (id) => clone((_data.members || []).find(m => m.id === id) || null),
+    getMemberById: (id) => {
+      const m = (_data.members || []).find(x => x.id === id);
+      return m ? { ...m } : null;
+    },
     getDepartments: () => {
-      const list = clone(_data.departments || []);
+      const list = (_data.departments || []).slice();
       return list.sort((a, b) => (a.order || 0) - (b.order || 0));
     },
-    getDepartmentById: (id) => clone((_data.departments || []).find(d => d.id === id || d.name.toLowerCase() === (id || '').toLowerCase()) || null),
+    getDepartmentById: (id) => {
+      const d = (_data.departments || []).find(x => x.id === id || x.name.toLowerCase() === (id || '').toLowerCase());
+      return d ? { ...d } : null;
+    },
     getTasks: (f) => {
       let list = _data.tasks || [];
       if (!f || f.includeArchived !== true) {
         list = list.filter(t => t.isArchived !== true);
       }
-      if (typeof f === 'function') return clone(list.filter(f));
+      if (typeof f === 'function') return list.filter(f);
       if (f && f.includeArchived !== undefined) {
         const copy = { ...f };
         delete copy.includeArchived;
@@ -340,19 +355,29 @@
       }
       return filterList(list, f);
     },
-    getTaskById: (id) => clone((_data.tasks || []).find(t => t.id === id) || null),
+    getTaskById: (id) => {
+      const t = (_data.tasks || []).find(x => x.id === id);
+      return t ? { ...t } : null;
+    },
     getProjects: (f) => filterList(_data.projects, f),
-    getProjectById: (id) => clone(_data.projects.find(p => p.id === id) || null),
+    getProjectById: (id) => {
+      const p = (_data.projects || []).find(x => x.id === id);
+      return p ? { ...p } : null;
+    },
     getEvents: (f) => filterList(_data.events, f),
-    getEventById: (id) => clone(_data.events.find(e => e.id === id) || null),
+    getEventById: (id) => {
+      const e = (_data.events || []).find(x => x.id === id);
+      return e ? { ...e } : null;
+    },
     getSkillCategories: () => {
-      const cats = clone(_data.skillCategories || []);
+      const cats = _data.skillCategories || [];
       const activeMembers = (_data.members || []).filter(m => m.isActive !== false);
+      const activeIdSet = new Set(activeMembers.map(m => m.id));
       const profs = _data.skillProficiencies || [];
       return cats.map(c => {
         const memberIds = new Set(
           profs
-            .filter(p => p.categoryId === c.id && activeMembers.some(m => m.id === p.memberId))
+            .filter(p => p.categoryId === c.id && activeIdSet.has(p.memberId))
             .map(p => p.memberId)
         );
         activeMembers.forEach(m => {
@@ -372,7 +397,7 @@
       return cats.find(c => c.id === id || c.name.toLowerCase() === (id || '').toLowerCase()) || null;
     },
     getSkillProficiencies: (filters) => {
-      let list = clone(_data.skillProficiencies || []);
+      let list = (_data.skillProficiencies || []).slice();
       if (!filters) return list;
       if (typeof filters === 'function') return list.filter(filters);
       return list.filter(item => {
@@ -385,7 +410,7 @@
     getEngagementSubmissions: (f) => filterList(_data.engagementSubmissions, f),
     getMotivationSubmissions: (f) => filterList(_data.motivationSubmissions, f),
     getZoomSessions: (f) => {
-      let list = clone(_data.zoomSessions || []);
+      let list = (_data.zoomSessions || []).slice();
       if (!f) return list;
       if (typeof f === 'function') return list.filter(f);
       if (typeof f === 'object') {
@@ -398,37 +423,47 @@
       }
       return list;
     },
-    getZoomSessionById: (id) => clone((_data.zoomSessions || []).find(z => z.id === id) || null),
+    getZoomSessionById: (id) => {
+      const z = (_data.zoomSessions || []).find(x => x.id === id);
+      return z ? { ...z } : null;
+    },
     getActivityTypes: (category) => {
-      const list = clone(_data.activityTypes || []);
+      const list = (_data.activityTypes || []).slice();
       if (!category || category === 'all') return list;
       return list.filter(t => t.category === category);
     },
-    getActivityTypeById: (id) => clone((_data.activityTypes || []).find(t => t.id === id) || null),
-    getKraObjectives: () => clone(_data.kraObjectives || []),
-    getKraHistory: () => clone(_data.kraHistory || { months: [], org: [], members: {} }),
+    getActivityTypeById: (id) => {
+      const t = (_data.activityTypes || []).find(x => x.id === id);
+      return t ? { ...t } : null;
+    },
+    getKraObjectives: () => (_data.kraObjectives || []).slice(),
+    getKraHistory: () => (_data.kraHistory || { months: [], org: [], members: {} }),
     updateMemberScores: (id, scores) => {
-      const m = _data.members.find(x => x.id === id);
+      const m = (_data.members || []).find(x => x.id === id);
       if (!m) return null;
       Object.assign(m, scores);
       persist();
-      return clone(m);
+      return { ...m };
     },
     getCurrentUser: () => {
       const loggedIn = localStorage.getItem('useme_logged_in') === 'true';
       const role = localStorage.getItem('useme_role') || 'member';
       const userId = localStorage.getItem('useme_user_id') || 'm5';
-      const member = _data.members.find(m => m.id === userId);
-      if (member) return { ...clone(member), role, loggedIn };
+      const member = (_data.members || []).find(m => m.id === userId);
+      if (member) return { ...member, role, loggedIn };
       return { id: userId, role, name: role === 'admin' ? 'Admin' : 'Team Member', loggedIn };
     },
 
     // Review Cycle APIs
-    getCycles: () => clone(_data.cycles || []),
-    getCycleById: (id) => clone((_data.cycles || []).find(c => c.id === id) || null),
+    getCycles: () => (_data.cycles || []).slice(),
+    getCycleById: (id) => {
+      const c = (_data.cycles || []).find(x => x.id === id);
+      return c ? { ...c } : null;
+    },
     getCurrentCycle: () => {
       const curr = (_data.cycles || []).find(c => c.isCurrent);
-      return clone(curr || _data.cycles?.[_data.cycles.length - 1] || null);
+      const c = curr || _data.cycles?.[_data.cycles.length - 1];
+      return c ? { ...c } : null;
     },
     createCycle: (cycleData, currentUser) => {
       reqAdmin('createCycle', currentUser);
@@ -549,10 +584,11 @@
 
     // KRA Strategic Pillar APIs
     getKraPillars: () => {
-      return clone((_data.kraPillars || []).slice().sort((a, b) => (a.order || 0) - (b.order || 0)));
+      return (_data.kraPillars || []).slice().sort((a, b) => (a.order || 0) - (b.order || 0));
     },
     getKraPillarById: (id) => {
-      return clone((_data.kraPillars || []).find(p => p.id === id) || null);
+      const p = (_data.kraPillars || []).find(x => x.id === id);
+      return p ? { ...p } : null;
     },
     createKraPillar: (pillarData, currentUser) => {
       reqAdmin('createKraPillar', currentUser);
@@ -696,8 +732,25 @@
         total += scoreVal * (Number(p.weight || 0) / 100);
       });
       return Math.round(total * 10) / 10;
+    },
+    reseed: () => {
+      const source = window.USEME_SEEDED_DATA || window.USEME_DATA;
+      if (source && source.members && source.members.length >= 50) {
+        _data = clone(source);
+        _data.isSeeded = true;
+        persist();
+        return true;
+      }
+      return false;
     }
   };
   window.currentUser = window.DataStore.getCurrentUser();
+  window.reseedDatabase = () => {
+    const ok = window.DataStore.reseed();
+    if (ok && typeof window.location !== 'undefined') {
+      window.location.reload();
+    }
+    return ok;
+  };
 })();
 

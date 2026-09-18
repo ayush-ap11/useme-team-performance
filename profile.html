@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile - Useme Team</title>
+  <script>
+    if (localStorage.getItem('useme_logged_in') !== 'true') window.location.replace('index.html');
+  </script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/nav.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/profile.css">
+  <link rel="stylesheet" href="css/command-palette.css">
+</head>
+<body data-page="profile">
+  <header class="mobile-header">
+    <img src="assets/useme-team.png" alt="Useme Team" class="brand-logo">
+    <button type="button" class="menu-toggle-btn" id="sidebarToggle" aria-label="Toggle navigation menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+  </header>
+
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="dashboard.html" class="brand-link">
+          <img src="assets/useme-team.png" alt="Useme Team Logo" class="brand-logo">
+        </a>
+      </div>
+      <nav class="sidebar-nav" aria-label="Main Navigation">
+        <ul class="nav-list"></ul>
+      </nav>
+    </aside>
+
+    <main class="main-content" id="mainContent">
+      <div class="profile-header-row">
+        <div>
+          <h1 class="profile-page-title">My Profile</h1>
+          <p class="profile-page-subtitle">Manage your personal information, role details, competencies, and credentials.</p>
+        </div>
+      </div>
+
+      <div class="profile-grid">
+        <!-- Personal Details Card -->
+        <div class="profile-card profile-card-span2">
+          <div class="profile-card-header">
+            <div class="profile-avatar" id="profAvatar">--</div>
+            <div class="profile-title-block">
+              <div class="profile-name-row">
+                <h2 class="profile-name" id="profName">Member Name</h2>
+                <span class="role-badge" id="profRoleBadge">Member</span>
+              </div>
+              <div class="profile-role-row">
+                <span class="profile-role" id="profRole">Role Title</span>
+                <button type="button" class="btn-profile-pill" id="btnEditRole">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                  Edit Role
+                </button>
+              </div>
+              <div id="roleEditBox" class="profile-inline-edit" style="display:none;">
+                <input type="text" id="roleEditInput" class="profile-input" placeholder="Enter new role...">
+                <button type="button" id="btnSaveRole" class="btn-coral-sm">Save</button>
+                <button type="button" id="btnCancelRole" class="btn-neutral-sm">Cancel</button>
+              </div>
+              <div id="roleNotice" class="profile-notice" style="display:none;"></div>
+            </div>
+          </div>
+          <div class="profile-details-grid">
+            <div><span class="profile-label">Department</span><div class="profile-val" id="profDept">Engineering</div></div>
+            <div><span class="profile-label">Location</span><div class="profile-val" id="profLoc">Remote (APAC)</div></div>
+            <div><span class="profile-label">Joined</span><div class="profile-val" id="profJoined">--</div></div>
+            <div><span class="profile-label">Account ID</span><div class="profile-val" id="profId">--</div></div>
+          </div>
+        </div>
+
+        <!-- Performance Summary Card -->
+        <div class="profile-card">
+          <div class="profile-section-title">Performance Snapshot</div>
+          <div class="profile-stats-grid">
+            <div class="profile-stat-box stat-tint-peach">
+              <span class="profile-stat-num" id="profKpiScore">--</span>
+              <span class="profile-stat-lbl">Avg KPI Score</span>
+            </div>
+            <div class="profile-stat-box stat-tint-lavender">
+              <span class="profile-stat-num" id="profRank">#--</span>
+              <span class="profile-stat-lbl">Org Rank</span>
+            </div>
+            <div class="profile-stat-box stat-tint-mint">
+              <span class="profile-stat-num" id="profTasksCount">--</span>
+              <span class="profile-stat-lbl">Active Tasks</span>
+            </div>
+            <div class="profile-stat-box stat-tint-peach">
+              <span class="profile-stat-num" id="profProficiency">Advanced</span>
+              <span class="profile-stat-lbl">Skill Level</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Competencies & Skills Card -->
+        <div class="profile-card">
+          <div class="profile-section-title">Skills & Specializations</div>
+          <div class="profile-skills-list" id="profSkills"></div>
+        </div>
+
+        <!-- Security & Credentials Card -->
+        <div class="profile-card profile-card-span2">
+          <div class="profile-section-title">Account Credentials & Password</div>
+          <form id="profilePasswordForm" class="profile-pw-form">
+            <div class="pw-form-grid">
+              <div class="form-group">
+                <label for="profUsername" class="form-label">Username</label>
+                <input type="text" id="profUsername" class="profile-input" readonly>
+              </div>
+              <div class="form-group">
+                <label for="profNewPw" class="form-label">New Password</label>
+                <input type="password" id="profNewPw" class="profile-input" placeholder="Enter new password">
+              </div>
+              <div class="form-group">
+                <label for="profConfirmPw" class="form-label">Confirm Password</label>
+                <input type="password" id="profConfirmPw" class="profile-input" placeholder="Confirm new password">
+              </div>
+            </div>
+            <div class="pw-form-footer">
+              <div id="pwFeedback" class="profile-notice" style="display:none;"></div>
+              <button type="submit" class="btn-coral-pill" id="btnUpdatePw">Update Password</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/data-store.js"></script>
+  <script src="js/profile.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/command-palette.js"></script>
+</body>
+</html>
