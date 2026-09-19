@@ -63,6 +63,27 @@
     return result;
   }
 
+  const REALISTIC_MOTIVATION_LOGS = [
+    { id: "mot-1", memberId: "m1", type: "groupTalk", title: "Engineering Roadmaps & Cross-Functional Alignment", date: "2026-09-15", proofType: "url", proofValue: "https://youtu.be/eng-roadmaps-align", status: "approved" },
+    { id: "mot-2", memberId: "m2", type: "microEvent", title: "Micro-Frontend State Hydration Deep Dive", date: "2026-09-14", proofType: "file", proofValue: "microfrontends_hydration.mp4", status: "approved" },
+    { id: "mot-3", memberId: "m3", type: "groupTalk", title: "Growth Funnel Optimization & CRO Playbook", date: "2026-09-12", proofType: "url", proofValue: "https://vimeo.com/89201928", status: "approved" },
+    { id: "mot-4", memberId: "m5", type: "microEvent", title: "Live Coding: Building Custom ESLint AST Rules", date: "2026-09-10", proofType: "url", proofValue: "https://meet.google.com/rec/eslint-ast", status: "approved" },
+    { id: "mot-5", memberId: "m7", type: "groupTalk", title: "Data-Driven Metric Tracking with Superset", date: "2026-09-08", proofType: "url", proofValue: "https://youtu.be/superset-metrics", status: "pending" },
+    { id: "mot-6", memberId: "m9", type: "microEvent", title: "Figma Design System Tokens & Variable Sync", date: "2026-09-06", proofType: "file", proofValue: "figma_tokens_walkthrough.mov", status: "approved" },
+    { id: "mot-7", memberId: "m1", type: "microEvent", title: "Incident Response Post-Mortem Workshop", date: "2026-09-05", proofType: "url", proofValue: "https://zoom.us/rec/postmortem-wkshp", status: "approved" },
+    { id: "mot-8", memberId: "m4", type: "groupTalk", title: "Fintech Compliance & PCI-DSS Audit Checklist", date: "2026-09-03", proofType: "url", proofValue: "https://vimeo.com/71829011", status: "approved" },
+    { id: "mot-9", memberId: "m6", type: "microEvent", title: "Accessibility Testing with Screen Readers", date: "2026-09-01", proofType: "file", proofValue: "a11y_screenreader_demo.mp4", status: "reworkNeeded" },
+    { id: "mot-10", memberId: "m8", type: "groupTalk", title: "SQL Window Functions for High-Volume Queries", date: "2026-08-28", proofType: "url", proofValue: "https://youtu.be/sql-window-funcs", status: "approved" },
+    { id: "mot-11", memberId: "m10", type: "microEvent", title: "SVG Micro-Animations & Canvas Rendering", date: "2026-08-26", proofType: "file", proofValue: "svg_animations_lab.mp4", status: "approved" },
+    { id: "mot-12", memberId: "m2", type: "groupTalk", title: "Distributed Caching Strategies with Redis", date: "2026-08-24", proofType: "url", proofValue: "https://meet.google.com/rec/redis-cache", status: "approved" },
+    { id: "mot-13", memberId: "m3", type: "microEvent", title: "Viral Product Loops & User Onboarding Lab", date: "2026-08-21", proofType: "url", proofValue: "https://vimeo.com/62910283", status: "pending" },
+    { id: "mot-14", memberId: "m5", type: "groupTalk", title: "Zero-Downtime Database Schema Migrations", date: "2026-08-18", proofType: "file", proofValue: "postgres_zero_downtime.mp4", status: "approved" },
+    { id: "mot-15", memberId: "m1", type: "groupTalk", title: "Async Remote Culture: Documentation over Meetings", date: "2026-08-15", proofType: "url", proofValue: "https://youtu.be/async-remote-culture", status: "approved" },
+    { id: "mot-16", memberId: "m7", type: "microEvent", title: "Automated Data Quality Checks with Great Expectations", date: "2026-08-11", proofType: "file", proofValue: "ge_data_quality_demo.mov", status: "approved" },
+    { id: "mot-17", memberId: "m9", type: "groupTalk", title: "Responsive Typographic Hierarchies in Web Design", date: "2026-08-08", proofType: "url", proofValue: "https://vimeo.com/83910291", status: "approved" },
+    { id: "mot-18", memberId: "m6", type: "microEvent", title: "Component Driven Dev with Storybook", date: "2026-08-04", proofType: "file", proofValue: "storybook_tdd_lab.mp4", status: "pending" }
+  ];
+
   function initData() {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -253,6 +274,10 @@
           upgraded = true;
         }
         (parsed.zoomSessions || []).forEach(z => {
+          if (!z.zoomUrl && !z.meetingUrl) {
+            z.zoomUrl = "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync";
+            upgraded = true;
+          }
           if (!z.time) { z.time = '10:00 AM'; upgraded = true; }
           if (!z.scheduledStart) {
             let hours = 10, mins = 0;
@@ -282,22 +307,51 @@
             upgraded = true;
           }
         });
-        if (parsed.zoomSessions && !parsed.zoomSessions.some(z => z.id === 'z-live')) {
-          parsed.zoomSessions.unshift({
+        const todayStr = new Date().toISOString().slice(0, 10);
+        let zLive = parsed.zoomSessions && parsed.zoomSessions.find(z => z.id === 'z-live');
+        if (!zLive && parsed.zoomSessions) {
+          zLive = {
             id: "z-live",
-            title: "Daily Sync & Open Office Hours (Live)",
-            date: "2026-09-18",
-            time: "09:00 PM",
-            scheduledStart: "2026-09-18T21:00:00.000Z",
-            sessionEnd: "2026-09-18T22:30:00.000Z",
-            attendance: { "m1": "present", "m2": "present", "m3": "present", "m4": "present" },
-            attendanceRecords: {
-              "m1": { sessionId: "z-live", memberId: "m1", capturedAt: "2026-09-18T21:02:00.000Z", status: "present", source: "self-capture" },
-              "m2": { sessionId: "z-live", memberId: "m2", capturedAt: "2026-09-18T21:01:30.000Z", status: "present", source: "admin-override" },
-              "m3": { sessionId: "z-live", memberId: "m3", capturedAt: "2026-09-18T21:03:15.000Z", status: "present", source: "self-capture" },
-              "m4": { sessionId: "z-live", memberId: "m4", capturedAt: "2026-09-18T21:08:45.000Z", status: "late", source: "self-capture" }
-            }
-          });
+            title: "Meeting Link (Live)",
+            date: todayStr,
+            time: "10:00 AM",
+            scheduledStart: new Date(Date.now() - 2 * 60000).toISOString(),
+            sessionEnd: new Date(Date.now() + 58 * 60000).toISOString(),
+            status: "live",
+            zoomUrl: "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync",
+            attendance: {},
+            attendanceRecords: {},
+            pendingCheckIns: {}
+          };
+          parsed.zoomSessions.unshift(zLive);
+          upgraded = true;
+        } else if (zLive) {
+          zLive.status = "live";
+          zLive.title = "Meeting Link (Live)";
+          if (!zLive.zoomUrl) {
+            zLive.zoomUrl = "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync";
+            upgraded = true;
+          }
+          if (!zLive.scheduledStart || new Date(zLive.sessionEnd || 0).getTime() < Date.now()) {
+            zLive.date = todayStr;
+            zLive.scheduledStart = new Date(Date.now() - 2 * 60000).toISOString();
+            zLive.sessionEnd = new Date(Date.now() + 58 * 60000).toISOString();
+            upgraded = true;
+          }
+          zLive.pendingCheckIns = zLive.pendingCheckIns || {};
+          zLive.attendanceRecords = zLive.attendanceRecords || {};
+          zLive.attendance = zLive.attendance || {};
+          if (zLive.attendance) {
+            Object.keys(zLive.attendance).forEach(mid => {
+              if (zLive.attendanceRecords?.[mid]?.source !== 'admin-override') {
+                delete zLive.attendance[mid];
+                upgraded = true;
+              }
+            });
+          }
+        }
+        if (!parsed.motivationSubmissions || parsed.motivationSubmissions.length < 15 || !parsed.motivationSubmissions.some(s => s.memberId === 'm1' && s.id === 'mot-1')) {
+          parsed.motivationSubmissions = clone(REALISTIC_MOTIVATION_LOGS);
           upgraded = true;
         }
         if (upgraded) {
@@ -327,7 +381,10 @@
       kraObjectives: clone(seed.kraObjectives || []),
       kraHistory: clone(seed.kraHistory || { months: [], org: [], members: {} }),
       engagementSubmissions: clone(seed.engagementSubmissions || []),
-      zoomSessions: clone(seed.zoomSessions || []),
+      zoomSessions: clone(seed.zoomSessions || []).map(z => ({
+        ...z,
+        zoomUrl: z.zoomUrl || z.meetingUrl || "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
+      })),
       activityTypes: clone(seed.activityTypes || [
         { id: 'social', label: 'Social Media', category: 'outreach', pointValue: 2, requiresProof: true },
         { id: 'onGround', label: 'On-Ground Visit', category: 'outreach', pointValue: 5, requiresProof: true },
@@ -337,7 +394,7 @@
         { id: 'groupTalk', label: 'Group Talk', category: 'motivation', pointValue: 4, requiresProof: true },
         { id: 'microEvent', label: 'Micro Event', category: 'motivation', pointValue: 5, requiresProof: true }
       ]),
-      motivationSubmissions: clone(seed.motivationSubmissions || []),
+      motivationSubmissions: clone((seed.motivationSubmissions && seed.motivationSubmissions.some(s => s.memberId === 'm1')) ? seed.motivationSubmissions : REALISTIC_MOTIVATION_LOGS),
       cycles: clone(seed.cycles || []),
       activityLog: clone(seed.activityLog || []),
       kraPillars: clone(seed.kraPillars || []),

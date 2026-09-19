@@ -21,9 +21,9 @@
         <div class="task-modal-card" style="max-width:580px;">
           <button type="button" class="modal-close-btn" id="nmCloseBtn">&times;</button>
           <h2 class="task-modal-title" style="margin-bottom:10px;">Team Member Hierarchy Setup</h2>
-          <div class="role-toggle-group" id="nmModeGroup" style="margin-bottom:12px;">
-            <button type="button" class="role-toggle-btn active" id="nmModeAssign">Assign Registered Member</button>
-            <button type="button" class="role-toggle-btn" id="nmModeCreate">Create New Member</button>
+          <div class="role-toggle-group" id="nmModeGroup" style="margin-bottom:14px;">
+            <button type="button" class="role-toggle-btn active" id="nmModeAssign"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>Assign Registered Member</button>
+            <button type="button" class="role-toggle-btn" id="nmModeCreate"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>Create New Member</button>
           </div>
           <div id="nmError" class="alert-banner alert-banner-error" style="display:none; margin-bottom:12px;"></div>
           <form id="newMemberForm">

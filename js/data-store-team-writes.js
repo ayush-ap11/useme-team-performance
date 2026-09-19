@@ -188,6 +188,9 @@
       status: st,
       source: 'admin-override'
     };
+    if (sess.pendingCheckIns && sess.pendingCheckIns[mid]) {
+      sess.pendingCheckIns[mid].confirmed = true;
+    }
     _persist();
     const targetMember = _data.members.find(m => m.id === mid);
     const mName = targetMember ? targetMember.name : mid;
@@ -211,20 +214,27 @@
     else if (diffMin <= 15) status = 'late';
     else status = 'absent';
 
-    sess.attendance = sess.attendance || {};
-    sess.attendance[mid] = status;
+    sess.pendingCheckIns = sess.pendingCheckIns || {};
+    sess.pendingCheckIns[mid] = {
+      sessionId: sess.id,
+      memberId: mid,
+      capturedAt: new Date(capTime).toISOString(),
+      timeStr: new Date(capTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      suggestedStatus: status
+    };
     sess.attendanceRecords = sess.attendanceRecords || {};
     sess.attendanceRecords[mid] = {
       sessionId: sess.id,
       memberId: mid,
       capturedAt: new Date(capTime).toISOString(),
       status,
-      source: 'self-capture'
+      source: 'self-capture',
+      pending: true
     };
     _persist();
     const targetMember = _data.members.find(m => m.id === mid);
     const mName = targetMember ? targetMember.name : mid;
-    DS.logActivity(mid, `joined "${sess.title}" (${status}, self-capture)`, 'attendance', sess.id);
+    DS.logActivity(mid, `checked in to "${sess.title}" (${status}, self-capture pending)`, 'attendance', sess.id);
     return _clone(sess);
   };
 

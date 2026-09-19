@@ -122,3 +122,20 @@
   transform: translateY(-1px); box-shadow: 0 3px 8px rgba(232, 81, 77, 0.2);
 }
 .modal-auth-btn svg { stroke: currentColor; flex-shrink: 0; }
+
+/* Role & Mode Selector Pill Toggle */
+.role-toggle-group {
+  display: flex; gap: 4px; background: var(--color-bg); padding: 4px;
+  border-radius: var(--radius-pill); border: 1px solid var(--color-border); margin-bottom: var(--space-4);
+}
+.role-toggle-btn {
+  flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 8px 16px; font-size: var(--text-xs); font-weight: 700; font-family: inherit;
+  border-radius: var(--radius-pill); border: 1px solid transparent; background: transparent;
+  color: var(--color-text-muted); cursor: pointer; transition: all 0.15s ease; text-align: center;
+}
+.role-toggle-btn:hover { color: var(--color-text); background: rgba(0, 0, 0, 0.04); }
+.role-toggle-btn.active {
+  background-color: var(--color-primary); color: #fff;
+  box-shadow: 0 2px 8px rgba(232, 81, 77, 0.28); border-color: transparent;
+}

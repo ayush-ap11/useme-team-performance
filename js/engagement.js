@@ -33,8 +33,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Tab switching
   if (tabEng && tabMot) {
-    tabEng.onclick = () => { tabEng.classList.add('active'); tabMot.classList.remove('active'); paneEng.classList.add('active'); paneMot.classList.remove('active'); };
-    tabMot.onclick = () => { tabMot.classList.add('active'); tabEng.classList.remove('active'); paneMot.classList.add('active'); paneEng.classList.remove('active'); };
+    tabEng.onclick = () => {
+      tabEng.classList.add('active');
+      tabMot.classList.remove('active');
+      paneEng.classList.add('active');
+      paneMot.classList.remove('active');
+      renderEngagementTab();
+    };
+    tabMot.onclick = () => {
+      tabMot.classList.add('active');
+      tabEng.classList.remove('active');
+      paneMot.classList.add('active');
+      paneEng.classList.remove('active');
+      renderMotivationTab();
+    };
   }
 
   // Admin button visibility
@@ -142,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const targetMid = isMember ? currentUserId : 'all';
     const score = window.SCORING_ENGINE ? window.SCORING_ENGINE.getMotivationScore(targetMid) : (window.KPI_ENGINE?.calculateMotivationScore(isMember ? currentUserId : null) || 88);
     const targetInfo = window.SCORING_TARGETS ? window.SCORING_TARGETS.getTargetResolutionDetails(isMember ? currentUserId : null, 'motivation') : { target: 40, label: 'Default (40 pts)' };
-    const streak = window.KPI_ENGINE?.calculateAttendanceStreak(isMember ? currentUserId : 'm1') || 3;
+    const streak = (typeof window.KPI_ENGINE?.calculateAttendanceStreak === 'function' ? window.KPI_ENGINE.calculateAttendanceStreak(isMember ? currentUserId : 'm1') : 3);
     const sRow = document.getElementById('motSummaryRow');
     if (sRow) {
       sRow.innerHTML = `
@@ -184,29 +196,98 @@ document.addEventListener('DOMContentLoaded', () => {
       };
     });
 
+    const programs = [
+      {
+        id: 'prog-zoom',
+        isZoom: true,
+        icon: ICONS.zoom,
+        title: 'Meeting Link',
+        desc: `${zoomSessions.length} Sessions conducted &bull; Live video attendance`,
+        status: '<span class="status-badge badge-green">Meeting Link</span>',
+        btnText: 'View Roster',
+        btnCls: 'roster-btn'
+      },
+      {
+        id: 'prog-lead',
+        icon: svgLine('<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>', 16, 16),
+        title: 'Team Lead Bootcamp',
+        desc: 'Module 3 of 4 &bull; Cross-functional alignment & leadership',
+        status: '<span class="status-badge badge-green">Enrolled &bull; 75%</span>',
+        btnText: 'Continue Learning',
+        btnCls: 'prog-btn'
+      },
+      {
+        id: 'prog-comm',
+        icon: svgLine('<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>', 16, 16),
+        title: 'Communication Skills Workshop',
+        desc: 'Module 2 of 5 &bull; Executive presentations & pitch decks',
+        status: '<span class="status-badge badge-amber">In Progress &bull; 40%</span>',
+        btnText: 'Continue Workshop',
+        btnCls: 'prog-btn'
+      },
+      {
+        id: 'prog-sales',
+        icon: svgLine('<line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>', 16, 16),
+        title: 'Sales Mastery Program',
+        desc: 'Completed &bull; Enterprise objection handling & demoing',
+        status: '<span class="status-badge badge-green">Completed &bull; 100%</span>',
+        btnText: 'View Certificate',
+        btnCls: 'prog-btn completed'
+      },
+      {
+        id: 'prog-cloud',
+        icon: svgLine('<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>', 16, 16),
+        title: 'Cloud Architecture Track',
+        desc: 'Module 3 of 5 &bull; High availability & microservice scaling',
+        status: '<span class="status-badge badge-amber">In Progress &bull; 60%</span>',
+        btnText: 'Continue Module',
+        btnCls: 'prog-btn'
+      },
+      {
+        id: 'prog-agile',
+        icon: svgLine('<polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>', 16, 16),
+        title: 'Agile Leadership Series',
+        desc: 'Cohort #4 &bull; Sprint velocity, backlog shaping & retros',
+        status: '<span class="status-badge" style="background:#F3F4F6; color:var(--color-text-muted);">Open Enrollment</span>',
+        btnText: 'Enroll Now',
+        btnCls: 'prog-btn'
+      },
+      {
+        id: 'prog-mentor',
+        icon: svgLine('<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 14 14"/>', 16, 16),
+        title: 'Peer Mentoring Circle',
+        desc: 'Active Cohort &bull; 1-on-1 biweekly track & peer enablement',
+        status: '<span class="status-badge badge-green">Active &bull; 85%</span>',
+        btnText: 'Join Circle',
+        btnCls: 'prog-btn'
+      },
+      {
+        id: 'prog-exec',
+        icon: svgLine('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>', 16, 16),
+        title: 'Executive Presence Series',
+        desc: 'Cohort #2 &bull; Strategic product vision & high-stakes influence',
+        status: '<span class="status-badge badge-amber">In Progress &bull; 50%</span>',
+        btnText: 'View Schedule',
+        btnCls: 'prog-btn'
+      }
+    ];
+
     const grid = document.getElementById('motCardsGrid');
     if (grid) {
-      grid.innerHTML = `
-        <div class="channel-card zoom-card" id="cardZoomSessions">
+      grid.innerHTML = programs.map(p => `
+        <div class="channel-card ${p.isZoom ? 'zoom-card' : ''}" ${p.isZoom ? 'id="cardZoomSessions"' : ''}>
           <div class="channel-top">
-            <span class="channel-icon green">${ICONS.zoom}</span>
-            <span class="channel-count">${zoomSessions.length}</span>
+            <span class="channel-icon green">${p.icon}</span>
+            ${p.status}
           </div>
-          <span class="channel-name">Zoom Calls &amp; Sync</span>
-          <button type="button" class="roster-btn"><span>View Roster</span>${svgLine('<path d="M5 12h14M12 5l7 7-7 7"/>', 12, 12)}</button>
+          <div style="margin: 4px 0 8px;">
+            <span class="channel-name" style="font-size:12.5px; display:block; margin-bottom:2px;">${p.title}</span>
+            <div style="font-size:11px; color:var(--color-text-muted); line-height:1.35;">${p.desc}</div>
+          </div>
+          <button type="button" class="${p.btnCls}"><span>${p.btnText}</span>${svgLine('<path d="M5 12h14M12 5l7 7-7 7"/>', 12, 12)}</button>
         </div>
-        ${cards.map(c => `
-          <div class="channel-card">
-            <div class="channel-top">
-              <span class="channel-icon green">${getIcon(c.key)}</span>
-              <span class="channel-count">${c.count}</span>
-            </div>
-            <span class="channel-name">${c.name}</span>
-            ${getSparkline(c.data, 'var(--color-green)')}
-          </div>
-        `).join('')}
-      `;
-      document.getElementById('cardZoomSessions').onclick = openZoomRosterModal;
+      `).join('');
+      document.getElementById('cardZoomSessions')?.addEventListener('click', openZoomRosterModal);
     }
 
     const totalMotPts = (zoomPts + cards.reduce((sum, c) => sum + c.pts, 0)) || 1;
@@ -270,7 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderSubmissionsTable(tbodyId, list, tagCls, category) {
     const tbody = document.getElementById(tbodyId);
     if (!tbody) return;
-    const filtered = isMember ? list.filter(s => s.memberId === currentUserId) : list;
+    const filtered = (isMember && category !== 'motivation') ? list.filter(s => s.memberId === currentUserId) : list;
     const allTypes = window.DataStore ? window.DataStore.getActivityTypes() : [];
     const typeLabelMap = {};
     allTypes.forEach(t => { typeLabelMap[t.id] = t.label; });
@@ -540,8 +621,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       body.innerHTML = members.map(m => {
-        const status = curSess.attendance?.[m.id] || 'absent';
+        const status = curSess.attendance?.[m.id];
+        const pending = curSess.pendingCheckIns?.[m.id];
+        const sug = (!status && pending) ? pending.suggestedStatus : null;
         const sourceTag = window.ZOOM_SELF_CAPTURE ? window.ZOOM_SELF_CAPTURE.getRosterSourceTag(curSess, m.id) : '';
+        const presCls = status === 'present' ? 'active-present' : (sug === 'present' ? 'suggested-present' : '');
+        const lateCls = status === 'late' ? 'active-late' : (sug === 'late' ? 'suggested-late' : '');
+        const absCls = status === 'absent' ? 'active-absent' : '';
+        const presTitle = sug === 'present' ? 'Suggested from member check-in (Click to confirm)' : '';
+        const lateTitle = sug === 'late' ? 'Suggested from member check-in (Click to confirm)' : '';
         return `
           <div class="zoom-member-row">
             <div class="zoom-member-info">
@@ -551,11 +639,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
             ${isAdmin ? `
               <div class="att-segment-group">
-                <button type="button" class="att-seg-btn ${status==='present'?'active-present':''}" data-mid="${m.id}" data-st="present">Present</button>
-                <button type="button" class="att-seg-btn ${status==='late'?'active-late':''}" data-mid="${m.id}" data-st="late">Late</button>
-                <button type="button" class="att-seg-btn ${status==='absent'?'active-absent':''}" data-mid="${m.id}" data-st="absent">Absent</button>
+                <button type="button" class="att-seg-btn ${presCls}" data-mid="${m.id}" data-st="present" title="${presTitle}">Present</button>
+                <button type="button" class="att-seg-btn ${lateCls}" data-mid="${m.id}" data-st="late" title="${lateTitle}">Late</button>
+                <button type="button" class="att-seg-btn ${absCls}" data-mid="${m.id}" data-st="absent">Absent</button>
               </div>` : `
-              <span class="status-badge ${status==='present'?'badge-green':status==='late'?'badge-amber':'badge-red'}">${status}</span>`}
+              <span class="status-badge ${status==='present'?'badge-green':status==='late'?'badge-amber':status==='absent'?'badge-red':'badge-neutral'}">${status || (sug ? sug + ' (pending)' : 'unmarked')}</span>`}
           </div>`;
       }).join('');
 
@@ -807,4 +895,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // Initial render
   renderEngagementTab();
   renderMotivationTab();
+  window.renderEngagementTab = renderEngagementTab;
+  window.renderMotivationTab = renderMotivationTab;
 });

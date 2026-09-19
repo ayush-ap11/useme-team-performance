@@ -34,7 +34,6 @@
           <div class="modal-tabs">
             <button type="button" class="modal-tab-btn active" data-pane="tabTimeline">History</button>
             <button type="button" class="modal-tab-btn" data-pane="tabResources">Resources & Assets</button>
-            <button type="button" class="modal-tab-btn" data-pane="tabQuality">Quality Criteria</button>
           </div>
           <div class="modal-tab-pane active" id="tabTimeline"><ul class="timeline" id="tmTimeline"></ul></div>
           <div class="modal-tab-pane" id="tabResources">
@@ -43,7 +42,6 @@
             <p style="font-size:var(--text-xs);font-weight:600;margin-top:12px;margin-bottom:6px;">Deliverables & Assets (Proof of Work):</p>
             <div id="tmAssetContainer"></div>
           </div>
-          <div class="modal-tab-pane" id="tabQuality"><div id="tmQuality"></div></div>
           <div style="border-top:1px solid var(--color-border); padding-top:var(--space-4); margin-top:var(--space-4); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
             <div style="display:flex; align-items:center; gap:8px;">
               <label for="tmStatusSelect" style="font-size:var(--text-xs); font-weight:600;">Status:</label>
@@ -133,8 +131,6 @@
         }
       });
     }
-
-    modal.querySelector('#tmQuality').innerHTML = `<p style="font-size:var(--text-xs); color:var(--color-text-muted);">Quality Score: <strong>${task.qualityScore !== null ? task.qualityScore + '/10' : 'Pending Review'}</strong></p><ul class="tab-list" style="margin-top:8px;"><li class="tab-list-item"><span>Requirements & edge cases covered</span></li><li class="tab-list-item"><span>Responsive & accessible validation</span></li></ul>`;
 
     const select = modal.querySelector('#tmStatusSelect'), revCont = modal.querySelector('#tmSubmitReviewContainer');
     if (role === 'admin') {

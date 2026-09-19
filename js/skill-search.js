@@ -162,10 +162,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const categories = getCategories();
     tbody.innerHTML = categories.map(cat => `
       <tr>
-        <td><strong>${cat.name}</strong></td>
-        <td><code>${cat.id}</code></td>
-        <td style="font-size:11.5px; color:var(--color-text-muted);">${cat.description || '--'}</td>
-        <td><span class="card-pill">${cat.count} specialist${cat.count === 1 ? '' : 's'}</span></td>
+        <td><strong class="cat-name-text">${cat.name}</strong></td>
+        <td><code class="cat-id-badge">${cat.id}</code></td>
+        <td><div class="cat-desc-text">${cat.description || '--'}</div></td>
+        <td style="text-align:center;"><span class="card-pill cat-count-pill">${cat.count} specialist${cat.count === 1 ? '' : 's'}</span></td>
         <td>
           <div class="actions-cell">
             <button type="button" class="btn-action-edit" data-cat-act="edit" data-id="${cat.id}">Edit</button>

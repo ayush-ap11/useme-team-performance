@@ -1482,7 +1482,8 @@
           "status": "late",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z1",
@@ -1590,7 +1591,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z2",
@@ -1698,7 +1700,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z3",
@@ -1806,7 +1809,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     }
   ],
   "activityTypes": [
@@ -1863,53 +1867,183 @@
   "motivationSubmissions": [
     {
       "id": "mot-1",
-      "memberId": "m3",
+      "memberId": "m1",
       "type": "groupTalk",
-      "title": "Design Thinking & Agile Collaboration Talk",
-      "date": "2026-08-22",
+      "title": "Engineering Roadmaps & Cross-Functional Alignment",
+      "date": "2026-09-15",
       "proofType": "url",
-      "proofValue": "https://youtu.be/group-talk-01",
+      "proofValue": "https://youtu.be/eng-roadmaps-align",
       "status": "approved"
     },
     {
       "id": "mot-2",
-      "memberId": "m5",
+      "memberId": "m2",
       "type": "microEvent",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules",
-      "date": "2026-08-20",
+      "title": "Micro-Frontend State Hydration Deep Dive",
+      "date": "2026-09-14",
       "proofType": "file",
-      "proofValue": "typescript_ast_workshop.mp4",
+      "proofValue": "microfrontends_hydration.mp4",
       "status": "approved"
     },
     {
       "id": "mot-3",
-      "memberId": "m9",
+      "memberId": "m3",
       "type": "groupTalk",
-      "title": "UI Typography & Brand Consistency Workshop",
-      "date": "2026-08-16",
+      "title": "Growth Funnel Optimization & CRO Playbook",
+      "date": "2026-09-12",
       "proofType": "url",
-      "proofValue": "https://vimeo.com/78291039",
+      "proofValue": "https://vimeo.com/89201928",
       "status": "approved"
     },
     {
       "id": "mot-4",
-      "memberId": "m7",
+      "memberId": "m5",
       "type": "microEvent",
-      "title": "Data Analytics Basics for Support Team",
-      "date": "2026-08-14",
+      "title": "Live Coding: Building Custom ESLint AST Rules",
+      "date": "2026-09-10",
       "proofType": "url",
-      "proofValue": "https://meet.google.com/rec/abc",
-      "status": "pending"
+      "proofValue": "https://meet.google.com/rec/eslint-ast",
+      "status": "approved"
     },
     {
       "id": "mot-5",
+      "memberId": "m7",
+      "type": "groupTalk",
+      "title": "Data-Driven Metric Tracking with Superset",
+      "date": "2026-09-08",
+      "proofType": "url",
+      "proofValue": "https://youtu.be/superset-metrics",
+      "status": "pending"
+    },
+    {
+      "id": "mot-6",
+      "memberId": "m9",
+      "type": "microEvent",
+      "title": "Figma Design System Tokens & Variable Sync",
+      "date": "2026-09-06",
+      "proofType": "file",
+      "proofValue": "figma_tokens_walkthrough.mov",
+      "status": "approved"
+    },
+    {
+      "id": "mot-7",
+      "memberId": "m1",
+      "type": "microEvent",
+      "title": "Incident Response Post-Mortem Workshop",
+      "date": "2026-09-05",
+      "proofType": "url",
+      "proofValue": "https://zoom.us/rec/postmortem-wkshp",
+      "status": "approved"
+    },
+    {
+      "id": "mot-8",
+      "memberId": "m4",
+      "type": "groupTalk",
+      "title": "Fintech Compliance & PCI-DSS Audit Checklist",
+      "date": "2026-09-03",
+      "proofType": "url",
+      "proofValue": "https://vimeo.com/71829011",
+      "status": "approved"
+    },
+    {
+      "id": "mot-9",
+      "memberId": "m6",
+      "type": "microEvent",
+      "title": "Accessibility Testing with Screen Readers",
+      "date": "2026-09-01",
+      "proofType": "file",
+      "proofValue": "a11y_screenreader_demo.mp4",
+      "status": "reworkNeeded"
+    },
+    {
+      "id": "mot-10",
+      "memberId": "m8",
+      "type": "groupTalk",
+      "title": "SQL Window Functions for High-Volume Queries",
+      "date": "2026-08-28",
+      "proofType": "url",
+      "proofValue": "https://youtu.be/sql-window-funcs",
+      "status": "approved"
+    },
+    {
+      "id": "mot-11",
+      "memberId": "m10",
+      "type": "microEvent",
+      "title": "SVG Micro-Animations & Canvas Rendering",
+      "date": "2026-08-26",
+      "proofType": "file",
+      "proofValue": "svg_animations_lab.mp4",
+      "status": "approved"
+    },
+    {
+      "id": "mot-12",
+      "memberId": "m2",
+      "type": "groupTalk",
+      "title": "Distributed Caching Strategies with Redis",
+      "date": "2026-08-24",
+      "proofType": "url",
+      "proofValue": "https://meet.google.com/rec/redis-cache",
+      "status": "approved"
+    },
+    {
+      "id": "mot-13",
+      "memberId": "m3",
+      "type": "microEvent",
+      "title": "Viral Product Loops & User Onboarding Lab",
+      "date": "2026-08-21",
+      "proofType": "url",
+      "proofValue": "https://vimeo.com/62910283",
+      "status": "pending"
+    },
+    {
+      "id": "mot-14",
       "memberId": "m5",
       "type": "groupTalk",
-      "title": "Tech Architecture Deep Dive: Zero-Downtime PostgreSQL Schema Migrations",
-      "date": "2026-08-14",
-      "proofType": "url",
-      "proofValue": "https://youtu.be/useme-zero-downtime-talk",
+      "title": "Zero-Downtime Database Schema Migrations",
+      "date": "2026-08-18",
+      "proofType": "file",
+      "proofValue": "postgres_zero_downtime.mp4",
       "status": "approved"
+    },
+    {
+      "id": "mot-15",
+      "memberId": "m1",
+      "type": "groupTalk",
+      "title": "Async Remote Culture: Documentation over Meetings",
+      "date": "2026-08-15",
+      "proofType": "url",
+      "proofValue": "https://youtu.be/async-remote-culture",
+      "status": "approved"
+    },
+    {
+      "id": "mot-16",
+      "memberId": "m7",
+      "type": "microEvent",
+      "title": "Automated Data Quality Checks with Great Expectations",
+      "date": "2026-08-11",
+      "proofType": "file",
+      "proofValue": "ge_data_quality_demo.mov",
+      "status": "approved"
+    },
+    {
+      "id": "mot-17",
+      "memberId": "m9",
+      "type": "groupTalk",
+      "title": "Responsive Typographic Hierarchies in Web Design",
+      "date": "2026-08-08",
+      "proofType": "url",
+      "proofValue": "https://vimeo.com/83910291",
+      "status": "approved"
+    },
+    {
+      "id": "mot-18",
+      "memberId": "m6",
+      "type": "microEvent",
+      "title": "Component Driven Dev with Storybook",
+      "date": "2026-08-04",
+      "proofType": "file",
+      "proofValue": "storybook_tdd_lab.mp4",
+      "status": "pending"
     }
   ],
   "cycles": [
@@ -88035,803 +88169,183 @@
   "motivationSubmissions": [
     {
       "id": "mot-1",
-      "memberId": "m73",
-      "type": "microEvent",
-      "title": "Tech Architecture Deep Dive: Zero-Downtime PostgreSQL Migrations (Session #1)",
-      "date": "2026-06-07",
+      "memberId": "m1",
+      "type": "groupTalk",
+      "title": "Engineering Roadmaps & Cross-Functional Alignment",
+      "date": "2026-09-15",
       "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-1",
-      "status": "pending"
+      "proofValue": "https://youtu.be/eng-roadmaps-align",
+      "status": "approved"
     },
     {
       "id": "mot-2",
-      "memberId": "m46",
+      "memberId": "m2",
       "type": "microEvent",
-      "title": "Direct Selling Compensation Model Mastery (Session #2)",
-      "date": "2026-05-30",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-2",
+      "title": "Micro-Frontend State Hydration Deep Dive",
+      "date": "2026-09-14",
+      "proofType": "file",
+      "proofValue": "microfrontends_hydration.mp4",
       "status": "approved"
     },
     {
       "id": "mot-3",
-      "memberId": "m156",
+      "memberId": "m3",
       "type": "groupTalk",
-      "title": "Modern Responsive Web Performance & CWV Optimization (Session #3)",
-      "date": "2026-04-05",
+      "title": "Growth Funnel Optimization & CRO Playbook",
+      "date": "2026-09-12",
       "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-3",
+      "proofValue": "https://vimeo.com/89201928",
       "status": "approved"
     },
     {
       "id": "mot-4",
-      "memberId": "m121",
-      "type": "groupTalk",
-      "title": "Tech Architecture Deep Dive: Zero-Downtime PostgreSQL Migrations (Session #4)",
-      "date": "2026-06-18",
+      "memberId": "m5",
+      "type": "microEvent",
+      "title": "Live Coding: Building Custom ESLint AST Rules",
+      "date": "2026-09-10",
       "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-4",
+      "proofValue": "https://meet.google.com/rec/eslint-ast",
       "status": "approved"
     },
     {
       "id": "mot-5",
-      "memberId": "m29",
-      "type": "microEvent",
-      "title": "Modern Responsive Web Performance & CWV Optimization (Session #5)",
-      "date": "2026-04-04",
+      "memberId": "m7",
+      "type": "groupTalk",
+      "title": "Data-Driven Metric Tracking with Superset",
+      "date": "2026-09-08",
       "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-5",
-      "status": "approved"
+      "proofValue": "https://youtu.be/superset-metrics",
+      "status": "pending"
     },
     {
       "id": "mot-6",
-      "memberId": "m14",
-      "type": "groupTalk",
-      "title": "Merchant Objections Handling & Sales Psychology (Session #6)",
-      "date": "2026-07-11",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-6",
+      "memberId": "m9",
+      "type": "microEvent",
+      "title": "Figma Design System Tokens & Variable Sync",
+      "date": "2026-09-06",
+      "proofType": "file",
+      "proofValue": "figma_tokens_walkthrough.mov",
       "status": "approved"
     },
     {
       "id": "mot-7",
-      "memberId": "m33",
-      "type": "groupTalk",
-      "title": "Data Analytics Basics for Support Team (Session #7)",
-      "date": "2026-07-14",
+      "memberId": "m1",
+      "type": "microEvent",
+      "title": "Incident Response Post-Mortem Workshop",
+      "date": "2026-09-05",
       "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-7",
+      "proofValue": "https://zoom.us/rec/postmortem-wkshp",
       "status": "approved"
     },
     {
       "id": "mot-8",
-      "memberId": "m121",
-      "type": "microEvent",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #8)",
-      "date": "2026-08-10",
+      "memberId": "m4",
+      "type": "groupTalk",
+      "title": "Fintech Compliance & PCI-DSS Audit Checklist",
+      "date": "2026-09-03",
       "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-8",
+      "proofValue": "https://vimeo.com/71829011",
       "status": "approved"
     },
     {
       "id": "mot-9",
-      "memberId": "m112",
+      "memberId": "m6",
       "type": "microEvent",
-      "title": "Merchant Objections Handling & Sales Psychology (Session #9)",
-      "date": "2026-08-23",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-9",
-      "status": "approved"
+      "title": "Accessibility Testing with Screen Readers",
+      "date": "2026-09-01",
+      "proofType": "file",
+      "proofValue": "a11y_screenreader_demo.mp4",
+      "status": "reworkNeeded"
     },
     {
       "id": "mot-10",
-      "memberId": "m131",
+      "memberId": "m8",
       "type": "groupTalk",
-      "title": "Direct Selling Compensation Model Mastery (Session #10)",
-      "date": "2026-08-01",
+      "title": "SQL Window Functions for High-Volume Queries",
+      "date": "2026-08-28",
       "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-10",
+      "proofValue": "https://youtu.be/sql-window-funcs",
       "status": "approved"
     },
     {
       "id": "mot-11",
-      "memberId": "m43",
+      "memberId": "m10",
       "type": "microEvent",
-      "title": "Data Analytics Basics for Support Team (Session #11)",
-      "date": "2026-06-08",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-11",
+      "title": "SVG Micro-Animations & Canvas Rendering",
+      "date": "2026-08-26",
+      "proofType": "file",
+      "proofValue": "svg_animations_lab.mp4",
       "status": "approved"
     },
     {
       "id": "mot-12",
-      "memberId": "m54",
-      "type": "microEvent",
-      "title": "UI Typography & Brand Consistency Workshop (Session #12)",
-      "date": "2026-07-03",
+      "memberId": "m2",
+      "type": "groupTalk",
+      "title": "Distributed Caching Strategies with Redis",
+      "date": "2026-08-24",
       "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-12",
+      "proofValue": "https://meet.google.com/rec/redis-cache",
       "status": "approved"
     },
     {
       "id": "mot-13",
-      "memberId": "m43",
-      "type": "groupTalk",
-      "title": "Tech Architecture Deep Dive: Zero-Downtime PostgreSQL Migrations (Session #13)",
-      "date": "2026-05-25",
+      "memberId": "m3",
+      "type": "microEvent",
+      "title": "Viral Product Loops & User Onboarding Lab",
+      "date": "2026-08-21",
       "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-13",
+      "proofValue": "https://vimeo.com/62910283",
       "status": "pending"
     },
     {
       "id": "mot-14",
-      "memberId": "m95",
+      "memberId": "m5",
       "type": "groupTalk",
-      "title": "Modern Responsive Web Performance & CWV Optimization (Session #14)",
-      "date": "2026-05-26",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-14",
+      "title": "Zero-Downtime Database Schema Migrations",
+      "date": "2026-08-18",
+      "proofType": "file",
+      "proofValue": "postgres_zero_downtime.mp4",
       "status": "approved"
     },
     {
       "id": "mot-15",
-      "memberId": "m173",
+      "memberId": "m1",
       "type": "groupTalk",
-      "title": "UI Typography & Brand Consistency Workshop (Session #15)",
-      "date": "2026-08-14",
+      "title": "Async Remote Culture: Documentation over Meetings",
+      "date": "2026-08-15",
       "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-15",
+      "proofValue": "https://youtu.be/async-remote-culture",
       "status": "approved"
     },
     {
       "id": "mot-16",
-      "memberId": "m36",
-      "type": "groupTalk",
-      "title": "Direct Selling Compensation Model Mastery (Session #16)",
-      "date": "2026-06-16",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-16",
+      "memberId": "m7",
+      "type": "microEvent",
+      "title": "Automated Data Quality Checks with Great Expectations",
+      "date": "2026-08-11",
+      "proofType": "file",
+      "proofValue": "ge_data_quality_demo.mov",
       "status": "approved"
     },
     {
       "id": "mot-17",
-      "memberId": "m176",
-      "type": "microEvent",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #17)",
-      "date": "2026-04-16",
+      "memberId": "m9",
+      "type": "groupTalk",
+      "title": "Responsive Typographic Hierarchies in Web Design",
+      "date": "2026-08-08",
       "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-17",
+      "proofValue": "https://vimeo.com/83910291",
       "status": "approved"
     },
     {
       "id": "mot-18",
-      "memberId": "m30",
+      "memberId": "m6",
       "type": "microEvent",
-      "title": "UI Typography & Brand Consistency Workshop (Session #18)",
-      "date": "2026-05-31",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-18",
-      "status": "pending"
-    },
-    {
-      "id": "mot-19",
-      "memberId": "m142",
-      "type": "microEvent",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #19)",
-      "date": "2026-06-25",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-19",
-      "status": "pending"
-    },
-    {
-      "id": "mot-20",
-      "memberId": "m126",
-      "type": "microEvent",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #20)",
-      "date": "2026-04-10",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-20",
-      "status": "approved"
-    },
-    {
-      "id": "mot-21",
-      "memberId": "m167",
-      "type": "microEvent",
-      "title": "Merchant Objections Handling & Sales Psychology (Session #21)",
-      "date": "2026-07-29",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-21",
-      "status": "approved"
-    },
-    {
-      "id": "mot-22",
-      "memberId": "m12",
-      "type": "groupTalk",
-      "title": "Data Analytics Basics for Support Team (Session #22)",
-      "date": "2026-06-09",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-22",
-      "status": "approved"
-    },
-    {
-      "id": "mot-23",
-      "memberId": "m163",
-      "type": "groupTalk",
-      "title": "UI Typography & Brand Consistency Workshop (Session #23)",
-      "date": "2026-08-16",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-23",
-      "status": "approved"
-    },
-    {
-      "id": "mot-24",
-      "memberId": "m101",
-      "type": "microEvent",
-      "title": "Data Analytics Basics for Support Team (Session #24)",
-      "date": "2026-04-01",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-24",
-      "status": "approved"
-    },
-    {
-      "id": "mot-25",
-      "memberId": "m24",
-      "type": "microEvent",
-      "title": "Modern Responsive Web Performance & CWV Optimization (Session #25)",
-      "date": "2026-05-31",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-25",
-      "status": "approved"
-    },
-    {
-      "id": "mot-26",
-      "memberId": "m27",
-      "type": "microEvent",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #26)",
-      "date": "2026-05-27",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-26",
-      "status": "reworkNeeded"
-    },
-    {
-      "id": "mot-27",
-      "memberId": "m102",
-      "type": "microEvent",
-      "title": "Design Thinking & Agile Collaboration Talk (Session #27)",
-      "date": "2026-07-16",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-27",
-      "status": "approved"
-    },
-    {
-      "id": "mot-28",
-      "memberId": "m46",
-      "type": "microEvent",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #28)",
-      "date": "2026-06-27",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-28",
-      "status": "approved"
-    },
-    {
-      "id": "mot-29",
-      "memberId": "m108",
-      "type": "microEvent",
-      "title": "UI Typography & Brand Consistency Workshop (Session #29)",
-      "date": "2026-06-27",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-29",
-      "status": "approved"
-    },
-    {
-      "id": "mot-30",
-      "memberId": "m61",
-      "type": "microEvent",
-      "title": "Modern Responsive Web Performance & CWV Optimization (Session #30)",
-      "date": "2026-06-14",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-30",
-      "status": "approved"
-    },
-    {
-      "id": "mot-31",
-      "memberId": "m111",
-      "type": "microEvent",
-      "title": "Modern Responsive Web Performance & CWV Optimization (Session #31)",
-      "date": "2026-07-19",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-31",
-      "status": "approved"
-    },
-    {
-      "id": "mot-32",
-      "memberId": "m154",
-      "type": "groupTalk",
-      "title": "Tech Architecture Deep Dive: Zero-Downtime PostgreSQL Migrations (Session #32)",
-      "date": "2026-06-15",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-32",
-      "status": "approved"
-    },
-    {
-      "id": "mot-33",
-      "memberId": "m154",
-      "type": "microEvent",
-      "title": "UI Typography & Brand Consistency Workshop (Session #33)",
-      "date": "2026-06-11",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-33",
-      "status": "approved"
-    },
-    {
-      "id": "mot-34",
-      "memberId": "m117",
-      "type": "microEvent",
-      "title": "UI Typography & Brand Consistency Workshop (Session #34)",
-      "date": "2026-04-07",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-34",
-      "status": "approved"
-    },
-    {
-      "id": "mot-35",
-      "memberId": "m105",
-      "type": "groupTalk",
-      "title": "Direct Selling Compensation Model Mastery (Session #35)",
-      "date": "2026-03-29",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-35",
-      "status": "approved"
-    },
-    {
-      "id": "mot-36",
-      "memberId": "m164",
-      "type": "microEvent",
-      "title": "Data Analytics Basics for Support Team (Session #36)",
-      "date": "2026-06-06",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-36",
-      "status": "reworkNeeded"
-    },
-    {
-      "id": "mot-37",
-      "memberId": "m80",
-      "type": "microEvent",
-      "title": "UI Typography & Brand Consistency Workshop (Session #37)",
-      "date": "2026-07-14",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-37",
-      "status": "approved"
-    },
-    {
-      "id": "mot-38",
-      "memberId": "m112",
-      "type": "groupTalk",
-      "title": "Design Thinking & Agile Collaboration Talk (Session #38)",
-      "date": "2026-07-03",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-38",
-      "status": "approved"
-    },
-    {
-      "id": "mot-39",
-      "memberId": "m2",
-      "type": "microEvent",
-      "title": "Modern Responsive Web Performance & CWV Optimization (Session #39)",
-      "date": "2026-08-24",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-39",
-      "status": "approved"
-    },
-    {
-      "id": "mot-40",
-      "memberId": "m143",
-      "type": "groupTalk",
-      "title": "Design Thinking & Agile Collaboration Talk (Session #40)",
-      "date": "2026-04-11",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-40",
-      "status": "approved"
-    },
-    {
-      "id": "mot-41",
-      "memberId": "m46",
-      "type": "groupTalk",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #41)",
-      "date": "2026-07-03",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-41",
-      "status": "approved"
-    },
-    {
-      "id": "mot-42",
-      "memberId": "m91",
-      "type": "groupTalk",
-      "title": "UI Typography & Brand Consistency Workshop (Session #42)",
-      "date": "2026-04-26",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-42",
-      "status": "approved"
-    },
-    {
-      "id": "mot-43",
-      "memberId": "m168",
-      "type": "microEvent",
-      "title": "Design Thinking & Agile Collaboration Talk (Session #43)",
-      "date": "2026-06-19",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-43",
-      "status": "approved"
-    },
-    {
-      "id": "mot-44",
-      "memberId": "m80",
-      "type": "microEvent",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #44)",
-      "date": "2026-05-02",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-44",
-      "status": "pending"
-    },
-    {
-      "id": "mot-45",
-      "memberId": "m108",
-      "type": "microEvent",
-      "title": "Tech Architecture Deep Dive: Zero-Downtime PostgreSQL Migrations (Session #45)",
-      "date": "2026-05-25",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-45",
-      "status": "approved"
-    },
-    {
-      "id": "mot-46",
-      "memberId": "m93",
-      "type": "microEvent",
-      "title": "Tech Architecture Deep Dive: Zero-Downtime PostgreSQL Migrations (Session #46)",
+      "title": "Component Driven Dev with Storybook",
       "date": "2026-08-04",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-46",
+      "proofType": "file",
+      "proofValue": "storybook_tdd_lab.mp4",
       "status": "pending"
-    },
-    {
-      "id": "mot-47",
-      "memberId": "m106",
-      "type": "microEvent",
-      "title": "Data Analytics Basics for Support Team (Session #47)",
-      "date": "2026-06-06",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-47",
-      "status": "approved"
-    },
-    {
-      "id": "mot-48",
-      "memberId": "m92",
-      "type": "groupTalk",
-      "title": "Tech Architecture Deep Dive: Zero-Downtime PostgreSQL Migrations (Session #48)",
-      "date": "2026-06-28",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-48",
-      "status": "reworkNeeded"
-    },
-    {
-      "id": "mot-49",
-      "memberId": "m64",
-      "type": "groupTalk",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #49)",
-      "date": "2026-08-11",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-49",
-      "status": "approved"
-    },
-    {
-      "id": "mot-50",
-      "memberId": "m161",
-      "type": "microEvent",
-      "title": "Tech Architecture Deep Dive: Zero-Downtime PostgreSQL Migrations (Session #50)",
-      "date": "2026-06-25",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-50",
-      "status": "approved"
-    },
-    {
-      "id": "mot-51",
-      "memberId": "m140",
-      "type": "groupTalk",
-      "title": "Merchant Objections Handling & Sales Psychology (Session #51)",
-      "date": "2026-07-30",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-51",
-      "status": "approved"
-    },
-    {
-      "id": "mot-52",
-      "memberId": "m50",
-      "type": "groupTalk",
-      "title": "Merchant Objections Handling & Sales Psychology (Session #52)",
-      "date": "2026-05-01",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-52",
-      "status": "approved"
-    },
-    {
-      "id": "mot-53",
-      "memberId": "m118",
-      "type": "microEvent",
-      "title": "Direct Selling Compensation Model Mastery (Session #53)",
-      "date": "2026-05-02",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-53",
-      "status": "approved"
-    },
-    {
-      "id": "mot-54",
-      "memberId": "m136",
-      "type": "microEvent",
-      "title": "UI Typography & Brand Consistency Workshop (Session #54)",
-      "date": "2026-06-11",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-54",
-      "status": "approved"
-    },
-    {
-      "id": "mot-55",
-      "memberId": "m102",
-      "type": "groupTalk",
-      "title": "Design Thinking & Agile Collaboration Talk (Session #55)",
-      "date": "2026-07-16",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-55",
-      "status": "approved"
-    },
-    {
-      "id": "mot-56",
-      "memberId": "m164",
-      "type": "microEvent",
-      "title": "Data Analytics Basics for Support Team (Session #56)",
-      "date": "2026-05-28",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-56",
-      "status": "approved"
-    },
-    {
-      "id": "mot-57",
-      "memberId": "m173",
-      "type": "groupTalk",
-      "title": "Data Analytics Basics for Support Team (Session #57)",
-      "date": "2026-07-20",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-57",
-      "status": "approved"
-    },
-    {
-      "id": "mot-58",
-      "memberId": "m161",
-      "type": "groupTalk",
-      "title": "Modern Responsive Web Performance & CWV Optimization (Session #58)",
-      "date": "2026-04-10",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-58",
-      "status": "approved"
-    },
-    {
-      "id": "mot-59",
-      "memberId": "m18",
-      "type": "microEvent",
-      "title": "Merchant Objections Handling & Sales Psychology (Session #59)",
-      "date": "2026-08-24",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-59",
-      "status": "reworkNeeded"
-    },
-    {
-      "id": "mot-60",
-      "memberId": "m158",
-      "type": "microEvent",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #60)",
-      "date": "2026-08-11",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-60",
-      "status": "reworkNeeded"
-    },
-    {
-      "id": "mot-61",
-      "memberId": "m74",
-      "type": "groupTalk",
-      "title": "Direct Selling Compensation Model Mastery (Session #61)",
-      "date": "2026-08-25",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-61",
-      "status": "pending"
-    },
-    {
-      "id": "mot-62",
-      "memberId": "m3",
-      "type": "groupTalk",
-      "title": "Modern Responsive Web Performance & CWV Optimization (Session #62)",
-      "date": "2026-04-18",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-62",
-      "status": "approved"
-    },
-    {
-      "id": "mot-63",
-      "memberId": "m145",
-      "type": "microEvent",
-      "title": "Merchant Objections Handling & Sales Psychology (Session #63)",
-      "date": "2026-07-20",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-63",
-      "status": "approved"
-    },
-    {
-      "id": "mot-64",
-      "memberId": "m106",
-      "type": "microEvent",
-      "title": "Merchant Objections Handling & Sales Psychology (Session #64)",
-      "date": "2026-07-25",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-64",
-      "status": "approved"
-    },
-    {
-      "id": "mot-65",
-      "memberId": "m154",
-      "type": "microEvent",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #65)",
-      "date": "2026-05-19",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-65",
-      "status": "approved"
-    },
-    {
-      "id": "mot-66",
-      "memberId": "m17",
-      "type": "groupTalk",
-      "title": "Design Thinking & Agile Collaboration Talk (Session #66)",
-      "date": "2026-07-19",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-66",
-      "status": "approved"
-    },
-    {
-      "id": "mot-67",
-      "memberId": "m49",
-      "type": "groupTalk",
-      "title": "Design Thinking & Agile Collaboration Talk (Session #67)",
-      "date": "2026-05-18",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-67",
-      "status": "reworkNeeded"
-    },
-    {
-      "id": "mot-68",
-      "memberId": "m121",
-      "type": "groupTalk",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #68)",
-      "date": "2026-08-17",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-68",
-      "status": "approved"
-    },
-    {
-      "id": "mot-69",
-      "memberId": "m176",
-      "type": "microEvent",
-      "title": "Design Thinking & Agile Collaboration Talk (Session #69)",
-      "date": "2026-07-19",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-69",
-      "status": "approved"
-    },
-    {
-      "id": "mot-70",
-      "memberId": "m148",
-      "type": "groupTalk",
-      "title": "Design Thinking & Agile Collaboration Talk (Session #70)",
-      "date": "2026-07-15",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-70",
-      "status": "approved"
-    },
-    {
-      "id": "mot-71",
-      "memberId": "m94",
-      "type": "groupTalk",
-      "title": "Tech Architecture Deep Dive: Zero-Downtime PostgreSQL Migrations (Session #71)",
-      "date": "2026-06-30",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-71",
-      "status": "approved"
-    },
-    {
-      "id": "mot-72",
-      "memberId": "m54",
-      "type": "microEvent",
-      "title": "UI Typography & Brand Consistency Workshop (Session #72)",
-      "date": "2026-05-13",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-72",
-      "status": "approved"
-    },
-    {
-      "id": "mot-73",
-      "memberId": "m57",
-      "type": "groupTalk",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #73)",
-      "date": "2026-05-04",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-73",
-      "status": "approved"
-    },
-    {
-      "id": "mot-74",
-      "memberId": "m55",
-      "type": "groupTalk",
-      "title": "Tech Architecture Deep Dive: Zero-Downtime PostgreSQL Migrations (Session #74)",
-      "date": "2026-06-07",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-74",
-      "status": "approved"
-    },
-    {
-      "id": "mot-75",
-      "memberId": "m87",
-      "type": "groupTalk",
-      "title": "Interactive Hands-on Lab: TypeScript AST & Custom Lint Rules (Session #75)",
-      "date": "2026-07-25",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-75",
-      "status": "approved"
-    },
-    {
-      "id": "mot-76",
-      "memberId": "m107",
-      "type": "microEvent",
-      "title": "Data Analytics Basics for Support Team (Session #76)",
-      "date": "2026-05-08",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-76",
-      "status": "reworkNeeded"
-    },
-    {
-      "id": "mot-77",
-      "memberId": "m36",
-      "type": "groupTalk",
-      "title": "Data Analytics Basics for Support Team (Session #77)",
-      "date": "2026-07-23",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-77",
-      "status": "approved"
-    },
-    {
-      "id": "mot-78",
-      "memberId": "m95",
-      "type": "microEvent",
-      "title": "Modern Responsive Web Performance & CWV Optimization (Session #78)",
-      "date": "2026-03-31",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-78",
-      "status": "approved"
-    },
-    {
-      "id": "mot-79",
-      "memberId": "m157",
-      "type": "groupTalk",
-      "title": "UI Typography & Brand Consistency Workshop (Session #79)",
-      "date": "2026-05-14",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-79",
-      "status": "approved"
-    },
-    {
-      "id": "mot-80",
-      "memberId": "m1",
-      "type": "microEvent",
-      "title": "Modern Responsive Web Performance & CWV Optimization (Session #80)",
-      "date": "2026-08-09",
-      "proofType": "url",
-      "proofValue": "https://youtube.com/watch?v=mot-80",
-      "status": "approved"
     }
   ],
   "zoomSessions": [
@@ -88877,7 +88391,8 @@
           "status": "late",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z1",
@@ -90329,7 +89844,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z2",
@@ -91781,7 +91297,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z3",
@@ -93233,7 +92750,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z4",
@@ -94685,7 +94203,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z5",
@@ -96137,7 +95656,8 @@
           "status": "late",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z6",
@@ -97589,7 +97109,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z7",
@@ -99041,7 +98562,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z8",
@@ -100493,7 +100015,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z9",
@@ -101945,7 +101468,8 @@
           "status": "late",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z10",
@@ -103397,7 +102921,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z11",
@@ -104849,7 +104374,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z12",
@@ -106301,7 +105827,8 @@
           "status": "absent",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z13",
@@ -107753,7 +107280,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z14",
@@ -109205,7 +108733,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z15",
@@ -110657,7 +110186,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z16",
@@ -112109,7 +111639,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z17",
@@ -113561,7 +113092,8 @@
           "status": "absent",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z18",
@@ -115013,7 +114545,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z19",
@@ -116465,7 +115998,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z20",
@@ -117917,7 +117451,8 @@
           "status": "late",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z21",
@@ -119369,7 +118904,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z22",
@@ -120821,7 +120357,8 @@
           "status": "absent",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z23",
@@ -122273,7 +121810,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z24",
@@ -123725,7 +123263,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z25",
@@ -125177,7 +124716,8 @@
           "status": "late",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z26",
@@ -126629,7 +126169,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z27",
@@ -128081,7 +127622,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z28",
@@ -129533,7 +129075,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z29",
@@ -130985,7 +130528,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z30",
@@ -132437,7 +131981,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z31",
@@ -133889,7 +133434,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z32",
@@ -135341,7 +134887,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z33",
@@ -136793,7 +136340,8 @@
           "status": "absent",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z34",
@@ -138245,7 +137793,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z35",
@@ -139697,7 +139246,8 @@
           "status": "late",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z36",
@@ -141149,7 +140699,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z37",
@@ -142601,7 +142152,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z38",
@@ -144053,7 +143605,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z39",
@@ -145505,7 +145058,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z40",
@@ -146957,7 +146511,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z41",
@@ -148409,7 +147964,8 @@
           "status": "late",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z42",
@@ -149861,7 +149417,8 @@
           "status": "late",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z43",
@@ -151313,7 +150870,8 @@
           "status": "late",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z44",
@@ -152765,7 +152323,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z45",
@@ -154217,7 +153776,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z46",
@@ -155669,7 +155229,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z47",
@@ -157121,7 +156682,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z48",
@@ -158573,7 +158135,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z49",
@@ -160025,7 +159588,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z50",
@@ -161477,7 +161041,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z51",
@@ -162929,7 +162494,8 @@
           "status": "absent",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z52",
@@ -164381,7 +163947,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z53",
@@ -165833,7 +165400,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z54",
@@ -167285,7 +166853,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z55",
@@ -168737,7 +168306,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z56",
@@ -170189,7 +169759,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z57",
@@ -171641,7 +171212,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z58",
@@ -173093,7 +172665,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z59",
@@ -174545,7 +174118,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z60",
@@ -175997,7 +175571,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z61",
@@ -177449,7 +177024,8 @@
           "status": "late",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z62",
@@ -178901,7 +178477,8 @@
           "status": "late",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z63",
@@ -180353,7 +179930,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z64",
@@ -181805,7 +181383,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     },
     {
       "id": "z65",
@@ -183257,7 +182836,8 @@
           "status": "present",
           "source": "self-capture"
         }
-      }
+      },
+      "zoomUrl": "https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync"
     }
   ],
   "activityLog": [

@@ -9,45 +9,74 @@
     if (!sessions.length) return null;
     const now = Date.now();
 
-    // Check if any session is currently live or in grace window (15m before start to end)
     for (const s of sessions) {
-      const start = new Date(s.scheduledStart || (s.date + 'T10:00:00.000Z')).getTime();
-      const end = new Date(s.sessionEnd || (s.date + 'T11:00:00.000Z')).getTime();
-      if (now >= start - (15 * 60000) && now <= end) {
-        return { session: s, isLive: true, start, end };
+      const isDesignatedLive = s.id === 'z-live' || s.status === 'live' || (s.title && s.title.includes('(Live)'));
+      let start = new Date(s.scheduledStart || (s.date + 'T10:00:00.000Z')).getTime();
+      let end = new Date(s.sessionEnd || (s.date + 'T11:00:00.000Z')).getTime();
+
+      if (isDesignatedLive && (isNaN(start) || now > end)) {
+        s.date = new Date(now).toISOString().slice(0, 10);
+        s.scheduledStart = new Date(now - 2 * 60000).toISOString();
+        s.sessionEnd = new Date(now + 58 * 60000).toISOString();
+        s.status = 'live';
+        s.title = 'Team Meeting Link (Live)';
+        if (!s.zoomUrl) s.zoomUrl = 'https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync';
+        start = new Date(s.scheduledStart).getTime();
+        end = new Date(s.sessionEnd).getTime();
+      } else if (isDesignatedLive && s.title && s.title.includes('Daily Sync')) {
+        s.title = 'Team Meeting Link (Live)';
       }
+
+      const isLive = s.status === 'live' || (now >= start - (15 * 60000) && now <= end);
+      if (isLive) return { session: s, isLive: true, start, end };
     }
-    // Otherwise return the most recent or upcoming
     const s = sessions[0];
     const start = new Date(s.scheduledStart || (s.date + 'T10:00:00.000Z')).getTime();
     const end = new Date(s.sessionEnd || (s.date + 'T11:00:00.000Z')).getTime();
-    return { session: s, isLive: false, start, end };
+    const isLive = s.status === 'live' || (now >= start - (15 * 60000) && now <= end);
+    return { session: s, isLive, start, end };
   }
 
   function renderJoinCallBanner(containerEl, memberId) {
     if (!containerEl) return;
     const info = getActiveOrUpcomingSession();
-    if (!info) {
-      containerEl.innerHTML = '';
-      return;
-    }
+    if (!info) { containerEl.innerHTML = ''; return; }
     const { session, isLive, start, end } = info;
-    const now = Date.now();
     const ds = window.DataStore;
     const u = ds?.getCurrentUser();
 
-    // Auto-resolve to absent if session ended and user never clicked join
-    if (now > end && session.attendance && !session.attendance[memberId]) {
-      if (ds && ds.recordZoomSelfCapture) {
-        ds.recordZoomSelfCapture(session.id, memberId, end, u);
-      }
-    }
+    // Mutually exclusive single-status logic:
+    // 1. Admin confirmed: only show confirmed status badge
+    // 2. Pending member checkin: only show "Checked In at [time] ✓" button
+    // 3. Before member clicks: show active coral "Join" button (or "Call Not Live" if scheduled)
+    const isAdminConfirmed = session.attendance?.[memberId] && session.attendanceRecords?.[memberId]?.source === 'admin-override';
+    const pending = session.pendingCheckIns?.[memberId];
 
-    const currentRec = session.attendanceRecords?.[memberId] || (session.attendance?.[memberId] ? { status: session.attendance[memberId], source: 'self-capture' } : null);
-    const hasJoined = !!currentRec && currentRec.status !== 'absent';
-    const statusBadge = hasJoined
-      ? `<span class="status-badge ${currentRec.status === 'present' ? 'badge-green' : 'badge-amber'}">${currentRec.status.toUpperCase()} (${currentRec.source || 'self-capture'})</span>`
-      : '';
+    let rightContent = '';
+    if (isAdminConfirmed) {
+      const st = session.attendance[memberId];
+      const badgeCls = st === 'present' ? 'badge-green' : (st === 'late' ? 'badge-amber' : 'badge-red');
+      rightContent = `<span class="status-badge ${badgeCls}" style="font-size:12px; font-weight:700; padding:6px 14px; border-radius:var(--radius-pill);">${st.toUpperCase()} (CONFIRMED)</span>`;
+    } else if (pending) {
+      const timeStr = pending.timeStr || (pending.capturedAt ? new Date(pending.capturedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '');
+      rightContent = `
+        <button type="button" class="btn-join-call confirmed" id="btnJoinZoomCall" data-sid="${session.id}" disabled>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Checked In at ${timeStr || 'Session'} &#10003;</span>
+        </button>`;
+    } else if (isLive) {
+      rightContent = `
+        <button type="button" class="btn-join-call btn-coral-live" id="btnJoinZoomCall" data-sid="${session.id}">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          <span>Join</span>
+        </button>`;
+    } else {
+      rightContent = `
+        <button type="button" class="btn-join-call" id="btnJoinZoomCall" data-sid="${session.id}" disabled>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          <span>Call Not Live</span>
+        </button>`;
+    }
 
     containerEl.innerHTML = `
       <div class="zoom-join-card ${isLive ? 'is-live' : ''}">
@@ -64,20 +93,22 @@
           </div>
         </div>
         <div class="zoom-join-right">
-          ${statusBadge}
-          <button type="button" class="btn-join-call" id="btnJoinZoomCall" data-sid="${session.id}" ${(!isLive || hasJoined) ? 'disabled' : ''}>
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-            <span>${hasJoined ? 'Joined Session' : (isLive ? 'Join Call & Capture' : 'Call Not Live')}</span>
-          </button>
+          ${rightContent}
         </div>
       </div>`;
 
-    const btn = document.getElementById('btnJoinZoomCall');
-    if (btn && isLive && !hasJoined) {
+    const btn = typeof document !== 'undefined' ? document.getElementById('btnJoinZoomCall') : null;
+    if (btn && isLive && !pending && !isAdminConfirmed) {
       btn.onclick = () => {
         const clickTime = Date.now();
+        const zoomUrl = session.zoomUrl || session.meetingUrl || session.link || session.url || 'https://zoom.us/j/84920193842?pwd=UsemeTeamLiveSync';
+        if (zoomUrl && typeof window !== 'undefined' && typeof window.open === 'function') {
+          try { window.open(zoomUrl, '_blank', 'noopener,noreferrer'); } catch (e) {}
+        }
         try {
-          ds.recordZoomSelfCapture(session.id, memberId, clickTime, u);
+          if (ds && ds.recordZoomSelfCapture) {
+            ds.recordZoomSelfCapture(session.id, memberId, clickTime, u);
+          }
           renderJoinCallBanner(containerEl, memberId);
           if (window.renderMotivationTab) window.renderMotivationTab();
         } catch (err) { alert(err.message); }
@@ -86,13 +117,15 @@
   }
 
   function getRosterSourceTag(session, memberId) {
-    const rec = session?.attendanceRecords?.[memberId];
-    if (!rec) return '';
-    const isOverride = rec.source === 'admin-override';
-    const timeStr = rec.capturedAt ? new Date(rec.capturedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '';
-    return `<span class="source-tag ${isOverride ? 'admin-override' : 'self-capture'}" title="${isOverride ? 'Admin manual override' : 'Self-capture'} at ${timeStr}">
-      ${isOverride ? 'admin-override' : 'self-capture'}${timeStr ? ' &bull; ' + timeStr : ''}
-    </span>`;
+    if (session?.attendance?.[memberId]) {
+      return `<span class="source-tag admin-override" title="Admin confirmed manual mark">CONFIRMED</span>`;
+    }
+    const pending = session?.pendingCheckIns?.[memberId];
+    if (pending) {
+      const st = (pending.suggestedStatus || 'present').toUpperCase();
+      return `<span class="source-tag self-capture suggested" title="Member checked in at ${pending.timeStr}">SUGGESTED: ${st} &bull; ${pending.timeStr}</span>`;
+    }
+    return '';
   }
 
   window.ZOOM_SELF_CAPTURE = {
